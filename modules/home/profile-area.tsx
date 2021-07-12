@@ -5,16 +5,27 @@ import OrbitIcon from "./orbit-icon";
 
 const ProfileArea: React.FC = () => {
   const [init, setInit] = React.useState(false);
+  const [profileScale, setProfileScale] = React.useState<number | undefined>();
 
   React.useEffect(() => {
+    calcProfileScale();
+    window.addEventListener("resize", () => {
+      calcProfileScale();
+    });
+
     setTimeout(() => {
       setInit(true);
     }, 100);
   }, []);
 
+  const calcProfileScale = () => {
+    const width = window.innerWidth;
+    setProfileScale(Math.min(1, width / 600));
+  }
+
   return (
     <div className={styles.centralContainer}>
-      <div className={styles.centralGroup}>
+      <div className={styles.centralGroup} style={{transform: `scale(${profileScale})`}}>
         <img
           className={styles.profileCenter}
           src="https://avatars.githubusercontent.com/u/41233357?s=200"

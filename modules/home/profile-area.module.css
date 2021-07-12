@@ -24,18 +24,12 @@
 }
 
 @media (max-width: 500px) {
-  .centralGroup {
-    transform: scale(80%);
-  }
   .centralContainer {
     height: 400px;
   }
 }
 
 @media (max-width: 400px) {
-  .centralGroup {
-    transform: scale(60%);
-  }
   .centralContainer {
     height: 300px;
   }

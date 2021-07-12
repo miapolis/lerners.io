@@ -113,17 +113,3 @@
 .projectLink:hover {
   font-weight: bold;
 }
-
-@media (max-width: 440px) {
-  .project {
-    transform: scale(70%);
-    margin: 5px;
-  }
-}
-
-@media (max-width: 360px) {
-  .project {
-    transform: scale(60%);
-    margin: 5px;
-  }
-}

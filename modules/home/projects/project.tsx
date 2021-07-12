@@ -26,10 +26,23 @@ const Project: React.FC<ProjectProps> = ({
   websiteName,
 }) => {
   const [hovered, setHovered] = React.useState(false);
+  const [scale, setScale] = React.useState<number | undefined>();
 
   const { isLoading, data } = useQuery(`get-project-${name}`, () =>
     fetchStars(githubPath)
   );
+
+  React.useEffect(() => {
+    calcScale();
+    window.addEventListener("resize", () => {
+      calcScale();
+    });
+  }, []);
+
+  const calcScale = () => {
+    const width = window.innerWidth;
+    setScale(Math.min(1, width / 600));
+  };
 
   if (isLoading) {
     return (
@@ -46,6 +59,7 @@ const Project: React.FC<ProjectProps> = ({
       className={styles.project}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      style={{transform: `scale(${scale})`}}
     >
       <img
         className={styles.coverImg}
