@@ -21,7 +21,7 @@ const Projects: React.FC = () => {
           name="Stratepig"
           description="A two-player turn-based game inspired by Stratego"
           src="/images/projects/stratepig.png"
-          alt="stratepig"
+          alt="Stratepig"
           githubPath="miapolis/stratepig-server"
           websiteUrl="https://stratepig.com"
           websiteName="stratepig.com"
@@ -30,7 +30,7 @@ const Projects: React.FC = () => {
           name="Brix"
           description="A CLI tool written in Rust for scaffolding and code generation"
           src="/images/projects/brix.png"
-          alt="QSpy"
+          alt="Brix"
           githubPath="xenoterracide/brix-rust"
         />
         <Project
