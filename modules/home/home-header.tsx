@@ -6,7 +6,11 @@ import Typewriter from "typewriter-effect";
 const HomeHeader: React.FC = () => {
   return (
     <section className={styles.headerSection}>
-      <h1>Miapolis.me</h1>
+      <h1>Ethan Lerner</h1>
+      <div>
+        <h3>AKA</h3>
+        <span className={styles.aka}>Miapolis</span>
+      </div>
       <p>
         <Typewriter
           options={{

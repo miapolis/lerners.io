@@ -59,7 +59,7 @@ const Project: React.FC<ProjectProps> = ({
       className={styles.project}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{transform: `scale(${scale})`}}
+      style={{ transform: `scale(${scale})` }}
     >
       <img
         className={styles.coverImg}
