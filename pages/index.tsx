@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Miapolis</title>
+        <title>Ethan Lerner</title>
         <meta
           name="description"
           content="Yet another personal website on the internet."
