@@ -14,6 +14,7 @@ export interface ProjectProps {
   githubPath: string;
   websiteUrl?: string | undefined;
   websiteName?: string | undefined;
+  scale: number | undefined;
 }
 
 const Project: React.FC<ProjectProps> = ({
@@ -24,35 +25,13 @@ const Project: React.FC<ProjectProps> = ({
   githubPath,
   websiteUrl,
   websiteName,
+  scale,
 }) => {
   const [hovered, setHovered] = React.useState(false);
-  const [scale, setScale] = React.useState<number | undefined>();
 
   const { isLoading, data } = useQuery(`get-project-${name}`, () =>
     fetchStars(githubPath)
   );
-
-  React.useEffect(() => {
-    calcScale();
-    window.addEventListener("resize", () => {
-      calcScale();
-    });
-  }, []);
-
-  const calcScale = () => {
-    const width = window.innerWidth;
-    setScale(Math.min(1, width / 600));
-  };
-
-  if (isLoading) {
-    return (
-      <div className={styles.project}>
-        <div className={styles.loader}>
-          <SyncLoader color={"#141414ff"} />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div
@@ -99,6 +78,18 @@ const Project: React.FC<ProjectProps> = ({
             </a>
           </>
         ) : undefined}
+      </div>
+      <div
+        className={styles.loaderCover}
+        style={{ opacity: isLoading ? 1 : 0, transition: "opacity 0.5s ease" }}
+      >
+        {isLoading ? (
+          <div className={styles.loader}>
+            <SyncLoader color={"#141414ff"} />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

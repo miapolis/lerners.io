@@ -4,6 +4,20 @@ import styles from "./projects.module.css";
 import Project from "./project";
 
 const Projects: React.FC = () => {
+  React.useEffect(() => {
+    calcScale();
+    window.addEventListener("resize", () => {
+      calcScale();
+    });
+  }, []);
+
+  const calcScale = () => {
+    const width = window.innerWidth;
+    setScale(Math.min(1, width / 600));
+  };
+
+  const [scale, setScale] = React.useState<number | undefined>();
+
   return (
     <section className={styles.projects}>
       <h3>— Projects —</h3>
@@ -16,6 +30,7 @@ const Projects: React.FC = () => {
           githubPath="miapolis/qspy"
           websiteUrl="https://qspy.xyz"
           websiteName="qspy.xyz"
+          scale={scale}
         />
         <Project
           name="Stratepig"
@@ -25,13 +40,15 @@ const Projects: React.FC = () => {
           githubPath="miapolis/stratepig-server"
           websiteUrl="https://stratepig.com"
           websiteName="stratepig.com"
+          scale={scale}
         />
         <Project
           name="Brix"
           description="A CLI tool written in Rust for scaffolding and code generation"
           src="/images/projects/brix.png"
           alt="Brix"
-          githubPath="xenoterracide/brix-rust"
+          githubPath="miapolis/brix"
+          scale={scale}
         />
         <Project
           name="OasisBot"
@@ -41,6 +58,7 @@ const Projects: React.FC = () => {
           githubPath="oasisbot/oasisbot"
           websiteUrl="https://docs.oasisbot.xyz"
           websiteName="docs.oasisbot.xyz"
+          scale={scale}
         />
         <Project
           name="Desk"
@@ -48,6 +66,7 @@ const Projects: React.FC = () => {
           src="/images/projects/desk.png"
           alt="Desk"
           githubPath="miapolis/desk"
+          scale={scale}
         />
       </div>
     </section>

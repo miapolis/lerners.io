@@ -17,4 +17,5 @@
   justify-content: center;
   flex-wrap: wrap;
   padding: 0 20px 0 20px;
+  scale: 0.5;
 }
