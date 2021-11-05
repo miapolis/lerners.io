@@ -56,7 +56,7 @@ const Projects: React.FC = () => {
           src="/images/projects/oasisbot.png"
           alt="OasisBot"
           githubPath="oasisbot/oasisbot"
-          websiteUrl="https://docs.oasisbot.xyz"
+          websiteUrl="https://github.com/oasisbot/oasisbot"
           websiteName="docs.oasisbot.xyz"
           scale={scale}
         />
