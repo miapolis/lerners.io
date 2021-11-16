@@ -14,7 +14,6 @@ export interface ProjectProps {
   githubPath: string;
   websiteUrl?: string | undefined;
   websiteName?: string | undefined;
-  scale: number | undefined;
 }
 
 const Project: React.FC<ProjectProps> = ({
@@ -25,7 +24,6 @@ const Project: React.FC<ProjectProps> = ({
   githubPath,
   websiteUrl,
   websiteName,
-  scale,
 }) => {
   const [hovered, setHovered] = React.useState(false);
 
@@ -38,7 +36,6 @@ const Project: React.FC<ProjectProps> = ({
       className={styles.project}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      style={{ transform: `scale(${scale})` }}
     >
       <img
         className={styles.coverImg}
