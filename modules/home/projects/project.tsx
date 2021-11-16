@@ -48,7 +48,6 @@ const Project: React.FC<ProjectProps> = ({
         }}
       />
       <div className={styles.headerPanel} />
-      <div className={styles.gradient} />
       <div className={styles.header}>
         <h3>{name}</h3>
         <p>{description}</p>
