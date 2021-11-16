@@ -53,9 +53,9 @@
   pointer-events: none;
   background-image: linear-gradient(
     to top,
-    rgba(20, 20, 20, 0),
+    rgba(20, 20, 20, 0
     rgba(20, 20, 20, 0.8)
-  );
+  ));
 }
 
 .project .header {
