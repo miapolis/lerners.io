@@ -28,6 +28,10 @@ const HomeHeader: React.FC = () => {
               .pauseFor(200)
               .typeString("n occasional gamer")
               .pauseFor(1000)
+              .deleteChars(17)
+              .pauseFor(200)
+              .typeString("waste of time")
+              .pauseFor(1000)
               .start();
           }}
         />
