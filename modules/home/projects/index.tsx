@@ -14,6 +14,8 @@ const Projects: React.FC = () => {
           src="/images/projects/qspy.png"
           alt="QSpy"
           githubPath="miapolis/qspy"
+          websiteUrl="https://qspy.xyz"
+          websiteName="qspy.xyz"
         />
         <Project
           name="Stratepig"
