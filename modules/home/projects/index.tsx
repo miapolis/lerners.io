@@ -23,8 +23,6 @@ const Projects: React.FC = () => {
           src="/images/projects/stratepig.png"
           alt="Stratepig"
           githubPath="miapolis/stratepig-server"
-          websiteUrl="https://stratepig.com"
-          websiteName="stratepig.com"
         />
         <Project
           name="Brix"
