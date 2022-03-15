@@ -1,7 +1,7 @@
 import React from "react";
 import { BaseShapeProps } from ".";
 
-const Two: React.FC<BaseShapeProps> = ({ size, opacity }) => {
+const Two: React.FC<BaseShapeProps> = ({ size, color, opacity }) => {
   return (
     <svg
       width={`${size}px`}
@@ -17,7 +17,7 @@ const Two: React.FC<BaseShapeProps> = ({ size, opacity }) => {
         height="47.17"
         ry="10.563"
         fill="none"
-        stroke={`#ffffff${opacity.repeat(2)}`}
+        stroke={`#${color}${opacity.repeat(2)}`}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={Math.round(250 / size)}

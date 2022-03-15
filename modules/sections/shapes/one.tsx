@@ -1,6 +1,6 @@
 import { BaseShapeProps } from ".";
 
-const One: React.FC<BaseShapeProps> = ({ size, opacity }) => {
+const One: React.FC<BaseShapeProps> = ({ size, color, opacity }) => {
   return (
     <svg
       width={`${size}px`}
@@ -13,7 +13,7 @@ const One: React.FC<BaseShapeProps> = ({ size, opacity }) => {
         transform="scale(.26458)"
         d="m94.488 5.3477a89.14 89.14 0 0 0-89.141 89.141 89.14 89.14 0 0 0 89.141 89.141 89.14 89.14 0 0 0 37.795-8.4434v-161.39a89.14 89.14 0 0 0-37.795-8.4434z"
         fill="none"
-        stroke={`#ffffff${opacity.repeat(2)}`}
+        stroke={`#${color}${opacity.repeat(2)}`}
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={Math.round(600 / size)}

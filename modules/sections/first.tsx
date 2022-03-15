@@ -6,6 +6,8 @@ import ShapeTwo from "./shapes/two";
 import ShapeThree from "./shapes/three";
 import styles from "./first.module.css";
 import { Arrow } from "../../components/icons/arrow";
+import { animated, useSpringRef, useTransition } from "react-spring";
+import { ThemeContext } from "../../pages/_app";
 
 const scroll = Scroll.animateScroll;
 
@@ -13,7 +15,11 @@ const SIZES = [130, 100, 60, 60, 60, 40, 40, 40, 30, 30];
 const SPACE_CONSTANT = 150;
 const OPACITY_VALUES = ["7", "8", "9", "a", "b", "c", "d", "e"];
 
+const shapeColor = { dark: "ffffff", light: "000000" };
+
 const Dots: React.FC = () => {
+  const theme = React.useContext(ThemeContext);
+
   const generateDots = () => {
     const dots = [];
     const bounds = [];
@@ -37,34 +43,66 @@ const Dots: React.FC = () => {
 
       bounds.push({ left, top });
 
-      dots.push(
+      dots.push([
+        { left, top },
         <Parallax
           key={i}
           rotate={[0, rotation * direction]}
           speed={speed * speedDir}
-          className="absolute"
-          style={{ left, top }}
         >
           {shape == 1 ? (
-            <ShapeOne size={size} opacity={opacity} />
+            <ShapeOne
+              size={size}
+              color={shapeColor[theme.value as keyof typeof shapeColor]}
+              opacity={opacity}
+            />
           ) : shape == 2 ? (
-            <ShapeTwo size={size} opacity={opacity} />
+            <ShapeTwo
+              size={size}
+              color={shapeColor[theme.value as keyof typeof shapeColor]}
+              opacity={opacity}
+            />
           ) : (
-            <ShapeThree size={size} opacity={opacity} />
+            <ShapeThree
+              size={size}
+              color={shapeColor[theme.value as keyof typeof shapeColor]}
+              opacity={opacity}
+            />
           )}
-        </Parallax>
-      );
+        </Parallax>,
+      ]);
     }
     return dots;
   };
 
-  let [elements, setElements] = React.useState<any>(null);
+  let [elements, setElements] = React.useState<any>([]);
+  const api = useSpringRef();
+  const transition = useTransition(elements ?? [], {
+    ref: api,
+    trail: 400 / elements.length,
+    from: { opacity: 0, scale: 0 },
+    enter: { opacity: 1, scale: 1 },
+  });
 
   React.useEffect(() => {
     setElements(generateDots());
-  }, []);
+    setTimeout(() => {
+      api.start();
+    }, 10);
+  }, [theme.value]);
 
-  return <div className="w-full h-full">{elements}</div>;
+  return (
+    <div className="w-full h-full">
+      {transition((style, [props, item]) => (
+        <animated.div
+          style={{ ...style, left: props.left, top: props.top }}
+          className="absolute"
+        >
+          {item}
+        </animated.div>
+      ))}
+    </div>
+  );
 };
 
 const intersectsAny = (bounds: any[], left: number, top: number): boolean => {
@@ -95,6 +133,7 @@ const inNameArea = (left: number, top: number, size: number): boolean => {
 };
 
 const First: React.FC = () => {
+  const theme = React.useContext(ThemeContext);
   const [arrowOpacity, setArrowOpacity] = React.useState(1);
 
   return (
@@ -103,7 +142,11 @@ const First: React.FC = () => {
       style={{ height: "calc(100vh + 117px)" }}
     >
       <div className="h-screen flex items-center justify-center relative overflow-visible">
-        <h1 className="text-white text-8xl font-bold z-10 drop-shadow-lg">
+        <h1
+          className={`${
+            theme.value == "dark" ? "text-white" : "text-black"
+          } text-8xl font-bold z-10 drop-shadow-lg`}
+        >
           Ethan Lerner
         </h1>
         <div className="absolute w-[1000px] h-[500px]">
@@ -123,7 +166,12 @@ const First: React.FC = () => {
             }
           }}
         >
-          <Arrow size={40} color={`rgb(230, 230, 230, ${arrowOpacity})`} />
+          <Arrow
+            size={40}
+            color={`rgb(${
+              theme.value == "dark" ? "230, 230, 230" : "25, 25, 25"
+            }, ${arrowOpacity})`}
+          />
         </Parallax>
       </div>
       <div className={styles.divider}>

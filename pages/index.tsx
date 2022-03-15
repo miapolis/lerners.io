@@ -1,11 +1,22 @@
-import type { NextPage } from "next";
+import React from "react";
 import Head from "next/head";
-import Image from "next/image";
-import { useParallax } from "react-scroll-parallax";
+import type { NextPage } from "next";
+
+import { ThemeContext } from "./_app";
 import FirstSection from "../modules/sections/first";
 import SecondSection from "../modules/sections/second";
 
+import { IconButton } from "@mui/material";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+
 const Home: NextPage = () => {
+  const theme = React.useContext(ThemeContext);
+
+  const toggleTheme = () => {
+    theme.setTheme(theme.value == "dark" ? "light" : "dark");
+  };
+
   return (
     <>
       <Head>
@@ -17,11 +28,25 @@ const Home: NextPage = () => {
       <div
         style={{
           height: "300vh",
-          backgroundImage:
-            "radial-gradient(circle at 1px 1px, grey 1px, transparent 0)",
+          backgroundImage: `radial-gradient(circle at 1px 1px, grey 1px, ${
+            theme.value == "dark" ? "black" : "white"
+          } 0)`,
           backgroundSize: "40px 40px",
         }}
       >
+        <IconButton size="large" className="absolute top-4 right-4 z-10">
+          {theme.value == "dark" ? (
+            <DarkModeOutlinedIcon
+              style={{ color: "white" }}
+              onClick={toggleTheme}
+            />
+          ) : (
+            <LightModeOutlinedIcon
+              style={{ color: "black" }}
+              onClick={toggleTheme}
+            />
+          )}
+        </IconButton>
         <FirstSection />
         <SecondSection />
       </div>
