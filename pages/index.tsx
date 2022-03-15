@@ -6,7 +6,6 @@ import FirstSection from "../modules/sections/first";
 import SecondSection from "../modules/sections/second";
 
 const Home: NextPage = () => {
-
   return (
     <>
       <Head>
@@ -18,6 +17,9 @@ const Home: NextPage = () => {
       <div
         style={{
           height: "300vh",
+          backgroundImage:
+            "radial-gradient(circle at 1px 1px, grey 1px, transparent 0)",
+          backgroundSize: "40px 40px",
         }}
       >
         <FirstSection />

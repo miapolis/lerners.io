@@ -9,22 +9,19 @@ const Two: React.FC<BaseShapeProps> = ({ size, opacity }) => {
       version="1.1"
       viewBox="0 0 50 50"
       xmlns="http://www.w3.org/2000/svg"
-      className="overflow-visible"
     >
-      <g transform="translate(37.345 -140.36)">
-        <rect
-          x="-35.663"
-          y="142.05"
-          width="46.636"
-          height="46.636"
-          ry="6.2047"
-          fill="none"
-          stroke={`#ffffff${opacity.repeat(2)}`}
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width={Math.round(250 / size)}
-        />
-      </g>
+      <rect
+        x="1.4151"
+        y="1.4151"
+        width="47.17"
+        height="47.17"
+        ry="10.563"
+        fill="none"
+        stroke={`#ffffff${opacity.repeat(2)}`}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={Math.round(250 / size)}
+      />
     </svg>
   );
 };
