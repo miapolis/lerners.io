@@ -33,18 +33,17 @@ const Home: NextPage = () => {
           } 0)`,
           backgroundSize: "40px 40px",
         }}
+        className="relative"
       >
-        <IconButton size="large" className="absolute top-4 right-4 z-10">
+        <IconButton
+          size="large"
+          className="absolute top-4 right-4 z-10"
+          onClick={toggleTheme}
+        >
           {theme.value == "dark" ? (
-            <DarkModeOutlinedIcon
-              style={{ color: "white" }}
-              onClick={toggleTheme}
-            />
+            <DarkModeOutlinedIcon style={{ color: "white" }} />
           ) : (
-            <LightModeOutlinedIcon
-              style={{ color: "black" }}
-              onClick={toggleTheme}
-            />
+            <LightModeOutlinedIcon style={{ color: "black" }} />
           )}
         </IconButton>
         <FirstSection />
