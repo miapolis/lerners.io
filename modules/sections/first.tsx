@@ -46,11 +46,11 @@ const Dots: React.FC = () => {
           style={{ left, top }}
         >
           {shape == 1 ? (
-            <ShapeOne key={i} size={size} opacity={opacity} />
+            <ShapeOne size={size} opacity={opacity} />
           ) : shape == 2 ? (
-            <ShapeTwo key={i} size={size} opacity={opacity} />
+            <ShapeTwo size={size} opacity={opacity} />
           ) : (
-            <ShapeThree key={i} size={size} opacity={opacity} />
+            <ShapeThree size={size} opacity={opacity} />
           )}
         </Parallax>
       );
