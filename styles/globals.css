@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "https://cdnjs.cloudflare.com/ajax/libs/hack-font/3.3.0/web/hack.min.css";
+
 html,
 body {
   padding: 0;
