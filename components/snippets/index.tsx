@@ -132,7 +132,7 @@ export const Snippet: React.FC<SnippetProps> = ({ code, language }) => {
     <div
       className={`relative h-auto w-min ${
         theme.value == "dark" ? "bg-black" : "bg-white"
-      } ml-10 rounded-lg shadow-lg p-4`}
+      } rounded-lg shadow-lg p-4`}
     >
       <div className="relative w-full h-4 flex flex-row gap-[8px] mb-8">
         <div className="h-full w-4 rounded-[50%] bg-[#ff5f56]" />
