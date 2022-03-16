@@ -15,7 +15,3 @@
   width: calc(100% + 1.3px);
   height: 117px;
 }
-
-.divider .shapeFill {
-  fill: rgb(17 24 39);
-}
