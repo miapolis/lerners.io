@@ -1,6 +1,8 @@
 import React from "react";
 import { useParallax } from "react-scroll-parallax";
-import { Elixir } from "../../components/snippets/intro/elixir";
+import { Snippet } from "../../components/snippets";
+import { ElixirIntro } from "../../components/snippets/elixir";
+import { RustIntro } from "../../components/snippets/rust";
 import { ThemeContext } from "../../pages/_app";
 
 const Second: React.FC = () => {
@@ -14,7 +16,9 @@ const Second: React.FC = () => {
         theme.value == "dark" ? "bg-gray-900" : "bg-gray-100"
       }`}
     >
-      <Elixir discordUsername={""} mode="dark" />
+      <Snippet code={<ElixirIntro />} language="Elixir" />
+      <div className="h-6" />
+      <Snippet code={<RustIntro />} language="Rust" />
     </div>
   );
 };
