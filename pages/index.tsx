@@ -37,7 +37,7 @@ const Home: NextPage = () => {
           } 0)`,
           backgroundSize: "40px 40px",
         }}
-        className="relative"
+        className={`relative ${theme.value}`}
       >
         <div className="absolute top-4 right-4 z-10">
           <IconButton size="large" onClick={toggleTheme}>

@@ -31,7 +31,7 @@ export const LinkKeyValue: React.FC<LinkKeyValueProps> = ({
     <Line
       tokens={[
         text("("),
-        string(name),
+        string(`"${name}"`),
         text(", "),
         { content: value, type: "string", link: link },
         text("),"),
