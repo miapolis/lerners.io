@@ -1,5 +1,10 @@
 import React from "react";
 import { ThemeContext } from "../../pages/_app";
+import { Die } from "../icons/die";
+import { ElixirIntro } from "./elixir";
+import { RustIntro } from "./rust";
+
+export type Language = "Elixir" | "Rust";
 
 export const darkTheme = {
   keyword: "CD3F45",
@@ -123,14 +128,26 @@ export const BlankLine: React.FC = () => {
 export interface SnippetProps {
   code: React.ReactNode;
   language: string;
+  onRandomClick?: () => void;
 }
 
-export const Snippet: React.FC<SnippetProps> = ({ code, language }) => {
+const dieColor = {
+  light: ["rgb(148 163 184)", "rgb(0 0 0)"],
+  dark: ["rgb(148 163 184)", "rgb(255 255 255)"],
+};
+
+export const Snippet: React.FC<SnippetProps> = ({
+  code,
+  language,
+  onRandomClick,
+}) => {
   const theme = React.useContext(ThemeContext);
+
+  const [dieHovered, setDieHovered] = React.useState(false);
 
   return (
     <div
-      className={`relative h-auto w-min ${
+      className={`transition-all relative ${
         theme.value == "dark" ? "bg-black" : "bg-white"
       } rounded-lg shadow-lg p-4`}
     >
@@ -139,14 +156,60 @@ export const Snippet: React.FC<SnippetProps> = ({ code, language }) => {
         <div className="h-full w-4 rounded-[50%] bg-[#ffbd2e]" />
         <div className="h-full w-4 rounded-[50%] bg-[#27c93f]" />
         <div
-          className={`absolute right-0 font-bold ${
+          className={`absolute right-0 font-bold flex flex-row items-center gap-3 ${
             theme.value == "dark" ? "text-white" : "text-black"
           }`}
         >
           {language}
+          <div
+            className="hover:rotate-90 hover:scale-150 transition-all duration-200 cursor-pointer"
+            onMouseEnter={() => setDieHovered(true)}
+            onMouseLeave={() => setDieHovered(false)}
+            onClick={onRandomClick}
+          >
+            <Die
+              size={18}
+              color={
+                dieColor[theme.value as keyof typeof dieColor][
+                  dieHovered ? 1 : 0
+                ]
+              }
+            />
+          </div>
         </div>
       </div>
       <div className="h-auto w-min">{code}</div>
     </div>
+  );
+};
+
+export interface IntroSnippetProps {
+  language: Language;
+  onRandomClick?: () => void;
+}
+
+export const IntroSnippet: React.FC<IntroSnippetProps> = ({
+  language,
+  onRandomClick,
+}) => {
+  const [component, setComponent] = React.useState<React.ReactNode>(undefined);
+
+  React.useEffect(() => {
+    switch (language) {
+      case "Elixir":
+        setComponent(<ElixirIntro />);
+        break;
+      case "Rust":
+        setComponent(<RustIntro />);
+        break;
+    }
+  }, [language]);
+
+  return (
+    <Snippet
+      code={component}
+      language={language}
+      onRandomClick={onRandomClick}
+    />
   );
 };
