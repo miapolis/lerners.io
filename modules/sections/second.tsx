@@ -8,21 +8,24 @@ import {
   useTransition,
 } from "react-spring";
 import { IntroSnippet, Language } from "../../components/snippets";
+import { useRandomLanguage } from "../../hooks/use-random-language";
 import { ThemeContext } from "../../pages/_app";
 
 const Second: React.FC = () => {
   const theme = React.useContext(ThemeContext);
+  const [randomLanguage, nextLanguage] = useRandomLanguage();
 
+  const [initial, setInitial] = React.useState(false);
   const [revealed, setRevealed] = React.useState(false);
   const [snippet, setSnippet] = React.useState<Language | undefined>();
   const [showDesc, setShowDesc] = React.useState(false);
 
   const changeSnippet = () => {
-    const prev = snippet;
-
     setSnippet(undefined);
+    nextLanguage();
+
     setTimeout(() => {
-      setSnippet(prev == "Elixir" ? "Rust" : "Elixir");
+      setSnippet(randomLanguage);
     }, 200);
   };
 
@@ -50,16 +53,23 @@ const Second: React.FC = () => {
 
   useChain([titleRef, bodyRef], [0, 0.3]);
 
+  React.useEffect(() => {
+    if (!initial) return;
+
+    setSnippet(randomLanguage);
+    nextLanguage();
+
+    setTimeout(() => {
+      setRevealed(true);
+      setShowDesc(true);
+    }, 500);
+  }, [initial]);
+
   return (
     <Parallax
       onProgressChange={(p) => {
-        if (!revealed && p > 0.2) {
-          setSnippet("Elixir");
-
-          setTimeout(() => {
-            setRevealed(true);
-            setShowDesc(true);
-          }, 500);
+        if (!initial && p > 0.2) {
+          setInitial(true);
         }
       }}
       className={`overflow-hidden relative w-full h-screen ${

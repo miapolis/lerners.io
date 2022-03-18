@@ -1,10 +1,15 @@
 import React from "react";
 import { ThemeContext } from "../../pages/_app";
 import { Die } from "../icons/die";
+import { CSharpIntro } from "./csharp";
 import { ElixirIntro } from "./elixir";
 import { RustIntro } from "./rust";
 
-export type Language = "Elixir" | "Rust";
+export enum Language {
+  ELIXIR = "Elixir",
+  CSHARP = "C#",
+  RUST = "Rust",
+}
 
 export const darkTheme = {
   keyword: "CD3F45",
@@ -196,11 +201,14 @@ export const IntroSnippet: React.FC<IntroSnippetProps> = ({
 
   React.useEffect(() => {
     switch (language) {
-      case "Elixir":
+      case Language.ELIXIR:
         setComponent(<ElixirIntro />);
         break;
-      case "Rust":
+      case Language.RUST:
         setComponent(<RustIntro />);
+        break;
+      case Language.CSHARP:
+        setComponent(<CSharpIntro />);
         break;
     }
   }, [language]);

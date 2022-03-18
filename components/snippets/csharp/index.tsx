@@ -1,18 +1,9 @@
-import {
-  comment,
-  CommentProps,
-  Line,
-  LinkKeyValueProps,
-  string,
-  text,
-  Token,
-} from "..";
-import RustIntro from "./intro";
+import { comment, CommentProps, Line, LinkKeyValueProps, string, text, Token } from "..";
+import CSharpIntro from "./intro";
 
-export { RustIntro };
+export { CSharpIntro };
 
-export const colon = { content: ":", type: "keyword" } as Token;
-export const doubleColon = { content: "::", type: "keyword" } as Token;
+export const dot = { content: ".", type: "keyword" } as Token;
 
 export const Comment: React.FC<CommentProps> = ({
   content,
@@ -25,17 +16,18 @@ export const LinkKeyValue: React.FC<LinkKeyValueProps> = ({
   name,
   value,
   link,
+  last = false,
 }) => {
   return (
     <Line
       tokens={[
-        text("("),
+        text("{ "),
         string(`"${name}"`),
         text(", "),
         { content: value, type: "string", link: link },
-        text("),"),
+        text(` }${!last ? "," : ""}`),
       ]}
-      indentation={16}
+      indentation={12}
     />
   );
 };
