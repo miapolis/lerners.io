@@ -145,7 +145,7 @@ const First: React.FC = () => {
         <h1
           className={`${
             theme.value == "dark" ? "text-white" : "text-black"
-          } text-8xl font-bold z-10 drop-shadow-lg`}
+          } text-4xl sm:text-7xl md:text-8xl font-bold z-10 drop-shadow-lg`}
         >
           Ethan Lerner
         </h1>

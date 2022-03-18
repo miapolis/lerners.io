@@ -67,12 +67,15 @@ const Second: React.FC = () => {
       }`}
     >
       <div className="relative w-full pt-12">
-        <div className="flex flex-row w-auto">
-          <div className="h-full w-1/2 flex justify-end">
+        <div className="flex flex-col-reverse lg:flex-row w-auto">
+          <div className="h-full w-full lg:w-1/2 flex justify-center lg:justify-end">
             {transition(
               (styles, item) =>
                 item && (
-                  <animated.div style={styles} className="absolute">
+                  <animated.div
+                    style={styles}
+                    className="absolute w-screen sm:w-auto"
+                  >
                     <IntroSnippet
                       language={item}
                       onRandomClick={changeSnippet}
@@ -81,7 +84,7 @@ const Second: React.FC = () => {
                 )
             )}
           </div>
-          <div className="ml-6 w-auto h-auto max-w-md">
+          <div className="flex flex-col mx-6 lg:mx-0 lg:ml-6 mb-8 w-auto h-auto max-w-md self-center lg:self-start">
             {titleTransition((styles, item) => (
               <animated.div
                 style={{ visibility: item ? "visible" : "hidden", ...styles }}

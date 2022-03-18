@@ -98,7 +98,7 @@ export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
         return (
           <div
             key={i}
-            className="whitespace-pre flex flex-row"
+            className="whitespace-pre flex flex-row text-xs sm:text-sm md:text-base"
             style={{
               color: `#${
                 theme.value == "dark"
