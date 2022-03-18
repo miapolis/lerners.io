@@ -72,11 +72,11 @@ const Second: React.FC = () => {
           setInitial(true);
         }
       }}
-      className={`overflow-hidden relative w-full h-screen ${
+      className={`overflow-hidden relative w-full min-h-screen h-min ${
         theme.value == "dark" ? "bg-gray-900" : "bg-gray-100"
       }`}
     >
-      <div className="relative w-full pt-12">
+      <div className="relative w-full pt-12" style={{ minHeight: 800 }}>
         <div className="flex flex-col-reverse lg:flex-row w-auto">
           <div className="h-full w-full lg:w-1/2 flex justify-center lg:justify-end">
             {transition(
