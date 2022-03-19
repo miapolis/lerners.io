@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { useQuery } from "react-query";
 
 interface ElapsedState {
@@ -36,7 +37,7 @@ export const Presence: React.FC = () => {
 
   React.useEffect(() => {
     const interval = setInterval(() => {
-      if (dataRef.current && !error) {
+      if (dataRef.current) {
         setElapsed(elapsedFromTimestamp(dataRef.current.start_timestamp));
       }
     }, 500);
@@ -50,7 +51,7 @@ export const Presence: React.FC = () => {
       </h1>
       <div className="flex flex-row">
         <div className="relative w-[100px] h-[100px]">
-          <img
+          <Image
             className="rounded-xl drop-shadow-md"
             alt="Language icon"
             width={100}
@@ -62,7 +63,8 @@ export const Presence: React.FC = () => {
             }
           />
           <div className="absolute rounded-[50%] bottom-[-10px] right-[-10px] flex items-center justify-center w-[38px] h-[38px] bg-gray-200 dark:bg-slate-800">
-            <img
+            <Image
+              alt="VSCode icon"
               className="rounded-[50%] drop-shadow-md"
               width={30}
               height={30}
@@ -89,10 +91,13 @@ export const Presence: React.FC = () => {
               )}
             </>
           ) : (
-            <div>Offline</div>
+            <>
+            <div className="text-lg text-gray-600 dark:text-slate-300">[ Offline ]</div>
+            <div className="text-lg text-gray-500 dark:text-slate-400">Not on VSCode</div>
+            </>
           )}
           {elapsed && data ? (
-            <div>{`${formatFullTime(elapsed)} elapsed`}</div>
+            <div className="text-gray-600 dark:text-slate-300">{`${formatFullTime(elapsed)} elapsed`}</div>
           ) : (
             ""
           )}
