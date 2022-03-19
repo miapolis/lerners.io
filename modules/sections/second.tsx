@@ -7,6 +7,7 @@ import {
   useSpringRef,
   useTransition,
 } from "react-spring";
+import { Presence } from "../../components/presence";
 import { IntroSnippet, Language } from "../../components/snippets";
 import { useRandomLanguage } from "../../hooks/use-random-language";
 import { ThemeContext } from "../../pages/_app";
@@ -50,8 +51,14 @@ const Second: React.FC = () => {
     enter: { opacity: 1 },
     ref: bodyRef,
   });
+  const presenceRef = useSpringRef();
+  const presenceTransition = useTransition(showDesc, {
+    from: { opacity: 0, y: 20 },
+    enter: { opacity: 1, y: 0},
+    ref: presenceRef,
+  });
 
-  useChain([titleRef, bodyRef], [0, 0.3]);
+  useChain([titleRef, bodyRef, presenceRef], [0, 0.3, 0.7]);
 
   React.useEffect(() => {
     if (!initial) return;
@@ -108,11 +115,17 @@ const Second: React.FC = () => {
               <animated.div
                 style={{ visibility: item ? "visible" : "hidden", ...styles }}
               >
-                <div className="text-gray-800 dark:text-gray-50">
-                  Over the last few years I've been working on some stuff and
-                  doing some things. If you'd like, feel free to check those
-                  things out!
+                <div className="text-gray-800 dark:text-gray-50 mb-4">
+                  I'm a student and programmer with an interest in servers and
+                  backend architecture, web development, and game engines.
                 </div>
+              </animated.div>
+            ))}
+            {presenceTransition((styles, item) => (
+              <animated.div
+                style={{ visibility: item ? "visible" : "hidden", ...styles }}
+              >
+                <Presence />
               </animated.div>
             ))}
           </div>

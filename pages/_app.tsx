@@ -1,7 +1,10 @@
 import React from "react";
 import type { AppProps } from "next/app";
 import { ParallaxProvider } from "react-scroll-parallax";
+import { QueryClient, QueryClientProvider } from "react-query";
 import "../styles/globals.css";
+
+const queryClient = new QueryClient();
 
 export const ThemeContext = React.createContext<{
   value: string;
@@ -12,11 +15,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [theme, setTheme] = React.useState("dark");
 
   return (
-    <ThemeContext.Provider value={{ value: theme, setTheme }}>
-      <ParallaxProvider>
-        <Component {...pageProps} />
-      </ParallaxProvider>
-    </ThemeContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeContext.Provider value={{ value: theme, setTheme }}>
+        <ParallaxProvider>
+          <Component {...pageProps} />
+        </ParallaxProvider>
+      </ThemeContext.Provider>
+    </QueryClientProvider>
   );
 }
 
