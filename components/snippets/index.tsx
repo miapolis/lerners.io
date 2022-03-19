@@ -1,12 +1,21 @@
 import React from "react";
 import { ThemeContext } from "../../pages/_app";
 import { Die } from "../icons/die";
+
+import { CppIntro } from "./cpp";
 import { CSharpIntro } from "./csharp";
 import { ElixirIntro } from "./elixir";
 import { RustIntro } from "./rust";
+import { TypeScriptIntro } from "./typescript";
+import { GoIntro } from "./go"
+import { JavaIntro } from "./java"
 
 export enum Language {
+	JAVA = "Java",
+	GO = "Go",
+  TYPESCRIPT = "TypeScript",
   ELIXIR = "Elixir",
+  CPP = "C++",
   CSHARP = "C#",
   RUST = "Rust",
 }
@@ -14,7 +23,7 @@ export enum Language {
 export const darkTheme = {
   keyword: "CD3F45",
   variable: "55B5DB",
-  number: "E6CD69",
+  number: "9FCA56",
   definition: "E6CD69",
   property: "A074C4",
   string: "55B5DB",
@@ -201,11 +210,23 @@ export const IntroSnippet: React.FC<IntroSnippetProps> = ({
 
   React.useEffect(() => {
     switch (language) {
+			case Language.JAVA:
+				setComponent(<JavaIntro />);
+				break;
+			case Language.GO:
+				setComponent(<GoIntro />);
+				break;
+      case Language.TYPESCRIPT:
+        setComponent(<TypeScriptIntro />);
+        break;
       case Language.ELIXIR:
         setComponent(<ElixirIntro />);
         break;
       case Language.RUST:
         setComponent(<RustIntro />);
+        break;
+      case Language.CPP:
+        setComponent(<CppIntro />);
         break;
       case Language.CSHARP:
         setComponent(<CSharpIntro />);
