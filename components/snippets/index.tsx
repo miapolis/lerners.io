@@ -109,12 +109,12 @@ export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
-    <div className={`flex flex-row`}>
+    <div className={`inline-block w-max-content whitespace-nowrap`}>
       {tokens.map((t, i) => {
         return (
           <div
             key={i}
-            className="whitespace-pre flex flex-row text-xs sm:text-sm md:text-base"
+            className="whitespace-pre inline-block text-xs sm:text-sm md:text-base"
             style={{
               color: `#${
                 theme.value == "dark"
@@ -124,12 +124,12 @@ export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
               fontFamily: "Hack",
             }}
           >
-            {t.link ? <div>{'"'}</div> : null}
+            {t.link ? <div className="inline-block">{'"'}</div> : null}
             <a
               href={t.link ?? undefined}
               className={`${t.link ? "hover:underline cursor-pointer" : ""}`}
             >{`${i == 0 ? " ".repeat(indentation) : ""}${t.content}`}</a>
-            {t.link ? <div>{'"'}</div> : null}
+            {t.link ? <div className="inline-block">{'"'}</div> : null}
           </div>
         );
       })}
@@ -194,7 +194,7 @@ export const Snippet: React.FC<SnippetProps> = ({
           </div>
         </div>
       </div>
-      <div className="h-auto w-min">{code}</div>
+      <div className="h-auto overflow-x-auto flex flex-col">{code}</div>
     </div>
   );
 };
