@@ -109,7 +109,7 @@ export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
-    <div className={`inline-block w-max-content whitespace-nowrap`}>
+    <div className={`inline-block whitespace-nowrap line`} style={{lineHeight: 1 }}>
       {tokens.map((t, i) => {
         return (
           <div
@@ -121,6 +121,7 @@ export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
                   ? darkTheme[t.type as keyof typeof darkTheme]
                   : lightTheme[t.type as keyof typeof lightTheme]
               }`,
+              // lineHeight: 0,
               fontFamily: "Hack",
             }}
           >
