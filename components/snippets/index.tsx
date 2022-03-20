@@ -9,8 +9,10 @@ import { RustIntro } from "./rust";
 import { TypeScriptIntro } from "./typescript";
 import { GoIntro } from "./go"
 import { JavaIntro } from "./java"
+import { PythonIntro } from "./python"
 
 export enum Language {
+	PYTHON = "Python",
 	JAVA = "Java",
 	GO = "Go",
   TYPESCRIPT = "TypeScript",
@@ -210,6 +212,9 @@ export const IntroSnippet: React.FC<IntroSnippetProps> = ({
 
   React.useEffect(() => {
     switch (language) {
+			case Language.PYTHON:
+				setComponent(<PythonIntro />);
+				break;
 			case Language.JAVA:
 				setComponent(<JavaIntro />);
 				break;

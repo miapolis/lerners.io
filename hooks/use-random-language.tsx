@@ -25,7 +25,6 @@ export const useRandomLanguage = () => {
   } as State);
 
   const next = () => {
-    console.log(state);
     dispatch({ type: "next" });
   };
 
