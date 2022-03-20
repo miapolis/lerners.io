@@ -1,20 +1,28 @@
 import React from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
+import Link from "next/link";
 
 import { ThemeContext } from "./_app";
 import FirstSection from "../modules/sections/first";
 import SecondSection from "../modules/sections/second";
+import ThirdSection from "../modules/sections/third";
 
 import { IconButton } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import { Parallax } from "react-scroll-parallax";
 
 const Home: NextPage = () => {
   const theme = React.useContext(ThemeContext);
+  const [navbarBlur, setNavbarBlur] = React.useState(false);
 
   const toggleTheme = () => {
     theme.setTheme(theme.value == "dark" ? "light" : "dark");
+  };
+
+  const setIsPastTop = (v: boolean) => {
+    setNavbarBlur(v);
   };
 
   return (
@@ -31,25 +39,54 @@ const Home: NextPage = () => {
 
       <div
         style={{
-          height: "300vh",
           backgroundImage: `radial-gradient(circle at 1px 1px, grey 1px, ${
             theme.value == "dark" ? "black" : "white"
           } 0)`,
           backgroundSize: "40px 40px",
         }}
-        className={`relative ${theme.value}`}
+        className={`relative overflow-hidden ${theme.value}`}
       >
-        <div className="absolute top-4 right-4 z-10">
-          <IconButton size="large" onClick={toggleTheme}>
-            {theme.value == "dark" ? (
-              <DarkModeOutlinedIcon style={{ color: "white" }} />
-            ) : (
-              <LightModeOutlinedIcon style={{ color: "black" }} />
-            )}
-          </IconButton>
-        </div>
+        <Parallax
+          className={`fixed top-0 w-full z-20 h-16 flex items-center flex-row-reverse px-3 transition-all ${
+            navbarBlur == true ? "shadow-md" : ""
+          }`}
+          style={
+            navbarBlur
+              ? {
+                  backdropFilter: "blur(3px)",
+                  background:
+                    theme.value == "dark"
+                      ? "rgb(0, 0, 0, 0.2)"
+                      : "rgb(255, 255, 255, 0.5)",
+                }
+              : { backdropFilter: "none" }
+          }
+        >
+          <div className="flex">
+            <IconButton size="large" onClick={toggleTheme}>
+              {theme.value == "dark" ? (
+                <DarkModeOutlinedIcon style={{ color: "white" }} />
+              ) : (
+                <LightModeOutlinedIcon style={{ color: "black" }} />
+              )}
+            </IconButton>
+          </div>
+          {navbarBlur ? (
+            <div className="flex flex-1 h-full flex-row items-center px-3 gap-4 text-black dark:text-white">
+              <Link href="/">
+                <a className="font-bold">Ethan Lerner</a>
+              </Link>
+              <div className="text-gray-500 dark:text-slate-300">|</div>
+              <a href="mailto:ethan@lerners.io">Email</a>
+              <a href="https://github.com/miapolis">GitHub</a>
+            </div>
+          ) : (
+            ""
+          )}
+        </Parallax>
         <FirstSection />
-        <SecondSection />
+        <SecondSection setIsPastTop={setIsPastTop} />
+        <ThirdSection />
       </div>
     </>
   );

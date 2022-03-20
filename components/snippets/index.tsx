@@ -7,14 +7,14 @@ import { CSharpIntro } from "./csharp";
 import { ElixirIntro } from "./elixir";
 import { RustIntro } from "./rust";
 import { TypeScriptIntro } from "./typescript";
-import { GoIntro } from "./go"
-import { JavaIntro } from "./java"
-import { PythonIntro } from "./python"
+import { GoIntro } from "./go";
+import { JavaIntro } from "./java";
+import { PythonIntro } from "./python";
 
 export enum Language {
-	PYTHON = "Python",
-	JAVA = "Java",
-	GO = "Go",
+  PYTHON = "Python",
+  JAVA = "Java",
+  GO = "Go",
   TYPESCRIPT = "TypeScript",
   ELIXIR = "Elixir",
   CPP = "C++",
@@ -109,7 +109,10 @@ export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
   const theme = React.useContext(ThemeContext);
 
   return (
-    <div className={`inline-block whitespace-nowrap line`} style={{lineHeight: 1 }}>
+    <div
+      className={`inline-block whitespace-nowrap line`}
+      style={{ lineHeight: 1 }}
+    >
       {tokens.map((t, i) => {
         return (
           <div
@@ -145,6 +148,7 @@ export const BlankLine: React.FC = () => {
 export interface SnippetProps {
   code: React.ReactNode;
   language: string;
+  alternateColors: boolean;
   onRandomClick?: () => void;
 }
 
@@ -156,6 +160,7 @@ const dieColor = {
 export const Snippet: React.FC<SnippetProps> = ({
   code,
   language,
+  alternateColors,
   onRandomClick,
 }) => {
   const theme = React.useContext(ThemeContext);
@@ -165,7 +170,13 @@ export const Snippet: React.FC<SnippetProps> = ({
   return (
     <div
       className={`transition-all relative ${
-        theme.value == "dark" ? "bg-black" : "bg-white"
+        theme.value == "dark"
+          ? alternateColors
+            ? "bg-slate-900"
+            : "bg-black"
+          : alternateColors
+          ? "bg-gray-100"
+          : "bg-white"
       } rounded-lg shadow-lg p-4`}
     >
       <div className="relative w-full h-4 flex flex-row gap-[8px] mb-8">
@@ -202,26 +213,28 @@ export const Snippet: React.FC<SnippetProps> = ({
 
 export interface IntroSnippetProps {
   language: Language;
+  alternateColors?: boolean;
   onRandomClick?: () => void;
 }
 
 export const IntroSnippet: React.FC<IntroSnippetProps> = ({
   language,
+  alternateColors = false,
   onRandomClick,
 }) => {
   const [component, setComponent] = React.useState<React.ReactNode>(undefined);
 
   React.useEffect(() => {
     switch (language) {
-			case Language.PYTHON:
-				setComponent(<PythonIntro />);
-				break;
-			case Language.JAVA:
-				setComponent(<JavaIntro />);
-				break;
-			case Language.GO:
-				setComponent(<GoIntro />);
-				break;
+      case Language.PYTHON:
+        setComponent(<PythonIntro />);
+        break;
+      case Language.JAVA:
+        setComponent(<JavaIntro />);
+        break;
+      case Language.GO:
+        setComponent(<GoIntro />);
+        break;
       case Language.TYPESCRIPT:
         setComponent(<TypeScriptIntro />);
         break;
@@ -244,6 +257,7 @@ export const IntroSnippet: React.FC<IntroSnippetProps> = ({
     <Snippet
       code={component}
       language={language}
+      alternateColors={alternateColors}
       onRandomClick={onRandomClick}
     />
   );

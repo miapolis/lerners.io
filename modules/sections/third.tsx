@@ -1,5 +1,5 @@
 import React from "react";
-import { Parallax } from "react-scroll-parallax";
+import { Parallax, useParallax } from "react-scroll-parallax";
 import {
   animated,
   config,
@@ -7,18 +7,39 @@ import {
   useSpringRef,
   useTransition,
 } from "react-spring";
-import { Presence } from "../../components/presence";
 import { IntroSnippet, Language } from "../../components/snippets";
 import { useRandomLanguage } from "../../hooks/use-random-language";
 import { ThemeContext } from "../../pages/_app";
+import One from "./shapes/one";
+import Three from "./shapes/three";
+import Two from "./shapes/two";
+import styles from "./third.module.css";
 
-export interface SecondProps {
-  setIsPastTop: (boolean: boolean) => void;
-}
-
-const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
+const Third: React.FC = () => {
   const theme = React.useContext(ThemeContext);
+
   const [randomLanguage, nextLanguage] = useRandomLanguage();
+  const centralParallax = useParallax<HTMLDivElement>({
+    rotate: [0, 360],
+    translateY: ["15px", "15px"],
+    translateX: ["-50%", "-50%"],
+  });
+  const rightParallax = useParallax<HTMLDivElement>({
+    rotate: [0, -900],
+    translateY: ["100px", "40px"],
+    translateX: ["500px", "0px"],
+    easing: "easeOut",
+    speed: 10,
+    opacity: [0, 1],
+  });
+  const leftParallax = useParallax<HTMLDivElement>({
+    rotate: [0, -200],
+    translateY: ["0px", "35px"],
+    translateX: ["-500px", "0px"],
+    easing: "easeOut",
+    speed: 10,
+    opacity: [0, 1],
+  });
 
   const [initial, setInitial] = React.useState(false);
   const [revealed, setRevealed] = React.useState(false);
@@ -33,6 +54,18 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
       setSnippet(randomLanguage);
     }, 200);
   };
+
+  React.useEffect(() => {
+    if (!initial) return;
+
+    setSnippet(randomLanguage);
+    nextLanguage();
+
+    setTimeout(() => {
+      setRevealed(true);
+      setShowDesc(true);
+    }, 500);
+  }, [initial]);
 
   const transition = useTransition(snippet, {
     from: !revealed
@@ -55,26 +88,8 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
     enter: { opacity: 1 },
     ref: bodyRef,
   });
-  const presenceRef = useSpringRef();
-  const presenceTransition = useTransition(showDesc, {
-    from: { opacity: 0, y: 20 },
-    enter: { opacity: 1, y: 0 },
-    ref: presenceRef,
-  });
 
-  useChain([titleRef, bodyRef, presenceRef], [0, 0.3, 0.7]);
-
-  React.useEffect(() => {
-    if (!initial) return;
-
-    setSnippet(randomLanguage);
-    nextLanguage();
-
-    setTimeout(() => {
-      setRevealed(true);
-      setShowDesc(true);
-    }, 500);
-  }, [initial]);
+  useChain([titleRef, bodyRef], [0, 0.3]);
 
   return (
     <Parallax
@@ -83,17 +98,51 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
           setInitial(true);
         }
       }}
-      className={`overflow-hidden relative w-full h-[850px] md:h-[950px] lg:h-[650px] ${
-        theme.value == "dark" ? "bg-slate-900" : "bg-gray-100"
-      }`}
+      className="relative w-full h-[850px] md:h-[950px] lg:h-[750px] bg-white dark:bg-black"
     >
-      <Parallax
-        className="w-full"
-        onProgressChange={(p) => {
-          setIsPastTop(p >= 1);
-        }}
-      />
-      <div className="relative w-full pt-12">
+      <div className={styles.divider}>
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M1200 120L0 16.48 0 0 1200 0 1200 120z"
+            style={{ fill: theme.value == "dark" ? "#0f172a" : "#f3f4f6" }}
+          ></path>
+        </svg>
+      </div>
+      <div ref={centralParallax.ref} className="absolute left-[50%]">
+        <One
+          size={80}
+          color={theme.value == "dark" ? "ffffff" : "000000"}
+          opacity={"f"}
+        />
+      </div>
+      <div
+        ref={rightParallax.ref}
+        className="absolute"
+        style={{ left: "calc(50% + 80px)" }}
+      >
+        <Two
+          size={30}
+          color={theme.value == "dark" ? "ffffff" : "000000"}
+          opacity={"e"}
+        />
+      </div>
+      <div
+        ref={leftParallax.ref}
+        className="absolute"
+        style={{ left: "calc(50% - 100px)" }}
+      >
+        <Three
+          size={24}
+          color={theme.value == "dark" ? "ffffff" : "000000"}
+          opacity={"e"}
+        />
+      </div>
+      <div className="relative w-full pt-40">
         <div className="flex flex-col-reverse lg:flex-row w-auto">
           <div className="h-full w-full lg:w-1/2 flex justify-center lg:justify-end">
             {transition(
@@ -105,6 +154,7 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
                   >
                     <IntroSnippet
                       language={item}
+                      alternateColors={true}
                       onRandomClick={changeSnippet}
                     />
                   </animated.div>
@@ -117,7 +167,7 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
                 style={{ visibility: item ? "visible" : "hidden", ...styles }}
               >
                 <h1 className="text-2xl mb-4 font-bold text-black dark:text-white">
-                  Hi! I'm Ethan
+                  Projects
                 </h1>
               </animated.div>
             ))}
@@ -126,16 +176,18 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
                 style={{ visibility: item ? "visible" : "hidden", ...styles }}
               >
                 <div className="text-gray-800 dark:text-gray-50 mb-4">
-                  I'm a student and programmer with an interest in servers and
-                  backend architecture, web development, and game engines.
+                  My main project right now is <b>Port7</b>, a dedicated
+                  platform for web-based games, written in Elixir. I'm also
+                  working on{"  "}
+                  <a
+                    className="hover:text-blue-400 font-bold"
+                    href="https://crates.io/crates/brix"
+                  >
+                    Brix
+                  </a>
+                  , a CLI tool for scaffolding and code generation. Almost
+                  everything I work on is open-source.
                 </div>
-              </animated.div>
-            ))}
-            {presenceTransition((styles, item) => (
-              <animated.div
-                style={{ visibility: item ? "visible" : "hidden", ...styles }}
-              >
-                <Presence />
               </animated.div>
             ))}
           </div>
@@ -145,4 +197,4 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
   );
 };
 
-export default Second;
+export default Third;

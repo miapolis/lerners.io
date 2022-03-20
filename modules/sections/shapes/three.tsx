@@ -16,7 +16,7 @@ const Three: React.FC<BaseShapeProps> = ({ size, color, opacity }) => {
         stroke={`#${color}${opacity.repeat(2)}`}
         strokeLinecap="round"
         strokeLinejoin="round"
-        strokeWidth={Math.round(1200 / size)}
+        strokeWidth={Math.round(600 / size)}
       />
     </svg>
   );
