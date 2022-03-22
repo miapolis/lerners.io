@@ -1,9 +1,8 @@
 import React from "react";
-import { Language } from "../components/snippets";
 
 interface State {
   index: number;
-  set: Language[];
+  set: any[];
 }
 
 const reducer = (state: any, action: any) => {
@@ -18,10 +17,10 @@ const reducer = (state: any, action: any) => {
   }
 };
 
-export const useRandomLanguage = () => {
+export function useRandomEnum<T>(obj: any) {
   const [state, dispatch] = React.useReducer(reducer, {
     index: 0,
-    set: languageSet(),
+    set: enumSet<T>(obj),
   } as State);
 
   const next = () => {
@@ -29,12 +28,12 @@ export const useRandomLanguage = () => {
   };
 
   return [state.set[state.index], next];
-};
+}
 
-const languageSet = (): Language[] => {
-  return Object.keys(Language)
-    .map((key) => Language[key as keyof typeof Language])
+function enumSet<T>(obj: T) {
+  return Object.keys(obj)
+    .map((key) => obj[key as keyof typeof obj])
     .map((value) => ({ value, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ value }) => value);
-};
+}

@@ -9,14 +9,14 @@ import {
 } from "react-spring";
 import { Presence } from "../../components/presence";
 import { IntroSnippet, Language } from "../../components/snippets";
-import { useRandomLanguage } from "../../hooks/use-random-language";
+import { useRandomEnum } from "../../hooks/use-random-enum";
 
 export interface SecondProps {
   setIsPastTop: (boolean: boolean) => void;
 }
 
 const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
-  const [randomLanguage, nextLanguage] = useRandomLanguage();
+  const [randomLanguage, nextLanguage] = useRandomEnum(Language);
 
   const [initial, setInitial] = React.useState(false);
   const [revealed, setRevealed] = React.useState(false);

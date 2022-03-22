@@ -10,6 +10,7 @@ import { TypeScriptIntro } from "./typescript";
 import { GoIntro } from "./go";
 import { JavaIntro } from "./java";
 import { PythonIntro } from "./python";
+import { TomlEnd, TomlProject, TomlSetup } from "./yaml";
 
 export enum Language {
   PYTHON = "Python",
@@ -22,11 +23,16 @@ export enum Language {
   RUST = "Rust",
 }
 
+export enum Config {
+  TOML = "TOML",
+}
+
 export const darkTheme = {
   keyword: "CD3F45",
   variable: "55B5DB",
   number: "9FCA56",
   definition: "E6CD69",
+  attribute: "9FCA56",
   property: "A074C4",
   string: "55B5DB",
   comment: "41535B",
@@ -39,6 +45,7 @@ export const lightTheme = {
   variable: "E06C75",
   number: "986801",
   definition: "4078F2",
+  attribute: "D19A66",
   property: "4078F2",
   string: "50A14F",
   comment: "A0A1A7",
@@ -51,6 +58,7 @@ export type TokenType =
   | "variable"
   | "number"
   | "definition"
+  | "attribute"
   | "property"
   | "string"
   | "comment"
@@ -73,6 +81,7 @@ export const def = (v: string): Token => ({
   type: "definition",
   content: v,
 });
+export const att = (v: string): Token => ({ type: "attribute", content: v });
 export const prop = (v: string): Token => ({ type: "property", content: v });
 export const string = (v: string): Token => ({ type: "string", content: v });
 export const comment = (v: string): Token => ({ type: "comment", content: v });
@@ -253,6 +262,65 @@ export const IntroSnippet: React.FC<IntroSnippetProps> = ({
       language={language}
       alternateColors={alternateColors}
       onRandomClick={onRandomClick}
+    />
+  );
+};
+
+export interface ConfigSnippetProps {
+  config: Config;
+  alternateColors?: boolean;
+  onRandomClick?: () => void;
+}
+
+const projects = [
+  {
+    name: "Port7",
+    desc: "An all-in-one platform for web-based games.",
+    url: "https://github.com/miapolis/port7",
+    languages: ["Elixir", "TypeScript"],
+  },
+  {
+    name: "Brix",
+    desc: "A CLI tools for scaffolding and code generation.",
+    url: "https://crates.io/crates/brix",
+    languages: ["Rust"],
+  },
+  {
+    name: "Stratepig",
+    desc: "A multiplayer Stratego implementation.",
+    url: "https://github.com/miapolis/stratepig-server",
+    languages: ["Rust", "C#"],
+  },
+];
+
+export const ConfigSnippet: React.FC<ConfigSnippetProps> = ({
+  config,
+  alternateColors = false,
+  onRandomClick,
+}) => {
+  const SetupComponent = TomlSetup;
+  const ProjectComponent = TomlProject;
+  const EndComponent = TomlEnd;
+
+  return (
+    <Snippet
+      code={
+        <>
+          <SetupComponent />
+          {projects.map((p) => (
+            <ProjectComponent
+              key={p.name}
+              name={p.name}
+              desc={p.desc}
+              url={p.url}
+              languages={p.languages}
+            />
+          ))}
+          <EndComponent />
+        </>
+      }
+      alternateColors={alternateColors}
+      language={config}
     />
   );
 };

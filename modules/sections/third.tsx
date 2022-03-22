@@ -7,8 +7,8 @@ import {
   useSpringRef,
   useTransition,
 } from "react-spring";
-import { IntroSnippet, Language } from "../../components/snippets";
-import { useRandomLanguage } from "../../hooks/use-random-language";
+import { Config, ConfigSnippet } from "../../components/snippets";
+import { useRandomEnum } from "../../hooks/use-random-enum";
 import { useTheme } from "../../pages/_app";
 import One from "./shapes/one";
 import Three from "./shapes/three";
@@ -18,7 +18,7 @@ import styles from "./third.module.css";
 const Third: React.FC = () => {
   const { dark } = useTheme();
 
-  const [randomLanguage, nextLanguage] = useRandomLanguage();
+  const [randomConfig, nextConfig] = useRandomEnum(Config);
   const centralParallax = useParallax<HTMLDivElement>({
     rotate: [0, 360],
     translateY: ["15px", "15px"],
@@ -43,23 +43,23 @@ const Third: React.FC = () => {
 
   const [initial, setInitial] = React.useState(false);
   const [revealed, setRevealed] = React.useState(false);
-  const [snippet, setSnippet] = React.useState<Language | undefined>();
+  const [snippet, setSnippet] = React.useState<Config | undefined>();
   const [showDesc, setShowDesc] = React.useState(false);
 
   const changeSnippet = () => {
     setSnippet(undefined);
-    nextLanguage();
+    nextConfig();
 
     setTimeout(() => {
-      setSnippet(randomLanguage);
+      setSnippet(randomConfig);
     }, 200);
   };
 
   React.useEffect(() => {
     if (!initial) return;
 
-    setSnippet(randomLanguage);
-    nextLanguage();
+    setSnippet(randomConfig);
+    nextConfig();
 
     setTimeout(() => {
       setRevealed(true);
@@ -140,8 +140,8 @@ const Third: React.FC = () => {
                     style={styles}
                     className="absolute w-screen sm:w-auto"
                   >
-                    <IntroSnippet
-                      language={item}
+                    <ConfigSnippet
+                      config={item}
                       alternateColors={true}
                       onRandomClick={changeSnippet}
                     />
