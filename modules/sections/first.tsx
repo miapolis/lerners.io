@@ -7,7 +7,7 @@ import ShapeThree from "./shapes/three";
 import styles from "./first.module.css";
 import { Arrow } from "../../components/icons/arrow";
 import { animated, useSpringRef, useTransition } from "react-spring";
-import { ThemeContext } from "../../pages/_app";
+import { useTheme } from "../../pages/_app";
 
 const scroll = Scroll.animateScroll;
 
@@ -18,7 +18,7 @@ const OPACITY_VALUES = ["7", "8", "9", "a", "b", "c", "d", "e"];
 const shapeColor = { dark: "ffffff", light: "000000" };
 
 const Dots: React.FC = () => {
-  const theme = React.useContext(ThemeContext);
+  const { theme } = useTheme();
 
   const generateDots = () => {
     const dots = [];
@@ -53,19 +53,19 @@ const Dots: React.FC = () => {
           {shape == 1 ? (
             <ShapeOne
               size={size}
-              color={shapeColor[theme.value as keyof typeof shapeColor]}
+              color={shapeColor[theme as keyof typeof shapeColor]}
               opacity={opacity}
             />
           ) : shape == 2 ? (
             <ShapeTwo
               size={size}
-              color={shapeColor[theme.value as keyof typeof shapeColor]}
+              color={shapeColor[theme as keyof typeof shapeColor]}
               opacity={opacity}
             />
           ) : (
             <ShapeThree
               size={size}
-              color={shapeColor[theme.value as keyof typeof shapeColor]}
+              color={shapeColor[theme as keyof typeof shapeColor]}
               opacity={opacity}
             />
           )}
@@ -89,7 +89,7 @@ const Dots: React.FC = () => {
     setTimeout(() => {
       api.start();
     }, 10);
-  }, [theme.value]);
+  }, [theme]);
 
   return (
     <div className="w-full h-full">
@@ -133,7 +133,7 @@ const inNameArea = (left: number, top: number, size: number): boolean => {
 };
 
 const First: React.FC = () => {
-  const theme = React.useContext(ThemeContext);
+  const { dark } = useTheme();
   const [arrowOpacity, setArrowOpacity] = React.useState(1);
 
   return (
@@ -142,11 +142,7 @@ const First: React.FC = () => {
       style={{ height: "calc(100vh + 117px)" }}
     >
       <div className="h-screen flex items-center justify-center relative overflow-visible">
-        <h1
-          className={`${
-            theme.value == "dark" ? "text-white" : "text-black"
-          } text-4xl sm:text-7xl md:text-8xl font-bold z-10 drop-shadow-lg`}
-        >
+        <h1 className="text-black dark:text-white text-4xl sm:text-7xl md:text-8xl font-bold z-10 drop-shadow-lg">
           Ethan Lerner
         </h1>
         <div className="absolute w-[1000px] h-[500px]">
@@ -169,7 +165,7 @@ const First: React.FC = () => {
           <Arrow
             size={40}
             color={`rgb(${
-              theme.value == "dark" ? "230, 230, 230" : "25, 25, 25"
+              dark ? "230, 230, 230" : "25, 25, 25"
             }, ${arrowOpacity})`}
           />
         </Parallax>
@@ -183,9 +179,7 @@ const First: React.FC = () => {
         >
           <path
             d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-            className={
-              theme.value == "dark" ? "fill-gray-900" : "fill-gray-100"
-            }
+            className="fill-gray-100 dark:fill-gray-900"
           ></path>
         </svg>
       </div>

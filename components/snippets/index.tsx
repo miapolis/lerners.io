@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeContext } from "../../pages/_app";
+import { useTheme } from "../../pages/_app";
 import { Die } from "../icons/die";
 
 import { CppIntro } from "./cpp";
@@ -106,7 +106,7 @@ export interface LineProps {
 }
 
 export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
-  const theme = React.useContext(ThemeContext);
+  const { dark } = useTheme();
 
   return (
     <div
@@ -120,7 +120,7 @@ export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
             className="whitespace-pre inline-block text-xs sm:text-sm md:text-base"
             style={{
               color: `#${
-                theme.value == "dark"
+                dark
                   ? darkTheme[t.type as keyof typeof darkTheme]
                   : lightTheme[t.type as keyof typeof lightTheme]
               }`,
@@ -163,14 +163,14 @@ export const Snippet: React.FC<SnippetProps> = ({
   alternateColors,
   onRandomClick,
 }) => {
-  const theme = React.useContext(ThemeContext);
+  const { theme, dark } = useTheme();
 
   const [dieHovered, setDieHovered] = React.useState(false);
 
   return (
     <div
       className={`transition-all relative ${
-        theme.value == "dark"
+        dark
           ? alternateColors
             ? "bg-slate-900"
             : "bg-black"
@@ -183,11 +183,7 @@ export const Snippet: React.FC<SnippetProps> = ({
         <div className="h-full w-4 rounded-[50%] bg-[#ff5f56]" />
         <div className="h-full w-4 rounded-[50%] bg-[#ffbd2e]" />
         <div className="h-full w-4 rounded-[50%] bg-[#27c93f]" />
-        <div
-          className={`absolute right-0 font-bold flex flex-row items-center gap-3 ${
-            theme.value == "dark" ? "text-white" : "text-black"
-          }`}
-        >
+        <div className="absolute right-0 font-bold flex flex-row items-center gap-3 text-black dark:text-white">
           {language}
           <div
             className="hover:rotate-90 hover:scale-150 transition-all duration-200 cursor-pointer"
@@ -198,9 +194,7 @@ export const Snippet: React.FC<SnippetProps> = ({
             <Die
               size={18}
               color={
-                dieColor[theme.value as keyof typeof dieColor][
-                  dieHovered ? 1 : 0
-                ]
+                dieColor[theme as keyof typeof dieColor][dieHovered ? 1 : 0]
               }
             />
           </div>

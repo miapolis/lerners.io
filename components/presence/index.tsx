@@ -19,7 +19,7 @@ interface Presence {
 export const Presence: React.FC = () => {
   const [elapsed, setElapsed] = React.useState<ElapsedState>();
 
-  const { status, data, error, isFetching } = useQuery(
+  const { data, error } = useQuery(
     "presence",
     async () => {
       const response = await fetch(
@@ -92,12 +92,18 @@ export const Presence: React.FC = () => {
             </>
           ) : (
             <>
-            <div className="text-lg text-gray-600 dark:text-slate-300">[ Offline ]</div>
-            <div className="text-lg text-gray-500 dark:text-slate-400">Not on VSCode</div>
+              <div className="text-lg text-gray-600 dark:text-slate-300">
+                [ Offline ]
+              </div>
+              <div className="text-lg text-gray-500 dark:text-slate-400">
+                Not on VSCode
+              </div>
             </>
           )}
           {elapsed && data ? (
-            <div className="text-gray-600 dark:text-slate-300">{`${formatFullTime(elapsed)} elapsed`}</div>
+            <div className="text-gray-600 dark:text-slate-300">{`${formatFullTime(
+              elapsed
+            )} elapsed`}</div>
           ) : (
             ""
           )}

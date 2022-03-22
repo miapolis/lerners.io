@@ -10,14 +10,12 @@ import {
 import { Presence } from "../../components/presence";
 import { IntroSnippet, Language } from "../../components/snippets";
 import { useRandomLanguage } from "../../hooks/use-random-language";
-import { ThemeContext } from "../../pages/_app";
 
 export interface SecondProps {
   setIsPastTop: (boolean: boolean) => void;
 }
 
 const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
-  const theme = React.useContext(ThemeContext);
   const [randomLanguage, nextLanguage] = useRandomLanguage();
 
   const [initial, setInitial] = React.useState(false);
@@ -83,9 +81,7 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
           setInitial(true);
         }
       }}
-      className={`overflow-hidden relative w-full h-[850px] md:h-[950px] lg:h-[650px] ${
-        theme.value == "dark" ? "bg-slate-900" : "bg-gray-100"
-      }`}
+      className="overflow-hidden relative w-full h-[850px] md:h-[950px] lg:h-[650px] bg-gray-100 dark:bg-slate-900"
     >
       <Parallax
         className="w-full"

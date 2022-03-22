@@ -9,14 +9,14 @@ import {
 } from "react-spring";
 import { IntroSnippet, Language } from "../../components/snippets";
 import { useRandomLanguage } from "../../hooks/use-random-language";
-import { ThemeContext } from "../../pages/_app";
+import { useTheme } from "../../pages/_app";
 import One from "./shapes/one";
 import Three from "./shapes/three";
 import Two from "./shapes/two";
 import styles from "./third.module.css";
 
 const Third: React.FC = () => {
-  const theme = React.useContext(ThemeContext);
+  const { dark } = useTheme();
 
   const [randomLanguage, nextLanguage] = useRandomLanguage();
   const centralParallax = useParallax<HTMLDivElement>({
@@ -109,38 +109,26 @@ const Third: React.FC = () => {
         >
           <path
             d="M1200 120L0 16.48 0 0 1200 0 1200 120z"
-            style={{ fill: theme.value == "dark" ? "#0f172a" : "#f3f4f6" }}
+            style={{ fill: dark ? "#0f172a" : "#f3f4f6" }}
           ></path>
         </svg>
       </div>
       <div ref={centralParallax.ref} className="absolute left-[50%]">
-        <One
-          size={80}
-          color={theme.value == "dark" ? "ffffff" : "000000"}
-          opacity={"f"}
-        />
+        <One size={80} color={dark ? "ffffff" : "000000"} opacity={"f"} />
       </div>
       <div
         ref={rightParallax.ref}
         className="absolute"
         style={{ left: "calc(50% + 80px)" }}
       >
-        <Two
-          size={30}
-          color={theme.value == "dark" ? "ffffff" : "000000"}
-          opacity={"e"}
-        />
+        <Two size={30} color={dark ? "ffffff" : "000000"} opacity={"e"} />
       </div>
       <div
         ref={leftParallax.ref}
         className="absolute"
         style={{ left: "calc(50% - 100px)" }}
       >
-        <Three
-          size={24}
-          color={theme.value == "dark" ? "ffffff" : "000000"}
-          opacity={"e"}
-        />
+        <Three size={24} color={dark ? "ffffff" : "000000"} opacity={"e"} />
       </div>
       <div className="relative w-full pt-40">
         <div className="flex flex-col-reverse lg:flex-row w-auto">

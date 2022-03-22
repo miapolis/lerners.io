@@ -3,7 +3,7 @@ import Head from "next/head";
 import type { NextPage } from "next";
 import Link from "next/link";
 
-import { ThemeContext } from "./_app";
+import { useTheme } from "./_app";
 import FirstSection from "../modules/sections/first";
 import SecondSection from "../modules/sections/second";
 import ThirdSection from "../modules/sections/third";
@@ -14,12 +14,8 @@ import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import { Parallax } from "react-scroll-parallax";
 
 const Home: NextPage = () => {
-  const theme = React.useContext(ThemeContext);
+  const { dark, theme, toggleTheme } = useTheme();
   const [navbarBlur, setNavbarBlur] = React.useState(false);
-
-  const toggleTheme = () => {
-    theme.setTheme(theme.value == "dark" ? "light" : "dark");
-  };
 
   const setIsPastTop = (v: boolean) => {
     setNavbarBlur(v);
@@ -40,11 +36,11 @@ const Home: NextPage = () => {
       <div
         style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, grey 1px, ${
-            theme.value == "dark" ? "black" : "white"
+            dark ? "black" : "white"
           } 0)`,
           backgroundSize: "40px 40px",
         }}
-        className={`relative overflow-hidden ${theme.value}`}
+        className={`relative overflow-hidden ${theme}`}
       >
         <Parallax
           className={`fixed top-0 w-full z-20 h-16 flex items-center flex-row-reverse px-3 transition-all ${
@@ -54,17 +50,16 @@ const Home: NextPage = () => {
             navbarBlur
               ? {
                   backdropFilter: "blur(3px)",
-                  background:
-                    theme.value == "dark"
-                      ? "rgb(0, 0, 0, 0.2)"
-                      : "rgb(255, 255, 255, 0.5)",
+                  background: dark
+                    ? "rgb(0, 0, 0, 0.2)"
+                    : "rgb(255, 255, 255, 0.5)",
                 }
               : { backdropFilter: "none" }
           }
         >
           <div className="flex">
             <IconButton size="large" onClick={toggleTheme}>
-              {theme.value == "dark" ? (
+              {dark ? (
                 <DarkModeOutlinedIcon style={{ color: "white" }} />
               ) : (
                 <LightModeOutlinedIcon style={{ color: "black" }} />

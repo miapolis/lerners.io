@@ -3,26 +3,43 @@ import type { AppProps } from "next/app";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { QueryClient, QueryClientProvider } from "react-query";
 import "../styles/globals.css";
+import useLocalStorage from "@rehooks/local-storage";
 
 const queryClient = new QueryClient();
 
-export const ThemeContext = React.createContext<{
-  value: string;
-  setTheme: any;
-}>({ value: "dark", setTheme: () => {} });
+export const useTheme = () => {
+  const prefersDark =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const [theme, setTheme] = React.useState("dark");
+  const [theme, setTheme] = useLocalStorage<"light" | "dark">(
+    "theme",
+    prefersDark ? "dark" : "light"
+  );
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeContext.Provider value={{ value: theme, setTheme }}>
+  const toggleTheme = React.useMemo(() => {
+    if (theme == "dark") {
+      return () => setTheme("light");
+    } else {
+      return () => setTheme("dark");
+    }
+  }, [theme, setTheme]);
+
+  return { theme, toggleTheme, dark: theme == "dark" };
+};
+
+const App: React.FC<AppProps> = ({ Component, pageProps }) => {
+  if (typeof window !== "undefined") {
+    return (
+      <QueryClientProvider client={queryClient}>
         <ParallaxProvider>
           <Component {...pageProps} />
         </ParallaxProvider>
-      </ThemeContext.Provider>
-    </QueryClientProvider>
-  );
+      </QueryClientProvider>
+    );
+  } else {
+    return null;
+  }
 }
 
-export default MyApp;
+export default App;
