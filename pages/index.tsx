@@ -47,7 +47,11 @@ const Home: NextPage = () => {
         }
       >
         <div className="flex">
-          <IconButton size="large" onClick={toggleTheme}>
+          <IconButton
+            size="large"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+          >
             {dark ? (
               <DarkModeOutlinedIcon style={{ color: "white" }} />
             ) : (
