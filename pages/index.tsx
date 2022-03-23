@@ -25,12 +25,12 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Ethan Lerner</title>
-        <meta name="theme-color" content="#000000" />
-        <meta name="author" content="Ethan Lerner" />
         <meta
           name="description"
           content="A website probably related to and/or about Ethan Lerner."
         />
+        <meta name="author" content="Ethan Lerner" />
+        <meta name="theme-color" content="#000000" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
