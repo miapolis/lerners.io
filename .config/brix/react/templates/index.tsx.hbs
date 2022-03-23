@@ -1,0 +1,11 @@
+import { comment, CommentProps, Line } from "..";
+
+import {{to-case "pascal" language }}Intro from "./intro";
+export { {{to-case "pascal" language }}Intro };
+
+export const Comment: React.FC<CommentProps> = ({
+  content,
+  indentation = 0,
+}) => {
+  return <Line tokens={[comment(`// ${content}`)]} indentation={indentation} />;
+};

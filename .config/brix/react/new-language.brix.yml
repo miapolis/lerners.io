@@ -1,0 +1,25 @@
+context:
+  language: "{{project}}"
+  displayable_language: "{{to-title module}}"
+commands:
+  - template:
+      source: templates/index.tsx.hbs
+      destination: components/snippets/{{to-lower language}}/index.tsx
+      overwrite: true
+  - template:
+      source: templates/intro.tsx.hbs
+      destination: components/snippets/{{to-lower language}}/intro.tsx
+      overwrite: true
+  - search_replace:
+      search: "(?=\nexport enum Language {)"
+      destination: components/snippets/index.tsx
+      replace: >
+        import { {{to-title project}}Intro } from "./{{to-lower language}}"
+  - search_replace:
+      search: "(?<=export enum Language {)"
+      destination: components/snippets/index.tsx
+      replace: '\n\t{{to-upper language}} = "{{displayable_language}}",'
+  - search_replace:
+      search: "(?<=switch \\(language\\) {)"
+      destination: components/snippets/index.tsx
+      replace: '\n\t\t\tcase Language.{{to-upper language}}:\n\t\t\t\tsetComponent(<{{to-title project}}Intro />);\n\t\t\t\tbreak;'

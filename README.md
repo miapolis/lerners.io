@@ -1,11 +1,13 @@
-# Miapolis.me
+# [lerners.io](https://lerners.io)
 
-Yet another personal website on the internet.
+## Built with
 
-Built with:
-
-- [Typescript](https://www.typescriptlang.org)
+- [TypeScript](https://www.typescriptlang.org)
+- [React](https://reactjs.org)
 - [Next.js](https://nextjs.org)
-- [React Query](https://react-query.tanstack.com/)
-
-Hosted seamlessly on [Vercel](https://vercel.com).
+- [TailwindCSS](https://tailwindcss.com)
+- [React Scroll Parallax](https://github.com/jscottsmith/react-scroll-parallax)
+- [React Spring](https://react-spring.io)
+- [Material UI](https://mui.com)
+- [Rust](https://www.rust-lang.org)
+- [Serenity](https://github.com/serenity-rs/serenity)
