@@ -25,12 +25,30 @@ const Home: NextPage = () => {
     <>
       <Head>
         <title>Ethan Lerner</title>
+        <meta name="title" content="Ethan Lerner" />
         <meta
           name="description"
           content="A website probably related to and/or about Ethan Lerner."
         />
-        <meta name="author" content="Ethan Lerner" />
         <meta name="theme-color" content="#000000" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://lerners.io/" />
+        <meta property="og:title" content="Ethan Lerner" />
+        <meta
+          property="og:description"
+          content="A website probably related to and/or about Ethan Lerner."
+        />
+        <meta property="og:image" content="" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://lerners.io/" />
+        <meta property="twitter:title" content="Ethan Lerner" />
+        <meta
+          property="twitter:description"
+          content="A website probably related to and/or about Ethan Lerner."
+        />
+        <meta property="twitter:image" content="" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
