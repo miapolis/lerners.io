@@ -42,10 +42,12 @@ const Dots: React.FC<DotsProps> = ({ titleRef }) => {
       setScrollEnd(window.innerHeight);
 
       clearTimeout(refreshTimeout);
-      setRefreshTimeout(setTimeout(() => {
-        setElements(generateDots());
-        api.start();
-      }, 300));
+      setRefreshTimeout(
+        setTimeout(() => {
+          setElements(generateDots());
+          api.start();
+        }, 300)
+      );
     };
 
     window.addEventListener("resize", onResize);
@@ -189,7 +191,9 @@ const First: React.FC = () => {
           {titleRef.current ? <Dots titleRef={titleRef} /> : ""}
         </div>
         <Parallax
-          className={`absolute w-[40px] h-[40px] bottom-20 ${
+          startScroll={0}
+          endScroll={containerRef.current?.clientHeight || 0}
+          className={`absolute w-[40px] h-[40px] bottom-0 sm:bottom-20 ${
             arrowOpacity > 0.3 ? "cursor-pointer" : ""
           }`}
           easing="easeOut"
@@ -198,7 +202,9 @@ const First: React.FC = () => {
           }}
           onClick={() => {
             if (arrowOpacity > 0.3) {
-              scroll.scrollTo(containerRef.current!.clientHeight, { duration: 1700 });
+              scroll.scrollTo(containerRef.current!.clientHeight + 10, {
+                duration: 1700,
+              });
             }
           }}
         >
