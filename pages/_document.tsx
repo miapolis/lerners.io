@@ -6,8 +6,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <link
-            rel="preload"
-            as="style"
+            rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/hack-font/3.3.0/web/hack.min.css"
           />
         </Head>
