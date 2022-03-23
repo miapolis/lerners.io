@@ -198,7 +198,7 @@ const First: React.FC = () => {
           }}
           onClick={() => {
             if (arrowOpacity > 0.3) {
-              scroll.scrollTo(window.innerHeight, { duration: 1700 });
+              scroll.scrollTo(containerRef.current!.clientHeight, { duration: 1700 });
             }
           }}
         >
