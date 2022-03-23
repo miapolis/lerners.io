@@ -98,7 +98,7 @@ const Third: React.FC = () => {
           setInitial(true);
         }
       }}
-      className="relative w-full h-[850px] md:h-[950px] lg:h-[750px] bg-white dark:bg-black"
+      className="relative w-full h-[850px] md:h-[950px] xl:h-[750px] bg-white dark:bg-black"
     >
       <div className={styles.divider}>
         <svg
@@ -131,8 +131,8 @@ const Third: React.FC = () => {
         <Three size={24} color={dark ? "ffffff" : "000000"} opacity={"e"} />
       </div>
       <div className="relative w-full pt-40">
-        <div className="flex flex-col-reverse lg:flex-row w-auto">
-          <div className="h-full w-full lg:w-1/2 flex justify-center lg:justify-end">
+        <div className="flex flex-col-reverse xl:flex-row w-auto">
+          <div className="h-full w-full xl:w-1/2 flex justify-center xl:justify-end">
             {transition(
               (styles, item) =>
                 item && (
@@ -149,7 +149,7 @@ const Third: React.FC = () => {
                 )
             )}
           </div>
-          <div className="flex flex-col mx-6 lg:mx-0 lg:ml-6 mb-8 w-auto h-auto max-w-md self-center lg:self-start">
+          <div className="flex flex-col mx-6 xl:mx-0 xl:ml-6 mb-8 w-auto h-auto max-w-md self-center xl:self-start">
             {titleTransition((styles, item) => (
               <animated.div
                 style={{ visibility: item ? "visible" : "hidden", ...styles }}
@@ -164,9 +164,15 @@ const Third: React.FC = () => {
                 style={{ visibility: item ? "visible" : "hidden", ...styles }}
               >
                 <div className="text-gray-800 dark:text-gray-50 mb-4">
-                  My main project right now is <b>Port7</b>, a dedicated
-                  platform for web-based games, written in Elixir. I'm also
-                  working on{"  "}
+                  My main project right now is{" "}
+                  <a
+                    className="hover:text-blue-400 font-bold"
+                    href="https://github.com/miapolis/port7"
+                  >
+                    Port7
+                  </a>
+                  , a dedicated platform for web-based games, written in Elixir.
+                  I'm also working on{"  "}
                   <a
                     className="hover:text-blue-400 font-bold"
                     href="https://crates.io/crates/brix"

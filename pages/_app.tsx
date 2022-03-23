@@ -38,7 +38,7 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
       </QueryClientProvider>
     );
   } else {
-    return null;
+    return <></>;
   }
 }
 

@@ -15,7 +15,10 @@ const Project = ({ name, desc, url, languages, last = false }: any) => {
         tokens={[att("description"), text(": "), string(desc)]}
         indentation={6}
       />
-      <Line tokens={[att("url"), text(": "), string(url)]} indentation={6} />
+      <Line
+        tokens={[att("url"), text(": "), string(url[0], url[1], false)]}
+        indentation={6}
+      />
       <Line
         tokens={[
           att("languages"),
@@ -37,4 +40,4 @@ const mapLanguages = (languages: string[]): Token[] => {
   return ([] as Token[]).concat(...arr);
 };
 
-export { Setup as TomlSetup, End as TomlEnd, Project as TomlProject };
+export { Setup as YamlSetup, End as YamlEnd, Project as YamlProject };

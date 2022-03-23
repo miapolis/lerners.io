@@ -10,7 +10,6 @@ import { TypeScriptIntro } from "./typescript";
 import { GoIntro } from "./go";
 import { JavaIntro } from "./java";
 import { PythonIntro } from "./python";
-import { TomlEnd, TomlProject, TomlSetup } from "./yaml";
 
 export enum Language {
   PYTHON = "Python",
@@ -23,8 +22,14 @@ export enum Language {
   RUST = "Rust",
 }
 
+import { YamlEnd, YamlProject, YamlSetup } from "./yaml";
+import { TomlEnd, TomlProject, TomlSetup } from "./toml";
+import { JsonEnd, JsonProject, JsonSetup } from "./json";
+
 export enum Config {
+  YAML = "YAML",
   TOML = "TOML",
+  JSON = "JSON",
 }
 
 export const darkTheme = {
@@ -68,7 +73,10 @@ export type TokenType =
 export interface Token {
   type: TokenType;
   content: string;
-  link?: string;
+  link?: {
+    value: string;
+    quotes: boolean;
+  };
 }
 
 export const key = (v: string): Token => ({ type: "keyword", content: v });
@@ -83,7 +91,15 @@ export const def = (v: string): Token => ({
 });
 export const att = (v: string): Token => ({ type: "attribute", content: v });
 export const prop = (v: string): Token => ({ type: "property", content: v });
-export const string = (v: string): Token => ({ type: "string", content: v });
+export const string = (
+  v: string,
+  link: string | undefined = undefined,
+  linkQuotes: boolean | undefined = true
+): Token => ({
+  type: "string",
+  content: v,
+  link: link ? { value: link, quotes: linkQuotes } : undefined,
+});
 export const comment = (v: string): Token => ({ type: "comment", content: v });
 export const operator = (v: string): Token => ({
   type: "operator",
@@ -133,16 +149,15 @@ export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
                   ? darkTheme[t.type as keyof typeof darkTheme]
                   : lightTheme[t.type as keyof typeof lightTheme]
               }`,
-              // lineHeight: 0,
               fontFamily: "Hack",
             }}
           >
-            {t.link ? <div className="inline-block">{'"'}</div> : null}
+            {t.link?.quotes ? <div className="inline-block">{'"'}</div> : null}
             <a
-              href={t.link ?? undefined}
+              href={t.link?.value ?? undefined}
               className={`${t.link ? "hover:underline cursor-pointer" : ""}`}
             >{`${i == 0 ? " ".repeat(indentation) : ""}${t.content}`}</a>
-            {t.link ? <div className="inline-block">{'"'}</div> : null}
+            {t.link?.quotes ? <div className="inline-block">{'"'}</div> : null}
           </div>
         );
       })}
@@ -276,44 +291,58 @@ const projects = [
   {
     name: "Port7",
     desc: "An all-in-one platform for web-based games.",
-    url: "https://github.com/miapolis/port7",
+    url: ["github.com/miapolis/port7", "https://github.com/miapolis/port7"],
     languages: ["Elixir", "TypeScript"],
   },
   {
     name: "Brix",
-    desc: "A CLI tools for scaffolding and code generation.",
-    url: "https://crates.io/crates/brix",
+    desc: "A CLI tool for scaffolding and code generation.",
+    url: ["crates.io/crates/brix", "https://crates.io/crates/brix"],
     languages: ["Rust"],
   },
   {
     name: "Stratepig",
     desc: "A multiplayer Stratego implementation.",
-    url: "https://github.com/miapolis/stratepig-server",
+    url: [
+      "github.com/miapolis/stratepig-server",
+      "https://github.com/miapolis/stratepig-server",
+    ],
     languages: ["Rust", "C#"],
   },
 ];
+
+const configComponent = (config: Config) => {
+  switch (config) {
+    case Config.YAML:
+      return [YamlSetup, YamlProject, YamlEnd];
+    case Config.TOML:
+      return [TomlSetup, TomlProject, TomlEnd];
+    case Config.JSON:
+      return [JsonSetup, JsonProject, JsonEnd];
+  }
+};
 
 export const ConfigSnippet: React.FC<ConfigSnippetProps> = ({
   config,
   alternateColors = false,
   onRandomClick,
 }) => {
-  const SetupComponent = TomlSetup;
-  const ProjectComponent = TomlProject;
-  const EndComponent = TomlEnd;
+  const [SetupComponent, ProjectComponent, EndComponent] =
+    configComponent(config);
 
   return (
     <Snippet
       code={
         <>
           <SetupComponent />
-          {projects.map((p) => (
+          {projects.map((p, i) => (
             <ProjectComponent
               key={p.name}
               name={p.name}
               desc={p.desc}
               url={p.url}
               languages={p.languages}
+              last={i == projects.length - 1}
             />
           ))}
           <EndComponent />
@@ -321,6 +350,7 @@ export const ConfigSnippet: React.FC<ConfigSnippetProps> = ({
       }
       alternateColors={alternateColors}
       language={config}
+      onRandomClick={onRandomClick}
     />
   );
 };

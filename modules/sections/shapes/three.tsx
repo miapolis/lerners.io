@@ -8,6 +8,7 @@ const Three: React.FC<BaseShapeProps> = ({ size, color, opacity }) => {
       version="1.1"
       viewBox="0 0 50 50"
       xmlns="http://www.w3.org/2000/svg"
+      className="overflow-visible"
     >
       <path
         transform="matrix(.20948 0 0 .20948 8.9088 42.879)"

@@ -31,7 +31,7 @@ export const LinkKeyValue: React.FC<LinkKeyValueProps> = ({
       tokens={[
         string(`"${name}"`),
         text(", "),
-        { content: value, type: "string", link: link },
+        string(value, link),
         text(!last ? "," : ");"),
       ]}
       indentation={12}

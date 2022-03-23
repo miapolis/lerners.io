@@ -21,7 +21,7 @@ export const LinkKeyValue: React.FC<LinkKeyValueProps & { spacing: number }> = (
       tokens={[
         string(`"${name}"`),
         text(`:${" ".repeat(spacing)}`),
-        { content: value, type: "string", link: link },
+        string(value, link),
         text(","),
       ]}
       indentation={12}

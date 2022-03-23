@@ -81,7 +81,7 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
           setInitial(true);
         }
       }}
-      className="overflow-hidden relative w-full h-[850px] md:h-[950px] lg:h-[650px] bg-gray-100 dark:bg-slate-900"
+      className="overflow-hidden relative w-full h-[850px] md:h-[950px] xl:h-[650px] bg-gray-100 dark:bg-slate-900"
     >
       <Parallax
         className="w-full"
@@ -90,8 +90,8 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
         }}
       />
       <div className="relative w-full pt-12">
-        <div className="flex flex-col-reverse lg:flex-row w-auto">
-          <div className="h-full w-full lg:w-1/2 flex justify-center lg:justify-end">
+        <div className="flex flex-col-reverse xl:flex-row w-auto">
+          <div className="h-full w-full xl:w-1/2 flex justify-center xl:justify-end">
             {transition(
               (styles, item) =>
                 item && (
@@ -107,7 +107,7 @@ const Second: React.FC<SecondProps> = ({ setIsPastTop }) => {
                 )
             )}
           </div>
-          <div className="flex flex-col mx-6 lg:mx-0 lg:ml-6 mb-8 w-auto h-auto max-w-md self-center lg:self-start">
+          <div className="flex flex-col mx-6 xl:mx-0 xl:ml-6 mb-8 w-auto h-auto max-w-md self-center xl:self-start">
             {titleTransition((styles, item) => (
               <animated.div
                 style={{ visibility: item ? "visible" : "hidden", ...styles }}
