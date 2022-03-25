@@ -1,7 +1,6 @@
 declare var umami: any;
 
 import React from "react";
-import Head from "next/head";
 import type { NextPage } from "next";
 import Link from "next/link";
 
@@ -24,7 +23,11 @@ const Home: NextPage = () => {
   };
 
   React.useEffect(() => {
-    umami.trackEvent(theme, "theme-log");
+    setTimeout(() => {
+      try {
+        umami.trackEvent(theme, "theme-log");
+      } catch {}
+    }, 100);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
