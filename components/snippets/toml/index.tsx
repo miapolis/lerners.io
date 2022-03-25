@@ -10,7 +10,13 @@ const Project = ({ name, desc, url, languages, last = false }: any) => {
         tokens={[text("["), att("projects"), text("."), att(name), text("]")]}
       />
       <Line tokens={[prop("description"), text(" = "), string(`"${desc}"`)]} />
-      <Line tokens={[prop("url"), text(" = "), string(url[0], url[1])]} />
+      <Line
+        tokens={[
+          prop("url"),
+          text(" = "),
+          string(url[0], url[1], `project-url-${name.toLowerCase()}`),
+        ]}
+      />
       <Line
         tokens={[
           prop("languages"),

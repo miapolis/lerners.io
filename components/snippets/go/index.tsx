@@ -1,4 +1,11 @@
-import { comment, CommentProps, Line, LinkKeyValueProps, string, text } from "..";
+import {
+  comment,
+  CommentProps,
+  Line,
+  LinkKeyValueProps,
+  string,
+  text,
+} from "..";
 
 import GoIntro from "./intro";
 export { GoIntro };
@@ -10,18 +17,21 @@ export const Comment: React.FC<CommentProps> = ({
   return <Line tokens={[comment(`// ${content}`)]} indentation={indentation} />;
 };
 
-export const LinkKeyValue: React.FC<LinkKeyValueProps & { spacing: number }> = ({
-  name,
-  value,
-  link,
-  spacing,
-}) => {
+export const LinkKeyValue: React.FC<
+  LinkKeyValueProps & { spacing: number }
+> = ({ name, value, link, spacing }) => {
   return (
     <Line
       tokens={[
         string(`"${name}"`),
         text(`:${" ".repeat(spacing)}`),
-        string(value, link),
+        string(
+          value,
+          link,
+          `${name.toLowerCase()}-link`,
+          true,
+          name.toLowerCase() == "email"
+        ),
         text(","),
       ]}
       indentation={12}

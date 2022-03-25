@@ -80,6 +80,12 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#000000" />
         <meta name="msapplication-TileColor" content="#000000" />
         <meta name="theme-color" content="#ffffff" />
+        <script
+          async
+          defer
+          data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+          src={process.env.NEXT_PUBLIC_UMAMI_URL}
+        />
       </Head>
       {typeof window !== "undefined" ? (
         <QueryClientProvider client={queryClient}>

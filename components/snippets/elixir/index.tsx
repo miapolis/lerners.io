@@ -1,9 +1,20 @@
-import { comma, CommentProps, Line, LinkKeyValueProps, prop, string, TokenType } from "..";
+import {
+  comma,
+  CommentProps,
+  Line,
+  LinkKeyValueProps,
+  prop,
+  string,
+  TokenType,
+} from "..";
 import ElixirIntro from "./intro";
 
 export { ElixirIntro };
 
-export const Comment: React.FC<CommentProps> = ({ content, indentation = 0 }) => {
+export const Comment: React.FC<CommentProps> = ({
+  content,
+  indentation = 0,
+}) => {
   return (
     <Line
       tokens={[{ content: `# ${content}`, type: "comment" }]}
@@ -22,7 +33,13 @@ export const LinkKeyValue: React.FC<LinkKeyValueProps> = ({
     <Line
       tokens={[
         prop(`${name}: `),
-        string(value, link),
+        string(
+          value,
+          link,
+          `${name.toLowerCase()}-link`,
+          true,
+          name.toLowerCase() == "email"
+        ),
         ...(!last ? [comma] : []),
       ]}
       indentation={14}

@@ -10,6 +10,7 @@ export const useDiscordUsername = () => {
       return await response.text();
     },
     {
+      initialData: "miapolis#????",
       placeholderData: "miapolis#????",
       refetchOnMount: false,
       refetchOnWindowFocus: false,

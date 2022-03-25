@@ -1,3 +1,5 @@
+declare var umami: any;
+
 import React from "react";
 import Head from "next/head";
 import type { NextPage } from "next";
@@ -20,6 +22,11 @@ const Home: NextPage = () => {
   const setIsPastTop = (v: boolean) => {
     setNavbarBlur(v);
   };
+
+  React.useEffect(() => {
+    umami.trackEvent(theme, "theme-log");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div
@@ -65,8 +72,22 @@ const Home: NextPage = () => {
               <a className="font-bold">Ethan Lerner</a>
             </Link>
             <div className="text-gray-500 dark:text-slate-300">|</div>
-            <a href="mailto:ethan@lerners.io">Email</a>
-            <a href="https://github.com/miapolis">GitHub</a>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="unmami--click--navbar-email-link"
+              href="mailto:ethan@lerners.io"
+            >
+              Email
+            </a>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              className="umami--click--navbar-github-link"
+              href="https://github.com/miapolis"
+            >
+              GitHub
+            </a>
           </div>
         ) : (
           ""

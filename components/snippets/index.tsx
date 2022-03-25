@@ -75,7 +75,9 @@ export interface Token {
   content: string;
   link?: {
     value: string;
+    umamiId: string;
     quotes: boolean;
+    isEmail: boolean;
   };
 }
 
@@ -94,11 +96,15 @@ export const prop = (v: string): Token => ({ type: "property", content: v });
 export const string = (
   v: string,
   link: string | undefined = undefined,
-  linkQuotes: boolean | undefined = true
+  umamiId: string | undefined = "unknown-link",
+  linkQuotes: boolean | undefined = true,
+  isEmail: boolean | undefined = false
 ): Token => ({
   type: "string",
   content: v,
-  link: link ? { value: link, quotes: linkQuotes } : undefined,
+  link: link
+    ? { value: link, umamiId: umamiId, quotes: linkQuotes, isEmail: isEmail }
+    : undefined,
 });
 export const comment = (v: string): Token => ({ type: "comment", content: v });
 export const operator = (v: string): Token => ({
@@ -153,9 +159,16 @@ export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
             }}
           >
             {t.link?.quotes ? <div className="inline-block">{'"'}</div> : null}
+            {/* eslint-disable react/jsx-no-target-blank */}
             <a
               href={t.link?.value ?? undefined}
-              className={`${t.link ? "hover:underline cursor-pointer" : ""}`}
+              target={t.link && !t.link.isEmail ? "_blank" : undefined}
+              rel={t.link && !t.link.isEmail ? "noreferrer" : undefined}
+              className={
+                t.link
+                  ? `hover:underline cursor-pointer umami--click--${t.link.umamiId}`
+                  : ""
+              }
             >{`${i == 0 ? " ".repeat(indentation) : ""}${t.content}`}</a>
             {t.link?.quotes ? <div className="inline-block">{'"'}</div> : null}
           </div>
@@ -173,6 +186,7 @@ export interface SnippetProps {
   code: React.ReactNode;
   language: string;
   alternateColors: boolean;
+  forSnippet: string;
   onRandomClick?: () => void;
 }
 
@@ -185,6 +199,7 @@ export const Snippet: React.FC<SnippetProps> = ({
   code,
   language,
   alternateColors,
+  forSnippet,
   onRandomClick,
 }) => {
   const { theme, dark } = useTheme();
@@ -210,7 +225,7 @@ export const Snippet: React.FC<SnippetProps> = ({
         <div className="absolute right-0 font-bold flex flex-row items-center gap-3 text-black dark:text-white">
           {language}
           <div
-            className="hover:rotate-90 hover:scale-150 transition-all duration-200 cursor-pointer"
+            className={`hover:rotate-90 hover:scale-150 transition-all duration-200 cursor-pointer umami--click--${forSnippet}-die`}
             onMouseEnter={() => setDieHovered(true)}
             onMouseLeave={() => setDieHovered(false)}
             onClick={onRandomClick}
@@ -276,6 +291,7 @@ export const IntroSnippet: React.FC<IntroSnippetProps> = ({
       code={component}
       language={language}
       alternateColors={alternateColors}
+      forSnippet="intro"
       onRandomClick={onRandomClick}
     />
   );
@@ -350,6 +366,7 @@ export const ConfigSnippet: React.FC<ConfigSnippetProps> = ({
       }
       alternateColors={alternateColors}
       language={config}
+      forSnippet="projects"
       onRandomClick={onRandomClick}
     />
   );

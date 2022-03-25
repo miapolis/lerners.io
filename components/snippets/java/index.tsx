@@ -31,7 +31,13 @@ export const LinkKeyValue: React.FC<LinkKeyValueProps> = ({
       tokens={[
         string(`"${name}"`),
         text(", "),
-        string(value, link),
+        string(
+          value,
+          link,
+          `${name.toLowerCase()}-link`,
+          true,
+          name.toLowerCase() == "email"
+        ),
         text(!last ? "," : ");"),
       ]}
       indentation={12}

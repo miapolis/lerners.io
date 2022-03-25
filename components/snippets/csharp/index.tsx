@@ -1,4 +1,12 @@
-import { comment, CommentProps, Line, LinkKeyValueProps, string, text, Token } from "..";
+import {
+  comment,
+  CommentProps,
+  Line,
+  LinkKeyValueProps,
+  string,
+  text,
+  Token,
+} from "..";
 import CSharpIntro from "./intro";
 
 export { CSharpIntro };
@@ -24,7 +32,13 @@ export const LinkKeyValue: React.FC<LinkKeyValueProps> = ({
         text("{ "),
         string(`"${name}"`),
         text(", "),
-        string(value, link),
+        string(
+          value,
+          link,
+          `${name.toLowerCase()}-link`,
+          true,
+          name.toLowerCase() == "email"
+        ),
         text(` }${!last ? "," : ""}`),
       ]}
       indentation={12}

@@ -16,7 +16,11 @@ const Project = ({ name, desc, url, languages, last = false }: any) => {
         indentation={6}
       />
       <Line
-        tokens={[att("url"), text(": "), string(url[0], url[1], false)]}
+        tokens={[
+          att("url"),
+          text(": "),
+          string(url[0], url[1], `project-url-${name.toLowerCase()}`, false),
+        ]}
         indentation={6}
       />
       <Line
