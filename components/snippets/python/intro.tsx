@@ -1,8 +1,11 @@
 import React from "react";
 import { colon, Comment, LinkKeyValue } from ".";
 import { BlankLine, comma, def, key, Line, prop, string, text } from "..";
+import { useDiscordUsername } from "../../../hooks/use-discord-username";
 
 const Intro: React.FC = () => {
+  const username = useDiscordUsername();
+
   return (
     <>
       <Line
@@ -47,7 +50,7 @@ const Intro: React.FC = () => {
           key("=lambda"),
           text(": ["),
           string('"miapolis"'),
-          text("])")
+          text("])"),
         ]}
         indentation={4}
       />
@@ -78,7 +81,7 @@ const Intro: React.FC = () => {
         link="https://github.com/miapolis"
       />
       <Comment content="Send me a friend request!" indentation={8} />
-      <LinkKeyValue name="Discord" value='"miapolis#????"' />
+      <LinkKeyValue name="Discord" value={`"${username}"`} />
       <LinkKeyValue
         name="Spotify"
         value="lerners.io/spotify"

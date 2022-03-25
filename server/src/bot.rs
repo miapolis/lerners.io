@@ -2,8 +2,9 @@ use dotenv::dotenv;
 use serenity::async_trait;
 use serenity::client::bridge::gateway::GatewayIntents;
 use serenity::client::{Client, Context, EventHandler};
-use serenity::model::event::PresenceUpdateEvent;
+use serenity::model::event::{GuildMemberUpdateEvent, PresenceUpdateEvent};
 use serenity::model::id::UserId;
+use serenity::model::prelude::Ready;
 use std::str::FromStr;
 use std::sync::{Arc, Mutex};
 
@@ -29,10 +30,24 @@ impl Handler {
 
 #[async_trait]
 impl EventHandler for Handler {
+    async fn ready(&self, ctx: Context, _: Ready) {
+        let user = ctx
+            .http
+            .get_user(TARGET_USER.parse().unwrap())
+            .await
+            .expect("Unable to fetch user!");
+
+        self.state.lock().unwrap().username = Some(user.tag());
+    }
+
+    async fn guild_member_update(&self, _ctx: Context, e: GuildMemberUpdateEvent) {
+        if e.user.id == UserId::from_str(&TARGET_USER).unwrap() {
+            self.state.lock().unwrap().username = Some(e.user.tag());
+        }
+    }
+
     async fn presence_update(&self, _ctx: Context, p: PresenceUpdateEvent) {
         if p.presence.user_id == UserId::from_str(&TARGET_USER).unwrap() {
-            println!("PRESENCE receive!");
-            println!("{:?}", p.presence.activities);
             for activity in p.presence.activities {
                 if activity.name == "Visual Studio Code" {
                     if let Some(assets) = activity.assets {
@@ -73,7 +88,7 @@ pub async fn create_bot(state: Arc<Mutex<State>>) {
 
     let mut client = Client::builder(&token)
         .event_handler(Handler::new(state))
-        .intents(GatewayIntents::GUILD_PRESENCES)
+        .intents(GatewayIntents::GUILD_PRESENCES | GatewayIntents::GUILD_MEMBERS)
         .await
         .expect("Error creating client!");
 
