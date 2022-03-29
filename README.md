@@ -1,5 +1,7 @@
 # [lerners.io](https://lerners.io)
 
+<img src="/.github/docs/website-mockup.png">
+
 ## Built with
 
 - [TypeScript](https://www.typescriptlang.org)
