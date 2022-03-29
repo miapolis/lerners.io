@@ -40,7 +40,7 @@ const Intro: React.FC = () => {
         link="https://github.com/miapolis"
       />
       <Comment content="Send me a friend request!" indentation={14} />
-      <LinkKeyValue name="Discord" value={`"${username}"`} />
+      <LinkKeyValue name="discord" value={`"${username}"`} />
       <LinkKeyValue
         name="spotify"
         value="lerners.io/spotify"
