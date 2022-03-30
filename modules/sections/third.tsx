@@ -163,10 +163,12 @@ const Third: React.FC = () => {
               <animated.div
                 style={{ visibility: item ? "visible" : "hidden", ...styles }}
               >
-                <div className="text-gray-800 dark:text-gray-50 mb-4">
+                <div className="text-gray-800 dark:text-gray-50 mb-4 umami--click--projects-desc-port7">
                   My main project right now is{" "}
                   <a
                     className="hover:text-blue-400 font-bold"
+                    target="_blank"
+                    rel="noreferrer"
                     href="https://github.com/miapolis/port7"
                   >
                     Port7
@@ -174,7 +176,9 @@ const Third: React.FC = () => {
                   , a dedicated platform for web-based games, written in Elixir.
                   I'm also working on{"  "}
                   <a
-                    className="hover:text-blue-400 font-bold"
+                    className="hover:text-blue-400 font-bold umami--click--projects-desc-brix"
+                    target="_blank"
+                    rel="noreferrer"
                     href="https://crates.io/crates/brix"
                   >
                     Brix

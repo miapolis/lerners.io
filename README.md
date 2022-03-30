@@ -12,4 +12,5 @@
 - [React Spring](https://react-spring.io)
 - [Material UI](https://mui.com)
 - [Rust](https://www.rust-lang.org)
+- [Rocket](https://rocket.rs)
 - [Serenity](https://github.com/serenity-rs/serenity)

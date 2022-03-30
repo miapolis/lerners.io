@@ -3,16 +3,17 @@ declare var umami: any;
 import React from "react";
 import type { NextPage } from "next";
 import Link from "next/link";
+import { Parallax } from "react-scroll-parallax";
+
+import { IconButton } from "@mui/material";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 
 import { useTheme } from "./_app";
 import FirstSection from "../modules/sections/first";
 import SecondSection from "../modules/sections/second";
 import ThirdSection from "../modules/sections/third";
-
-import { IconButton } from "@mui/material";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import { Parallax } from "react-scroll-parallax";
+import FourthSection from "../modules/sections/fourth";
 
 const Home: NextPage = () => {
   const { dark, theme, toggleTheme } = useTheme();
@@ -99,6 +100,7 @@ const Home: NextPage = () => {
       <FirstSection />
       <SecondSection setIsPastTop={setIsPastTop} />
       <ThirdSection />
+      <FourthSection />
     </div>
   );
 };
