@@ -77,14 +77,14 @@ export const Presence: React.FC = () => {
             <>
               {!data.is_idling ? (
                 <div>
-                  Editing: <b>{data.editing}</b>
+                  Editing: <b translate="no">{data.editing}</b>
                 </div>
               ) : (
                 <div>Idling</div>
               )}
               {data.workspace ? (
                 <div>
-                  Workspace: <b>{data.workspace}</b>
+                  Workspace: <b translate="no">{data.workspace}</b>
                 </div>
               ) : (
                 ""

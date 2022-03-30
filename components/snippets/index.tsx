@@ -164,6 +164,7 @@ export const Line: React.FC<LineProps> = ({ tokens, indentation = 0 }) => {
               href={t.link?.value ?? undefined}
               target={t.link && !t.link.isEmail ? "_blank" : undefined}
               rel={t.link && !t.link.isEmail ? "noreferrer" : undefined}
+              translate="no"
               className={
                 t.link
                   ? `hover:underline cursor-pointer umami--click--${t.link.umamiId}`
