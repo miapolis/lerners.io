@@ -73,7 +73,7 @@ export default function Index() {
 export const PostCard = (post: SanityPost) => {
   return (
     <Link
-      className="flex gap-3 flex-col md:flex-row py-6 px-7 group"
+      className="flex gap-3 flex-col md:flex-row py-6 px-7 group [&:not(:last-child)]:border-b-2 border-b-black dark:border-b-white [&:not(:last-child)]:shadow-xl"
       to={`/blog/${post.slug.current}`}
     >
       <div className="mt-2 whitespace-nowrap">
@@ -85,7 +85,7 @@ export const PostCard = (post: SanityPost) => {
         </div>
       </div>
       <div>
-        <h4 className="transition-[color,transform] duration-500 group-hover:text-indigo-800 dark:group-hover:text-amber-400 group-hover:translate-x-1 text-4xl font-bold mb-3">
+        <h4 className="transition-[color,transform] duration-500 group-hover:text-indigo-800 dark:group-hover:text-yellow-400 group-hover:translate-x-1 text-4xl font-bold mb-3">
           {post.title}
         </h4>
         <div className="inline-flex flex-wrap gap-2 mb-5 w-full">
@@ -98,7 +98,7 @@ export const PostCard = (post: SanityPost) => {
         </div>
         <div className="flex gap-2 items-center mt-3">
           <div className="font-semibold text-lg">Read more</div>
-          <IconArrowRight className="transition-all duration-500 stroke-indigo-800 dark:stroke-amber-400 opacity-0 group-hover:opacity-100 dark:group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0" />
+          <IconArrowRight className="transition-all duration-500 stroke-indigo-800 dark:stroke-yellow-400 opacity-0 group-hover:opacity-100 dark:group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0" />
         </div>
       </div>
     </Link>
