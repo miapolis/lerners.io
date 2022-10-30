@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html.dark {
+  color-scheme: dark;
+}
+html.light {
+  color-scheme: light;
+}
+
+@layer base {
+  h2 {
+    @apply text-4xl font-extrabold text-indigo-800 dark:text-yellow-400 mt-12 mb-6;
+  }
+  h3 {
+    @apply text-2xl font-bold text-zinc-900 dark:text-zinc-100 mt-6 mb-3;
+  }
+  hr {
+    @apply mb-2 mt-4;
+  }
+  p:not(.sidenote) {
+    @apply text-lg leading-8 mb-6;
+  }
+  .sidenote > p {
+    @apply text-base mb-6;
+  }
+  li > strong,
+  p > strong {
+    @apply font-semibold;
+  }
+  html {
+    @apply h-full;
+  }
+  li {
+    @apply list-disc mb-2 text-base;
+  }
+  li:not(.sidenote li) {
+    @apply text-lg;
+  }
+  ul li {
+    list-style-type: none;
+  }
+  ul li::before {
+    @apply text-indigo-500 mr-3;
+    content: "→";
+    font-weight: bold;
+    display: inline-block;
+  }
+  summary {
+    @apply cursor-pointer;
+  }
+  blockquote {
+    @apply mb-6 text-gray-700 dark:text-gray-300 border-0 border-l-2 px-3 border-zinc-300 dark:border-zinc-700;
+  }
+  blockquote:not(.sidenote blockquote) {
+    @apply text-lg;
+  }
+  p > a,
+  main > a,
+  li > a {
+    @apply text-indigo-500 font-semibold hover:underline underline-offset-4;
+  }
+
+  code:not(.code-highlight code) {
+    @apply bg-zinc-200 dark:bg-zinc-800 py-1 px-2 rounded-lg;
+  }
+
+  .code-highlight {
+    @apply bg-transparent;
+  }
+  .code-highlight pre, code {
+    @apply bg-transparent !important;
+    @apply p-0 !important;
+  }
+}

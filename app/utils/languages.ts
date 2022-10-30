@@ -1,0 +1,83 @@
+export const formatLanguage = (language: string) => {
+  switch (language.toLowerCase()) {
+    case "typescript":
+      return "TypeScript";
+    case "javascript":
+      return "JavaScript";
+    case "c":
+      return "C";
+    case "c++":
+    case "cpp":
+      return "C++";
+    case "c#":
+      return "C#";
+    case "java":
+      return "Java";
+    case "python":
+      return "Python";
+    case "ruby":
+      return "Ruby";
+    case "go":
+      return "Go";
+    case "swift":
+      return "Swift";
+    case "kotlin":
+      return "Kotlin";
+    case "php":
+      return "PHP";
+    case "rust":
+      return "Rust";
+    case "scala":
+      return "Scala";
+    case "haskell":
+      return "Haskell";
+    case "elixir":
+      return "Elixir";
+    case "clojure":
+      return "Clojure";
+    case "erlang":
+      return "Erlang";
+    case "perl":
+      return "Perl";
+    case "lua":
+      return "Lua";
+    case "r":
+      return "R";
+    case "dart":
+      return "Dart";
+    case "f#":
+      return "F#";
+    case "objective-c":
+      return "Objective-C";
+    case "json":
+      return "JSON";
+    case "tsx":
+      return "TSX";
+    case "jsx":
+      return "JSX";
+    case "html":
+      return "HTML";
+    case "css":
+      return "CSS";
+    case "scss":
+      return "SCSS";
+    case "markdown":
+    case "md":
+      return "Markdown";
+    case "xml":
+      return "XML";
+    case "yaml":
+    case "yml":
+      return "YAML";
+    case "mysql":
+      return "MySQL";
+    case "sql":
+      return "SQL";
+    case "postgresql":
+      return "PostgreSQL";
+    case "plain text":
+      return "Plain Text";
+    default:
+      return language;
+  }
+};
