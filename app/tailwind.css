@@ -553,7 +553,8 @@ code:not(.code-highlight code) {
   background-color: transparent;
 }
 
-.code-highlight pre,  code {
+.code-highlight pre, 
+  code {
   background-color: transparent !important;
   padding: 0px !important;
 }

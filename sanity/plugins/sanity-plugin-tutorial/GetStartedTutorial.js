@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 import {
   Card,
   Container,
@@ -10,48 +10,57 @@ import {
   Stack,
   useElementRect,
   useTheme,
-} from '@sanity/ui'
-import {CloseIcon} from '@sanity/icons'
-import styled, {css} from 'styled-components'
+} from "@sanity/ui";
+import { CloseIcon } from "@sanity/icons";
+import styled, { css } from "styled-components";
 
 const BlueColor = css`
-  color: ${({theme}) => theme.sanity.color.muted.primary.enabled.fg};
-`
+  color: ${({ theme }) => theme.sanity.color.muted.primary.enabled.fg};
+`;
 
 const LabelContainer = styled(Label)`
   ${BlueColor}
-`
+`;
 
 const TextContainer = styled(Text)`
   ${BlueColor}
-`
+`;
 
 export const GetStartedTutorial = () => {
   const [hideTutorial, setShowTutorial] = useState(
-    window.localStorage.getItem('getstarted_closedTutorial') !== null
-  )
+    window.localStorage.getItem("getstarted_closedTutorial") !== null
+  );
 
-  const {sanity} = useTheme()
-  const [rootElement, setRootElement] = useState()
-  const rect = useElementRect(rootElement)
-  const isSmallScreen = rect?.width < sanity.media[1]
-  const isProdEnv = process.env.NODE_ENV !== 'development'
+  const { sanity } = useTheme();
+  const [rootElement, setRootElement] = useState();
+  const rect = useElementRect(rootElement);
+  const isSmallScreen = rect?.width < sanity.media[1];
+  const isProdEnv = process.env.NODE_ENV !== "development";
 
   const onClose = () => {
-    window.localStorage.setItem('getstarted_closedTutorial', 'true')
-    setShowTutorial(true)
-  }
+    window.localStorage.setItem("getstarted_closedTutorial", "true");
+    setShowTutorial(true);
+  };
 
   if (hideTutorial || isProdEnv) {
-    return null
+    return null;
   }
 
   return (
     <div ref={setRootElement}>
-      <Card tone="primary" padding={isSmallScreen ? 3 : 5} paddingBottom={isSmallScreen ? 4 : 6}>
-        <Flex justify={isSmallScreen ? 'space-between' : 'flex-end'} align="center">
+      <Card
+        tone="primary"
+        padding={isSmallScreen ? 3 : 5}
+        paddingBottom={isSmallScreen ? 4 : 6}
+      >
+        <Flex
+          justify={isSmallScreen ? "space-between" : "flex-end"}
+          align="center"
+        >
           {isSmallScreen && (
-            <LabelContainer forwardedAs="p">Your Sanity Studio is all set up!</LabelContainer>
+            <LabelContainer forwardedAs="p">
+              Your Sanity Studio is all set up!
+            </LabelContainer>
           )}
 
           <Button
@@ -79,14 +88,15 @@ export const GetStartedTutorial = () => {
             <TextContainer
               forwardedAs="p"
               size={isSmallScreen ? 1 : undefined}
-              align={isSmallScreen ? 'start' : 'center'}
+              align={isSmallScreen ? "start" : "center"}
             >
-              Next, our docs will guide you through building schemas, adding content, and connecting
-              a frontend. You’ll see updates reflected in your Studio below.
+              Next, our docs will guide you through building schemas, adding
+              content, and connecting a frontend. You’ll see updates reflected
+              in your Studio below.
             </TextContainer>
           </Container>
 
-          <Flex justify={isSmallScreen ? 'start' : 'center'}>
+          <Flex justify={isSmallScreen ? "start" : "center"}>
             <Button
               as="a"
               href="https://www.sanity.io/docs/create-a-schema-and-configure-sanity-studio"
@@ -99,7 +109,7 @@ export const GetStartedTutorial = () => {
         </Stack>
       </Card>
     </div>
-  )
-}
+  );
+};
 
-export default GetStartedTutorial
+export default GetStartedTutorial;

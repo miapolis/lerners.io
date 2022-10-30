@@ -69,7 +69,8 @@ html.light {
   .code-highlight {
     @apply bg-transparent;
   }
-  .code-highlight pre, code {
+  .code-highlight pre,
+  code {
     @apply bg-transparent !important;
     @apply p-0 !important;
   }
