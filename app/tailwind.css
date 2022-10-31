@@ -482,15 +482,6 @@ ul li {
   list-style-type: none;
 }
 
-ul li::before {
-  margin-right: 0.75rem;
-  --tw-text-opacity: 1;
-  color: rgb(99 102 241 / var(--tw-text-opacity));
-  content: "→";
-  font-weight: bold;
-  display: inline-block;
-}
-
 summary {
   cursor: pointer;
 }
@@ -726,6 +717,10 @@ code:not(.code-highlight code) {
   margin-bottom: 3rem;
 }
 
+.mr-3 {
+  margin-right: 0.75rem;
+}
+
 .mt-12 {
   margin-top: 3rem;
 }
@@ -784,6 +779,10 @@ code:not(.code-highlight code) {
 
 .block {
   display: block;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 .flex {
@@ -985,11 +984,6 @@ code:not(.code-highlight code) {
   border-left-color: rgb(239 68 68 / var(--tw-border-opacity));
 }
 
-.border-b-white {
-  --tw-border-opacity: 1;
-  border-bottom-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
-
 .border-b-black {
   --tw-border-opacity: 1;
   border-bottom-color: rgb(0 0 0 / var(--tw-border-opacity));
@@ -1128,6 +1122,10 @@ code:not(.code-highlight code) {
   text-align: center;
 }
 
+.align-middle {
+  vertical-align: middle;
+}
+
 .text-lg {
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -1223,12 +1221,6 @@ code:not(.code-highlight code) {
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-
-.shadow-md {
-  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
@@ -1339,10 +1331,6 @@ html.light {
   --tw-bg-opacity: 0.1;
 }
 
-.dark .dark\:stroke-amber-400 {
-  stroke: #fbbf24;
-}
-
 .dark .dark\:stroke-yellow-400 {
   stroke: #facc15;
 }
@@ -1374,11 +1362,6 @@ html.light {
 
 .dark .dark\:hover\:bg-opacity-20:hover {
   --tw-bg-opacity: 0.2;
-}
-
-.dark .group:hover .dark\:group-hover\:text-amber-400 {
-  --tw-text-opacity: 1;
-  color: rgb(251 191 36 / var(--tw-text-opacity));
 }
 
 .dark .group:hover .dark\:group-hover\:text-yellow-400 {
@@ -1442,12 +1425,6 @@ html.light {
 
 .\[\&\:not\(\:last-child\)\]\:border-b-2:not(:last-child) {
   border-bottom-width: 2px;
-}
-
-.\[\&\:not\(\:last-child\)\]\:shadow-lg:not(:last-child) {
-  --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
 .\[\&\:not\(\:last-child\)\]\:shadow-xl:not(:last-child) {

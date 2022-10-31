@@ -5,7 +5,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { PortableTextReactComponents, toPlainText } from "@portabletext/react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { IconLink } from "@tabler/icons";
+import { IconArrowRight, IconLink } from "@tabler/icons";
 import { sanityClient } from "~/config/sanity";
 import { Sidenote } from "./sidenote";
 
@@ -95,5 +95,15 @@ export const portableTextMap: Partial<PortableTextReactComponents> = {
   block: {
     h2: LinkableH2,
     h3: LinkableH3,
+  },
+  listItem: {
+    bullet: ({ children }) => {
+      return (
+        <li>
+          <IconArrowRight className="inline-block stroke-indigo-500 mr-3 align-middle" />
+          {children}
+        </li>
+      );
+    },
   },
 };

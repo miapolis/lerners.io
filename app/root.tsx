@@ -12,6 +12,7 @@ import { useTheme, ThemeProvider } from "remix-themes";
 import { themeSessionResolver } from "./utils/session.server";
 
 import styles from "./tailwind.css";
+import font from "./styles/font.css";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -20,7 +21,10 @@ export const meta: MetaFunction = () => ({
 });
 
 export const links = () => {
-  return [{ rel: "stylesheet", href: styles }];
+  return [
+    { rel: "stylesheet", href: styles },
+    { rel: "stylesheet", href: font },
+  ];
 };
 
 export const loader: LoaderFunction = async ({ request }) => {

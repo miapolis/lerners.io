@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html.dark {
   color-scheme: dark;
 }
@@ -40,12 +41,6 @@ html.light {
   }
   ul li {
     list-style-type: none;
-  }
-  ul li::before {
-    @apply text-indigo-500 mr-3;
-    content: "→";
-    font-weight: bold;
-    display: inline-block;
   }
   summary {
     @apply cursor-pointer;
