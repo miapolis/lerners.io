@@ -23,7 +23,7 @@ export default function Index() {
       <h1 className="text-5xl font-extrabold">Latest Posts</h1>
       <div className="mt-10 mb-20">
         {data.posts.map((post, i) => (
-          <PostCard {...post} key={i} />
+          <PostCard key={i} {...post} />
         ))}
       </div>
     </div>

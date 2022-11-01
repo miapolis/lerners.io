@@ -798,10 +798,6 @@ code:not(.code-highlight code) {
   margin-bottom: 0.25rem;
 }
 
-.mt-20 {
-  margin-top: 5rem;
-}
-
 .block {
   display: block;
 }
@@ -830,33 +826,16 @@ code:not(.code-highlight code) {
   height: 100vh;
 }
 
+.h-\[400vh\] {
+  height: 400vh;
+}
+
 .h-\[calc\(100vh-128px\)\] {
   height: calc(100vh - 128px);
 }
 
 .h-full {
   height: 100%;
-}
-
-.h-max {
-  height: -moz-max-content;
-  height: max-content;
-}
-
-.h-auto {
-  height: auto;
-}
-
-.h-\[200vh\] {
-  height: 200vh;
-}
-
-.h-\[1000vh\] {
-  height: 1000vh;
-}
-
-.h-\[400vh\] {
-  height: 400vh;
 }
 
 .min-h-full {
@@ -879,33 +858,16 @@ code:not(.code-highlight code) {
   width: 100vw;
 }
 
+.w-\[400vw\] {
+  width: 400vw;
+}
+
 .w-2 {
   width: 0.5rem;
 }
 
 .w-32 {
   width: 8rem;
-}
-
-.w-max {
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.w-auto {
-  width: auto;
-}
-
-.w-\[200vw\] {
-  width: 200vw;
-}
-
-.w-\[1000vw\] {
-  width: 1000vw;
-}
-
-.w-\[400vw\] {
-  width: 400vw;
 }
 
 .min-w-full {
@@ -939,19 +901,8 @@ code:not(.code-highlight code) {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-.scale-50 {
-  --tw-scale-x: .5;
-  --tw-scale-y: .5;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
 .scale-\[25\%\] {
   --tw-scale-x: 25%;
-  --tw-scale-y: 25%;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.scale-y-\[25\%\] {
   --tw-scale-y: 25%;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
@@ -1000,28 +951,12 @@ code:not(.code-highlight code) {
   gap: 1.5rem;
 }
 
-.gap-3 {
-  gap: 0.75rem;
-}
-
-.gap-20 {
-  gap: 5rem;
-}
-
-.gap-80 {
-  gap: 20rem;
-}
-
-.gap-40 {
-  gap: 10rem;
-}
-
-.gap-16 {
-  gap: 4rem;
-}
-
 .gap-12 {
   gap: 3rem;
+}
+
+.gap-3 {
+  gap: 0.75rem;
 }
 
 .overflow-visible {
@@ -1278,26 +1213,6 @@ code:not(.code-highlight code) {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
-}
-
-.text-8xl {
-  font-size: 6rem;
-  line-height: 1;
-}
-
-.text-9xl {
-  font-size: 8rem;
-  line-height: 1;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 1;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
 }
 
 .font-semibold {
@@ -1573,28 +1488,12 @@ html.light {
     flex-direction: row;
   }
 
-  .sm\:gap-6 {
-    gap: 1.5rem;
-  }
-
-  .sm\:gap-80 {
-    gap: 20rem;
-  }
-
-  .sm\:gap-40 {
-    gap: 10rem;
-  }
-
-  .sm\:gap-32 {
-    gap: 8rem;
-  }
-
-  .sm\:gap-28 {
-    gap: 7rem;
-  }
-
   .sm\:gap-24 {
     gap: 6rem;
+  }
+
+  .sm\:gap-6 {
+    gap: 1.5rem;
   }
 
   .sm\:border-r-2 {
