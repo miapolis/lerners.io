@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useCatch,
   useLoaderData,
 } from "@remix-run/react";
 import {
@@ -17,6 +18,7 @@ import { themeSessionResolver } from "./utils/session.server";
 
 import styles from "./tailwind.css";
 import font from "./styles/font.css";
+import { LayoutWrapper } from "./components/layout-wrapper";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
