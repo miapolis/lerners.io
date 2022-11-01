@@ -8,7 +8,11 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import { useTheme, ThemeProvider } from "remix-themes";
+import {
+  useTheme,
+  ThemeProvider,
+  PreventFlashOnWrongTheme,
+} from "remix-themes";
 import { themeSessionResolver } from "./utils/session.server";
 
 import styles from "./tailwind.css";
@@ -44,12 +48,14 @@ export default function AppWithProviders() {
 }
 
 export const App = () => {
+  const data = useLoaderData();
   const [theme] = useTheme();
 
   return (
-    <html lang="en" className={theme ?? ""}>
+    <html lang="en" className={theme ?? ""} data-theme={theme ?? ""}>
       <head>
         <Meta />
+        <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
       </head>
       <body className="bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white w-full min-h-full">
