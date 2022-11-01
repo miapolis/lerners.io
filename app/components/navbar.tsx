@@ -23,7 +23,7 @@ export const Navbar: React.FC = () => {
           light={<LogoIcon width={32} height={32} />}
         />
       </Link>
-      <div className="flex-1 mx-4 gap-6 flex">
+      <div className="flex gap-6">
         <MainLink href="/about" name="About" />
         <MainLink href="/blog" name="Blog" />
         <MainLink href="https://github.com/miapolis" name="GitHub" />
