@@ -59,8 +59,8 @@ export default function Index() {
           Ethan Lerner
         </h1>
       </div>
-      <div className="mt-16">
-        <div className="w-full h-full bg-zinc-50 dark:bg-zinc-900 bg-opacity-10 dark:bg-opacity-10 backdrop-blur-2xl rounded-xl border-2 border-black dark:border-white mb-8 shadow-2xl">
+      <div className="mt-16 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full h-full">
           {data.posts.map((post, i) => (
             <PostCard key={i} {...post} />
           ))}
@@ -73,16 +73,11 @@ export default function Index() {
 export const PostCard = (post: SanityPost) => {
   return (
     <Link
-      className="flex gap-3 flex-col md:flex-row py-6 px-7 group [&:not(:last-child)]:border-b-2 border-b-black dark:border-b-white [&:not(:last-child)]:shadow-xl"
+      className="flex gap-3 flex-col py-6 px-7 group bg-zinc-400 dark:bg-zinc-600 bg-opacity-10 dark:bg-opacity-10 backdrop-blur-xl rounded-xl border-2 border-black dark:border-white border-opacity-30 dark:border-opacity-30 shadow-xl"
       to={`/blog/${post.slug.current}`}
     >
-      <div className="mt-2 whitespace-nowrap">
-        <div className="text-sm text-gray-800 dark:text-gray-200 inline-flex w-18">
-          {dtFormatter.format(new Date(post.publishedAt))}
-        </div>
-        <div className="text-gray-500 text-sm font-extrabold ml-3 hidden md:inline-flex">
-          •
-        </div>
+      <div className="mt-2 text-sm text-gray-800 dark:text-gray-200 inline-flex w-18">
+        {dtFormatter.format(new Date(post.publishedAt))}
       </div>
       <div>
         <h4 className="transition-[color,transform] duration-500 group-hover:text-indigo-800 dark:group-hover:text-yellow-400 group-hover:translate-x-1 text-4xl font-bold mb-3">
@@ -107,7 +102,7 @@ export const PostCard = (post: SanityPost) => {
 
 export const Tag = ({ name }: { name: string }) => {
   return (
-    <div className="inline-flex px-2 py-1 rounded-md bg-zinc-500 bg-opacity-30 text-sm shadow-sm leading-none">
+    <div className="inline-flex px-2 py-1 rounded-md bg-zinc-400 dark:bg-zinc-600 bg-opacity-30 dark:bg-opacity-30 text-sm leading-none">
       {name}
     </div>
   );

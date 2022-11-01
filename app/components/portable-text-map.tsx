@@ -99,9 +99,11 @@ export const portableTextMap: Partial<PortableTextReactComponents> = {
   listItem: {
     bullet: ({ children }) => {
       return (
-        <li>
-          <IconArrowRight className="inline-block stroke-indigo-500 mr-3 align-middle" />
-          {children}
+        <li className="flex items-start">
+          <span className="mr-3 mt-[2px]">
+            <IconArrowRight className="stroke-indigo-500" />
+          </span>
+          <div className="flex-1">{children}</div>
         </li>
       );
     },
