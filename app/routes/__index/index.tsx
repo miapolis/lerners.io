@@ -1,8 +1,8 @@
-import React, { lazy, Suspense } from "react";
+import React from "react";
 import { json, LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { useTheme, Theme } from "remix-themes";
-import { ClientOnly } from "remix-utils";
+import Spline from "@splinetool/react-spline";
 import { SanityPost } from "~/interfaces/post";
 import { getPosts } from "~/utils/sanity.server";
 
@@ -19,9 +19,6 @@ export const loader: LoaderFunction = async () => {
     posts: await getPosts(),
   });
 };
-
-// @ts-ignore
-let Spline = lazy(() => import("@splinetool/react-spline"));
 
 export default function Index() {
   const data = useLoaderData<LoaderData>();
@@ -43,16 +40,10 @@ export default function Index() {
             size={300}
           />
         </div>
-        <ClientOnly>
-          {() => (
-            <Suspense fallback="">
-              <Spline
-                scene="https://prod.spline.design/taXw95jMHuEO12Wp/scene.splinecode"
-                className="absolute"
-              />
-            </Suspense>
-          )}
-        </ClientOnly>
+        <Spline
+          scene="https://prod.spline.design/taXw95jMHuEO12Wp/scene.splinecode"
+          className="absolute"
+        />
       </div>
       <div className="h-[calc(100vh-128px)] flex items-center justify-center">
         <h1 className="text-7xl sm:text-9xl font-bold z-[100] drop-shadow-xl text-center px-8">

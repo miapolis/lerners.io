@@ -68,7 +68,7 @@ export default function Post() {
   return (
     <main className="mt-16 relative overflow-visible mb-32">
       <LazyImage
-        className={`w-full rounded-xl mb-16 shadow-2xl shadow-zinc-900`}
+        className={`w-full rounded-xl mb-16 shadow-2xl`}
         width={post.fullImage.metadata.dimensions.width}
         height={post.fullImage.metadata.dimensions.height}
         placeholderSrc={post.fullImage.metadata.lqip}
