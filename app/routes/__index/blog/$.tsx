@@ -1,5 +1,5 @@
 import { json, LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import { LazyImage } from "~/components/lazy-image";
@@ -9,6 +9,7 @@ import { getSanityClient } from "~/config/sanity.server";
 import { SanityPost } from "~/interfaces/post";
 import { themeSessionResolver } from "~/utils/session.server";
 import { dtFormatter } from "~/utils/time";
+import { NotFoundPage } from "~/components/not-found-page";
 
 interface LoaderData {
   posts: SanityPost[];
@@ -19,7 +20,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   const { getTheme } = await themeSessionResolver(request);
   const slug = params["*"];
   if (!slug) {
-    return new Response("Not found", { status: 404 });
+    throw new Response("Not found", { status: 404 });
   }
 
   const reqUrl = new URL(request?.url);
@@ -34,7 +35,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
   const posts = await getSanityClient(isPreview).fetch(query, { slug });
   if (!posts.length) {
-    return new Response("Not found", { status: 404 });
+    throw new Response("Not found", { status: 404 });
   }
 
   return json({
@@ -95,8 +96,15 @@ export default function Post() {
 
 export const Tag = ({ name }: { name: string }) => {
   return (
-    <div className="transition-all inline-flex rounded-md bg-opacity-30 leading-none text-blue-500 font-semibold hover:text-blue-400 whitespace-nowrap">
+    <Link
+      to={`/blog/tags/${name}`}
+      className="transition-all inline-flex rounded-md bg-opacity-30 leading-none text-blue-500 font-semibold hover:text-blue-400 whitespace-nowrap"
+    >
       {name}
-    </div>
+    </Link>
   );
 };
+
+export const CatchBoundary = () => (
+  <NotFoundPage message="We couldn't find that post." />
+);

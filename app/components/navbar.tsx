@@ -29,6 +29,7 @@ export const Navbar: React.FC = () => {
         <MainLink href="https://github.com/miapolis" name="GitHub" />
       </div>
       <button
+        className="w-6 h-6"
         onClick={() => {
           setTheme((prev) => (prev === Theme.DARK ? Theme.LIGHT : Theme.DARK));
         }}

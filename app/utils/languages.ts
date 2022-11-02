@@ -1,7 +1,9 @@
 export const formatLanguage = (language: string) => {
   switch (language.toLowerCase()) {
+    case "ts":
     case "typescript":
       return "TypeScript";
+    case "js":
     case "javascript":
       return "JavaScript";
     case "c":
@@ -10,6 +12,7 @@ export const formatLanguage = (language: string) => {
     case "cpp":
       return "C++";
     case "c#":
+    case "csharp":
       return "C#";
     case "java":
       return "Java";

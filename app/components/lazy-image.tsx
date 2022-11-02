@@ -1,4 +1,4 @@
-import React, { ImgHTMLAttributes } from "react";
+import React from "react";
 
 export interface LazyImageProps
   extends React.DetailedHTMLProps<
