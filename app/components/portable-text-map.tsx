@@ -14,33 +14,46 @@ import { CodeWrapper } from "./code-wrapper";
 
 const slugFn = (v: any) => slugify(toPlainText(v)).toLowerCase();
 
-const LinkableH2 = ({ children, value }: any) => {
-  const slug = slugFn(value);
-  return (
-    <h2 id={slug} className="group -ml-[38px] flex items-center">
-      <a
-        href={`#${slug}`}
-        className="transition-all opacity-0 xl:group-hover:opacity-100 mr-2"
-      >
-        <IconLink size={28} />
-      </a>
-      {children}
-    </h2>
-  );
-};
+interface LinkableProps {
+  children: React.ReactNode;
+  value: any;
+  type: "h2" | "h3";
+}
 
-const LinkableH3 = ({ children, value }: any) => {
+const Linkable: React.FC<LinkableProps> = ({ children, value, type }) => {
+  const [anchorTarget, setAnchorTarget] =
+    React.useState<HTMLAnchorElement | null>(null);
+
   const slug = slugFn(value);
+  React.useEffect(() => {
+    setAnchorTarget(document.getElementById(slug) as HTMLAnchorElement);
+  }, []);
+
+  const anchorClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault();
+    anchorTarget!.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.pushState({}, "", `#${slug}`);
+  };
+
+  const Anchor = type;
+
   return (
-    <h3 id={slug} className="group -ml-8 flex items-center">
+    <Anchor
+      id={slug}
+      className={`group ${
+        type == "h2" ? "-ml-[38px]" : "-ml-8"
+      } flex items-center`}
+    >
       <a
         href={`#${slug}`}
+        onClick={anchorClick}
         className="transition-all opacity-0 xl:group-hover:opacity-100 mr-2"
+        aria-label={`Scroll to ${slug}`}
       >
-        <IconLink />
+        <IconLink size={type == "h2" ? 28 : 24} />
       </a>
       {children}
-    </h3>
+    </Anchor>
   );
 };
 
@@ -93,8 +106,12 @@ export const portableTextMap: Partial<PortableTextReactComponents> = {
     },
   },
   block: {
-    h2: LinkableH2,
-    h3: LinkableH3,
+    h2: ({ children, value }) => (
+      <Linkable children={children} value={value} type="h2" />
+    ),
+    h3: ({ children, value }) => (
+      <Linkable children={children} value={value} type="h3" />
+    ),
   },
   listItem: {
     bullet: ({ children }) => {

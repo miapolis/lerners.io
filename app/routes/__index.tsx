@@ -1,6 +1,5 @@
 import { LoaderFunction } from "@remix-run/node";
-import { Outlet, useCatch } from "@remix-run/react";
-import { useTheme } from "remix-themes";
+import { Outlet } from "@remix-run/react";
 import { LayoutWrapper } from "~/components/layout-wrapper";
 import { themeSessionResolver } from "~/utils/session.server";
 

@@ -58,7 +58,10 @@ export const App = () => {
         <PreventFlashOnWrongTheme ssrTheme={Boolean(data.theme)} />
         <Links />
       </head>
-      <body className="bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white w-full min-h-full">
+      <body
+        id="root"
+        className="bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white w-full min-h-full"
+      >
         <Outlet />
         <ScrollRestoration />
         <Scripts />

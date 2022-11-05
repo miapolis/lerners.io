@@ -2,6 +2,13 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import type { TypedObject } from "@portabletext/types";
 import { SanityTag } from "./tag";
 
+export interface PostPreview {
+  title: string;
+  slug: {
+    current: string;
+  };
+}
+
 export interface SanityPost {
   _id: string;
   title: string;
