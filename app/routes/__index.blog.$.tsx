@@ -117,7 +117,11 @@ export default function Post() {
           </div>
         </section>
         <PortableText value={post.body} components={portableTextMap} />
-        <section className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12">
+        <section
+          className={`w-full grid grid-cols-1 ${
+            loaderData.prevPost && loaderData.nextPost ? "sm:grid-cols-2" : ""
+          } gap-4 mt-12`}
+        >
           {loaderData.prevPost && (
             <NextPostComp post={loaderData.prevPost} next={false} />
           )}
