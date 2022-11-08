@@ -1,3 +1,4 @@
+import React from "react";
 import { json, LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import imageUrlBuilder from "@sanity/image-url";
@@ -14,6 +15,7 @@ import { IconArrowLeft, IconArrowRight } from "@tabler/icons";
 import { PostMenu } from "~/components/post-menu";
 import { BlogLayoutWrapper } from "~/components/blog-layout-wrapper";
 import { cache } from "~/services/redis.server";
+import { LoadingBarContext } from "~/root";
 
 interface LoaderData {
   posts: SanityPost[];
@@ -104,6 +106,11 @@ export default function Post() {
 
   const builder = imageUrlBuilder(sanityClient);
   const post = getSinglePost(loaderData.posts, loaderData.isPreview);
+
+  const bar = React.useContext(LoadingBarContext);
+  React.useEffect(() => {
+    bar?.current?.complete();
+  }, []);
 
   return (
     <BlogLayoutWrapper aside={<PostMenu post={post} />}>

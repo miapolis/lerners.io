@@ -6,6 +6,7 @@ import Spline from "@splinetool/react-spline";
 import { cache } from "~/services/redis.server";
 import { SanityPost } from "~/interfaces/post";
 import { getPosts } from "~/utils/sanity.server";
+import { LoadingBarContext } from "~/root";
 
 import { IconArrowRight } from "@tabler/icons";
 import PuffLoader from "react-spinners/PuffLoader";
@@ -73,10 +74,15 @@ export default function Index() {
 }
 
 export const PostCard = (post: SanityPost) => {
+  const bar = React.useContext(LoadingBarContext);
+
   return (
     <Link
       className="flex gap-3 flex-col py-6 px-7 group bg-zinc-400 dark:bg-zinc-600 bg-opacity-10 dark:bg-opacity-10 backdrop-blur-xl rounded-xl border-2 border-black dark:border-white border-opacity-30 dark:border-opacity-30 shadow-xl"
       to={`/blog/${post.slug.current}`}
+      onClick={() => {
+        bar?.current!.continuousStart();
+      }}
     >
       <div className="mt-2 text-sm text-gray-800 dark:text-gray-200 inline-flex w-18">
         {dtFormatter.format(new Date(post.publishedAt))}

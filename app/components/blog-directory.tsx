@@ -3,6 +3,7 @@ import { Link } from "@remix-run/react";
 import { SanityPost } from "~/interfaces/post";
 import { dtFormatter } from "~/utils/time";
 import { IconArrowRight } from "@tabler/icons";
+import { LoadingBarContext } from "~/root";
 
 export interface BlogDirectoryProps {
   title: string;
@@ -34,10 +35,15 @@ export const BlogDirectory: React.FC<BlogDirectoryProps> = ({
 };
 
 export const PostCard = (post: SanityPost) => {
+  const bar = React.useContext(LoadingBarContext);
+
   return (
     <Link
       className="group flex flex-col sm:flex-row gap-2 sm:gap-6 mb-6"
       to={`/blog/${post.slug.current}`}
+      onClick={() => {
+        bar?.current?.continuousStart();
+      }}
     >
       <div className="w-32 sm:border-r-2 sm:border-r-black sm:dark:border-r-white text-zinc-800 dark:text-zinc-200">
         <div>{dtFormatter.format(new Date(post.publishedAt))}</div>

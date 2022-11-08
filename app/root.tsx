@@ -1,3 +1,4 @@
+import React from "react";
 import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
@@ -12,8 +13,10 @@ import {
   useTheme,
   ThemeProvider,
   PreventFlashOnWrongTheme,
+  Theme,
 } from "remix-themes";
 import { themeSessionResolver } from "./utils/session.server";
+import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
 
 import styles from "./tailwind.css";
 import font from "./styles/font.css";
@@ -47,9 +50,14 @@ export default function AppWithProviders() {
   );
 }
 
+export const LoadingBarContext =
+  React.createContext<React.RefObject<LoadingBarRef> | null>(null);
+
 export const App = () => {
   const data = useLoaderData();
   const [theme] = useTheme();
+
+  const ref = React.useRef<LoadingBarRef | null>(null);
 
   return (
     <html lang="en" className={theme ?? ""} data-theme={theme ?? ""}>
@@ -62,7 +70,13 @@ export const App = () => {
         id="root"
         className="bg-zinc-50 dark:bg-zinc-900 text-black dark:text-white w-full min-h-full"
       >
-        <Outlet />
+        <LoadingBar
+          color={theme == Theme.DARK ? "#facc15" : "#4338ca"}
+          ref={ref}
+        />
+        <LoadingBarContext.Provider value={ref}>
+          <Outlet />
+        </LoadingBarContext.Provider>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

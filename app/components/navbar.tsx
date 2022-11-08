@@ -26,7 +26,7 @@ export const Navbar: React.FC = () => {
       <div className="flex gap-6">
         <MainLink href="/about" name="About" />
         <MainLink href="/blog" name="Blog" />
-        <MainLink href="https://github.com/miapolis" name="GitHub" />
+        <MainLink href="/links" name="Links" />
       </div>
       <button
         className="w-6 h-6"
@@ -41,15 +41,12 @@ export const Navbar: React.FC = () => {
 };
 
 const MainLink: React.FC<{ href: string; name: string }> = ({ href, name }) => {
-  const Comp = href.startsWith("http") ? "a" : Link;
-
   return (
-    <Comp
+    <Link
       to={href}
-      href={href}
       className="transition-all text-base font-semibold hover:text-indigo-700 dark:hover:text-yellow-400"
     >
       {name}
-    </Comp>
+    </Link>
   );
 };

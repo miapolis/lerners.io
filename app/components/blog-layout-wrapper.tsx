@@ -5,7 +5,7 @@ import { Navbar } from "./navbar";
 export const BlogLayoutWrapper: React.FC<
   React.PropsWithChildren & { aside: React.ReactNode }
 > = ({ children, aside }) => {
-  const isXl = useMedia("(min-width: 1400px)");
+  // const isXl = useMedia("(min-width: 1400px)");
 
   return (
     <div className="flex flex-col min-h-screen min-w-full items-center">
@@ -18,7 +18,9 @@ export const BlogLayoutWrapper: React.FC<
           <main>{children}</main>
         </div>
         <div className="flex-1">
-          {isXl && aside}
+          <div className="hidden xl:block w-full h-full">
+            {aside}
+          </div>
         </div>
       </div>
     </div>

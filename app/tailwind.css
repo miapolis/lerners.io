@@ -1672,6 +1672,10 @@ html.light {
     margin-left: calc(calc(32px + 3px) * -1);
   }
 
+  .xl\:block {
+    display: block;
+  }
+
   .xl\:w-\[calc\(100\%\+70px\)\] {
     width: calc(100% + 70px);
   }
