@@ -696,6 +696,10 @@ code:not(.code-highlight code) {
   top: 50%;
 }
 
+.z-\[50\] {
+  z-index: 50;
+}
+
 .z-\[100\] {
   z-index: 100;
 }
@@ -833,6 +837,10 @@ code:not(.code-highlight code) {
   display: none;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .h-8 {
   height: 2rem;
 }
@@ -843,10 +851,6 @@ code:not(.code-highlight code) {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-full {
-  height: 100%;
 }
 
 .h-\[calc\(100vh-128px\)\] {
@@ -1365,6 +1369,10 @@ code:not(.code-highlight code) {
   opacity: 0;
 }
 
+.opacity-20 {
+  opacity: 0.2;
+}
+
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -1420,6 +1428,51 @@ html.dark {
 
 html.light {
   color-scheme: light;
+}
+
+.halftoneBackground {
+  --dotRadius: 0.5rem;
+  --dotsColor: 255 255 255;
+  --bg: radial-gradient(
+    circle at center,
+    rgb(var(--dotsColor)) 3%,
+    rgb(var(--dotsColor) / 0.4) var(--dotRadius, 70%)
+  );
+  --bgSize: 2rem;
+  --bgPosition: calc(var(--bgSize) / 2);
+  --mask: radial-gradient(circle at center, rgb(0 0 0), rgb(0 0 0 / 0.1) 60%);
+  overflow: hidden;
+}
+
+.halftone,
+.halftoneLight {
+  position: relative;
+  aspect-ratio: 1;
+  background: black;
+}
+
+.halftone {
+  filter: contrast(20) invert(0);
+  mix-blend-mode: screen;
+}
+
+.halftoneLight {
+  filter: contrast(20) invert(1);
+  mix-blend-mode: multiply;
+}
+
+.halftone::after,
+.halftoneLight::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: round;
+  -webkit-mask-image: var(--mask);
+          mask-image: var(--mask);
+  background-image: var(--bg);
+  background-size: var(--bgSize, 0.75rem) var(--bgSize, 0.75rem);
+  background-position: 0, 0, var(--bgPosition), var(--bgPosition);
 }
 
 .hover\:border-indigo-700:hover {

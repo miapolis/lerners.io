@@ -44,7 +44,7 @@ export default function Index() {
 
   return (
     <div>
-      <div className="fixed w-screen h-screen top-0 left-0 pointer-events-none flex items-center justify-center">
+      <div className="fixed w-screen h-screen top-0 left-0 pointer-events-none flex items-center justify-center z-[50]">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <PuffLoader
             loading={landed}
@@ -57,7 +57,14 @@ export default function Index() {
           className="absolute"
         />
       </div>
-      <div className="h-[calc(100vh-128px)] flex items-center justify-center">
+      <div className="h-[calc(100vh-128px)] flex items-center justify-center relative">
+        <div className="w-full h-full absolute top-0 left-0 halftoneBackground opacity-20 bg-zinc-50 dark:bg-zinc-900">
+          <div
+            className={`w-full h-full ${
+              theme == Theme.DARK ? "halftone" : "halftoneLight"
+            }`}
+          />
+        </div>
         <h1 className="text-7xl sm:text-9xl font-bold z-[100] drop-shadow-xl text-center px-8">
           Ethan Lerner
         </h1>
@@ -78,7 +85,7 @@ export const PostCard = (post: SanityPost) => {
 
   return (
     <Link
-      className="flex gap-3 flex-col py-6 px-7 group bg-zinc-400 dark:bg-zinc-600 bg-opacity-10 dark:bg-opacity-10 backdrop-blur-xl rounded-xl border-2 border-black dark:border-white border-opacity-30 dark:border-opacity-30 shadow-xl"
+      className="z-[100] flex gap-3 flex-col py-6 px-7 group bg-zinc-400 dark:bg-zinc-600 bg-opacity-10 dark:bg-opacity-10 backdrop-blur-xl rounded-xl border-2 border-black dark:border-white border-opacity-30 dark:border-opacity-30 shadow-xl"
       to={`/blog/${post.slug.current}`}
       onClick={() => {
         bar?.current!.continuousStart();
