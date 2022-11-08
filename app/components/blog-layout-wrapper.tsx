@@ -17,7 +17,9 @@ export const BlogLayoutWrapper: React.FC<
         <div className="max-w-7xl px-4 sm:px-6 xl:px-20 min-h-full w-full flex-[100]">
           <main>{children}</main>
         </div>
-        <div className="flex-1">{isXl && aside}</div>
+        <div className="flex-1">
+          {isXl && aside}
+        </div>
       </div>
     </div>
   );

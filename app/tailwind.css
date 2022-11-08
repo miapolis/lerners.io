@@ -510,18 +510,14 @@ blockquote:not(.sidenote blockquote) {
   line-height: 1.75rem;
 }
 
-p > a, 
-  main > a, 
-  li > a {
+article a:not(.anchor-group > a) {
   font-weight: 600;
   --tw-text-opacity: 1;
   color: rgb(99 102 241 / var(--tw-text-opacity));
   text-underline-offset: 4px;
 }
 
-p > a:hover, 
-  main > a:hover, 
-  li > a:hover {
+article a:not(.anchor-group > a):hover {
   text-decoration-line: underline;
 }
 
@@ -545,7 +541,7 @@ code:not(.code-highlight code) {
 }
 
 .code-highlight pre, 
-  code {
+  .code-highlight code {
   background-color: transparent !important;
   padding: 0px !important;
 }
@@ -650,6 +646,10 @@ code:not(.code-highlight code) {
 
 .pointer-events-auto {
   pointer-events: auto;
+}
+
+.static {
+  position: static;
 }
 
 .fixed {

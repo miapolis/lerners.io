@@ -1,4 +1,3 @@
-import React from "react";
 import { json, LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import imageUrlBuilder from "@sanity/image-url";
@@ -14,6 +13,7 @@ import { NotFoundPage } from "~/components/not-found-page";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons";
 import { PostMenu } from "~/components/post-menu";
 import { BlogLayoutWrapper } from "~/components/blog-layout-wrapper";
+import { cache } from "~/services/redis.server";
 
 interface LoaderData {
   posts: SanityPost[];
@@ -32,21 +32,30 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   const reqUrl = new URL(request?.url);
   const isPreview =
     reqUrl?.searchParams?.get("preview") === process.env.SANITY_PREVIEW_SECRET;
+  console.log("isPreview", isPreview);
 
-  const query = `*[_type == "post" && slug.current == $slug] {
-    ...,
-    "tags": tags[]->,
-    "fullImage": primaryImage.asset->
-  }`;
+  let posts, adjData;
+  const key = `post:${slug}`;
 
-  const posts = await getSanityClient(isPreview).fetch(query, { slug });
-  if (!posts.length) {
-    throw new Response("Not found", { status: 404 });
-  }
+  if ((await cache.redis.exists(key)) && !isPreview) {
+    const data = JSON.parse((await cache.redis.get(key))!);
+    posts = data.posts;
+    adjData = data.adjData;
+    console.log("cache hit");
+  } else {
+    const query = `*[_type == "post" && slug.current == $slug] {
+      ...,
+      "tags": tags[]->,
+      "fullImage": primaryImage.asset->
+    }`;
 
-  const date = posts[0].publishedAt;
-  const adjQuery = `
-    {
+    posts = await getSanityClient(isPreview).fetch(query, { slug });
+    if (!posts.length) {
+      throw new Response("Not found", { status: 404 });
+    }
+
+    const date = posts[0].publishedAt;
+    const adjQuery = `{
       'prevPost': *[_type == "post" && publishedAt > $date] | order(publishedAt asc) [0] {
         slug,
         title
@@ -55,16 +64,23 @@ export const loader: LoaderFunction = async ({ params, request }) => {
         slug,
         title
       }
-    }
-  `;
+    }`;
 
-  const postData = await getSanityClient().fetch(adjQuery, { date });
+    adjData = await getSanityClient().fetch(adjQuery, { date });
+
+    cache.redis.set(
+      `post:${slug}`,
+      JSON.stringify({ posts, adjData }),
+      "EX",
+      300
+    );
+  }
 
   return json({
     posts,
     isPreview,
-    nextPost: postData.nextPost,
-    prevPost: postData.prevPost,
+    nextPost: adjData.nextPost,
+    prevPost: adjData.prevPost,
     theme: getTheme(),
   });
 };
@@ -116,7 +132,9 @@ export default function Post() {
             </div>
           </div>
         </section>
-        <PortableText value={post.body} components={portableTextMap} />
+        <article>
+          <PortableText value={post.body} components={portableTextMap} />
+        </article>
         <section
           className={`w-full grid grid-cols-1 ${
             loaderData.prevPost && loaderData.nextPost ? "sm:grid-cols-2" : ""

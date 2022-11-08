@@ -17,6 +17,7 @@
     "@splinetool/runtime": "^0.9.123",
     "@tabler/icons": "^1.104.0",
     "@vercel/node": "^2.4.4",
+    "ioredis": "^5.2.4",
     "picosanity": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

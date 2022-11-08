@@ -40,7 +40,7 @@ const Linkable: React.FC<LinkableProps> = ({ children, value, type }) => {
   return (
     <Anchor
       id={slug}
-      className={`group ${
+      className={`anchor-group group ${
         type == "h2" ? "-ml-[38px]" : "-ml-8"
       } flex items-center`}
     >

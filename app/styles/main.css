@@ -51,9 +51,7 @@ html.light {
   blockquote:not(.sidenote blockquote) {
     @apply text-lg;
   }
-  p > a,
-  main > a,
-  li > a {
+  article a:not(.anchor-group > a) {
     @apply text-indigo-500 font-semibold hover:underline underline-offset-4;
   }
 
@@ -65,7 +63,7 @@ html.light {
     @apply bg-transparent;
   }
   .code-highlight pre,
-  code {
+  .code-highlight code {
     @apply bg-transparent !important;
     @apply p-0 !important;
   }

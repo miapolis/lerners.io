@@ -3,6 +3,7 @@ import { json, LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { useTheme, Theme } from "remix-themes";
 import Spline from "@splinetool/react-spline";
+import { cache } from "~/services/redis.server";
 import { SanityPost } from "~/interfaces/post";
 import { getPosts } from "~/utils/sanity.server";
 
@@ -15,6 +16,16 @@ type LoaderData = {
 };
 
 export const loader: LoaderFunction = async () => {
+  const defaultKey = `landing:posts`;
+  let posts;
+  if (await cache.redis.exists(defaultKey)) {
+    const data = JSON.parse((await cache.redis.get(defaultKey))!);
+    posts = data.posts;
+  } else {
+    posts = await getPosts();
+    await cache.redis.set(defaultKey, JSON.stringify({ posts }), "EX", 300);
+  }
+
   return json<LoaderData>({
     posts: await getPosts(),
   });

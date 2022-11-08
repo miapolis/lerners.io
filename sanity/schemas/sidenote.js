@@ -27,4 +27,7 @@ export default {
       type: "blockContent",
     },
   ],
+  initialValue: {
+    tone: "info",
+  },
 };
