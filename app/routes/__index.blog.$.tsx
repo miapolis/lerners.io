@@ -171,8 +171,8 @@ export default function Post() {
         <section className="mb-6 flex h-full -ml-[30px]">
           <div className="w-2 mr-6 bg-indigo-500" />
           <div className="h-full w-full">
-            <div className="w-full flex justify-between">
-              <div className="text-zinc-700 dark:text-zinc-300 mb-2">
+            <div className="w-full flex justify-between items-center mb-2">
+              <div className="text-zinc-700 dark:text-zinc-300">
                 Published {dtFormatter.format(new Date(post.publishedAt))}
               </div>
               <div className="flex gap-2 items-center text-zinc-500 text-sm">
