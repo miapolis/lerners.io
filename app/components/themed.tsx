@@ -1,5 +1,4 @@
 import React from "react";
-import { ClientOnly } from "remix-utils";
 import { useTheme } from "~/hooks/use-theme";
 
 export interface ThemedProps {
@@ -21,9 +20,16 @@ export const Themed: React.FC<ThemedProps> = ({
   const [initialTheme] = React.useState(theme);
   const themeToReference = initialOnly ? initialTheme : theme;
 
-  return (
-    <ClientOnly>
-      {() => (themeToReference === "dark" ? dark : light)}
-    </ClientOnly>
-  );
+  const serverRenderWithUnknownTheme = !theme && typeof window !== "object";
+  if (serverRenderWithUnknownTheme) {
+    return (
+      <>
+        {React.createElement("dark-mode", null, dark)}
+        {React.createElement("light-mode", null, light)}
+      </>
+    );
+  } else {
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    return <>{themeToReference === "light" ? light : dark}</>;
+  }
 };
