@@ -7,7 +7,6 @@ import { getPosts } from "~/utils/sanity.server";
 import { LoadingBarContext } from "~/root";
 
 import { IconArrowRight } from "@tabler/icons";
-import PuffLoader from "react-spinners/PuffLoader";
 import { dtFormatter } from "~/utils/time";
 import { Theme } from "~/components/theme-provider";
 import { useTheme } from "~/hooks/use-theme";
@@ -48,13 +47,6 @@ export default function Index() {
   return (
     <div>
       <div className="fixed w-screen h-screen top-0 left-0 pointer-events-none flex items-center justify-center z-[50]">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <PuffLoader
-            loading={landed}
-            color={theme == Theme.DARK ? "white" : "black"}
-            size={300}
-          />
-        </div>
         <Suspense fallback={<></>}>
           <Spline
             scene="https://prod.spline.design/taXw95jMHuEO12Wp/scene.splinecode"

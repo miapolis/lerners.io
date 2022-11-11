@@ -21,7 +21,6 @@
     "picosanity": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-spinners": "^0.13.6",
     "react-syntax-highlighter": "^15.5.0",
     "react-top-loading-bar": "^2.3.1",
     "remix-utils": "^3.3.0",
