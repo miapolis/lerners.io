@@ -1,4 +1,5 @@
 import React from "react";
+import { Footer } from "./footer";
 import { Navbar } from "./navbar";
 
 export const LayoutWrapper: React.FC<React.PropsWithChildren> = ({
@@ -10,6 +11,7 @@ export const LayoutWrapper: React.FC<React.PropsWithChildren> = ({
         <Navbar />
         <main>{children}</main>
       </div>
+      <Footer />
     </div>
   );
 };

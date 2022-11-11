@@ -1,4 +1,5 @@
 import React from "react";
+import { Footer } from "./footer";
 import { Navbar } from "./navbar";
 
 export const BlogLayoutWrapper: React.FC<
@@ -18,6 +19,7 @@ export const BlogLayoutWrapper: React.FC<
           <div className="hidden xl:block w-full h-full">{aside}</div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
