@@ -11,6 +11,9 @@ import { dtFormatter } from "~/utils/time";
 import { Theme } from "~/components/theme-provider";
 import { useTheme } from "~/hooks/use-theme";
 
+// @ts-ignore
+const Spline = React.lazy(() => import("@splinetool/react-spline"));
+
 type LoaderData = {
   posts: SanityPost[];
 };
@@ -32,8 +35,6 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function Index() {
-  // @ts-ignore
-  const Spline = React.lazy(() => import("@splinetool/react-spline"));
   const data = useLoaderData<LoaderData>();
 
   const [theme] = useTheme();
