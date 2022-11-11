@@ -34,15 +34,9 @@ export const loader: LoaderFunction = async () => {
 export default function Index() {
   // @ts-ignore
   const Spline = React.lazy(() => import("@splinetool/react-spline"));
-
   const data = useLoaderData<LoaderData>();
 
   const [theme] = useTheme();
-  const [landed, setLanded] = React.useState(false);
-
-  React.useEffect(() => {
-    setLanded(true);
-  }, []);
 
   return (
     <div>

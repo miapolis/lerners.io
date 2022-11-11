@@ -5,13 +5,11 @@ export const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "lerners-io",
     secure: true,
-    sameSite: process.env.NODE_ENV == "production" ? "lax" : false,
-    secrets: [
-      process.env.NODE_ENV == "production"
-        ? assertEnv("COOKIE_SECRET")
-        : "secret",
-    ],
+    sameSite: "lax",
+    secrets: [assertEnv("COOKIE_SECRET")],
     path: "/",
-    httpOnly: process.env.NODE_ENV == "production",
+    httpOnly: true,
   },
 });
+
+export const { getSession, commitSession, destroySession } = sessionStorage;

@@ -11,17 +11,20 @@ import { getThemeSession } from "~/utils/theme.server";
 import { PostPreview, SanityPost } from "~/interfaces/post";
 import { dtFormatter } from "~/utils/time";
 import { NotFoundPage } from "~/components/not-found-page";
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons";
+import { IconArrowLeft, IconArrowRight, IconEye } from "@tabler/icons";
 import { PostMenu } from "~/components/post-menu";
 import { BlogLayoutWrapper } from "~/components/blog-layout-wrapper";
 import { cache } from "~/services/redis.server";
 import { LoadingBarContext } from "~/root";
+import { commitSession, getSession } from "~/utils/session.server";
+import { db } from "~/services/db.server";
 
 interface LoaderData {
   posts: SanityPost[];
   isPreview: boolean;
   nextPost: PostPreview | null;
   prevPost: PostPreview | null;
+  hits: number;
 }
 
 export const loader: LoaderFunction = async ({ params, request }) => {
@@ -34,16 +37,15 @@ export const loader: LoaderFunction = async ({ params, request }) => {
   const reqUrl = new URL(request?.url);
   const isPreview =
     reqUrl?.searchParams?.get("preview") === process.env.SANITY_PREVIEW_SECRET;
-  console.log("isPreview", isPreview);
 
-  let posts, adjData;
+  let posts, adjData, hits;
   const key = `post:${slug}`;
 
   if ((await cache.redis.exists(key)) && !isPreview) {
     const data = JSON.parse((await cache.redis.get(key))!);
     posts = data.posts;
     adjData = data.adjData;
-    console.log("cache hit");
+    hits = data.hits;
   } else {
     const query = `*[_type == "post" && slug.current == $slug] {
       ...,
@@ -70,21 +72,63 @@ export const loader: LoaderFunction = async ({ params, request }) => {
 
     adjData = await getSanityClient().fetch(adjQuery, { date });
 
+    const {
+      _sum: { count },
+    } = await db.slottedPostCounter.aggregate({
+      where: {
+        slug,
+      },
+      _sum: {
+        count: true,
+      },
+    });
+    hits = count || 0;
+
     cache.redis.set(
       `post:${slug}`,
-      JSON.stringify({ posts, adjData }),
+      JSON.stringify({ posts, adjData, hits }),
       "EX",
       300
     );
   }
 
-  return json({
-    posts,
-    isPreview,
-    nextPost: adjData.nextPost,
-    prevPost: adjData.prevPost,
-    theme: getTheme(),
-  });
+  const headers: Record<string, string> = {};
+  const session = await getSession(request.headers.get("Cookie"));
+
+  if (!session.has(`hit:${slug}`)) {
+    const slot = Math.floor(Math.random() * 100);
+    await db.slottedPostCounter.upsert({
+      where: {
+        slug_slot: {
+          slug,
+          slot,
+        },
+      },
+      create: {
+        slug,
+        slot,
+        count: 1,
+      },
+      update: {
+        count: { increment: 1 },
+      },
+    });
+
+    session.set(`hit:${slug}`, 1);
+    headers["Set-Cookie"] = await commitSession(session);
+  }
+
+  return json(
+    {
+      posts,
+      isPreview,
+      nextPost: adjData.nextPost,
+      prevPost: adjData.prevPost,
+      hits,
+      theme: getTheme(),
+    },
+    { headers }
+  );
 };
 
 const getSinglePost = (posts: SanityPost[], isPreview = false) => {
@@ -116,18 +160,25 @@ export default function Post() {
     <BlogLayoutWrapper aside={<PostMenu post={post} />}>
       <main className="mt-16 relative overflow-visible mb-32">
         <LazyImage
-          className={`w-full rounded-xl mb-16 shadow-2xl`}
+          className={`w-full rounded-lg mb-16 shadow-2xl`}
           width={post.fullImage.metadata.dimensions.width}
           height={post.fullImage.metadata.dimensions.height}
           placeholderSrc={post.fullImage.metadata.lqip}
           src={builder.image(post.primaryImage).auto("format").url()}
           alt={post.primaryImage.caption}
         />
+        <div className="flex justify-end gap-2 text-zinc-500 items-center"></div>
         <section className="mb-6 flex h-full -ml-[30px]">
           <div className="w-2 mr-6 bg-indigo-500" />
-          <div className="h-full">
-            <div className="text-zinc-700 dark:text-zinc-300 mb-2">
-              Published {dtFormatter.format(new Date(post.publishedAt))}
+          <div className="h-full w-full">
+            <div className="w-full flex justify-between">
+              <div className="text-zinc-700 dark:text-zinc-300 mb-2">
+                Published {dtFormatter.format(new Date(post.publishedAt))}
+              </div>
+              <div className="flex gap-2 items-center text-zinc-500 text-sm">
+                <IconEye size={18} />
+                {loaderData.hits.toLocaleString()}
+              </div>
             </div>
             <h1 className="text-5xl md:text-6xl font-extrabold">
               {post.title}
