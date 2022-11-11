@@ -13,7 +13,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Index() {
   return (
-    <LayoutWrapper>
+    <LayoutWrapper footer>
       <Outlet />
     </LayoutWrapper>
   );

@@ -82,7 +82,7 @@ export const portableTextMap: Partial<PortableTextReactComponents> = {
       if (!landed) {
         return (
           <CodeWrapper language={value.language} code={value.code}>
-            <pre className="code-highlight">
+            <pre className="code-highlight mt-[10px] mb-[6px]">
               <code>{value.code}</code>
             </pre>
           </CodeWrapper>
