@@ -9,17 +9,17 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import {
-  useTheme,
-  ThemeProvider,
-  PreventFlashOnWrongTheme,
-  Theme,
-} from "remix-themes";
-import { themeSessionResolver } from "./utils/session.server";
 import LoadingBar, { LoadingBarRef } from "react-top-loading-bar";
 
 import styles from "./tailwind.css";
 import font from "./styles/font.css";
+import { getThemeSession } from "./utils/theme.server";
+import {
+  PreventFlashOnWrongTheme,
+  Theme,
+  ThemeProvider,
+} from "./components/theme-provider";
+import { useTheme } from "./hooks/use-theme";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -35,7 +35,7 @@ export const links = () => {
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const { getTheme } = await themeSessionResolver(request);
+  const { getTheme } = await getThemeSession(request);
   return {
     theme: getTheme(),
   };
@@ -44,7 +44,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function AppWithProviders() {
   const data = useLoaderData();
   return (
-    <ThemeProvider specifiedTheme={data.theme} themeAction="/action/set-theme">
+    <ThemeProvider specifiedTheme={data.theme}>
       <App />
     </ThemeProvider>
   );

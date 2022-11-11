@@ -1,5 +1,5 @@
-import { IconCheck, IconCopy } from "@tabler/icons";
 import React from "react";
+import { IconCheck, IconCopy } from "@tabler/icons";
 import { formatLanguage } from "~/utils/languages";
 
 export interface CodeWrapperProps {

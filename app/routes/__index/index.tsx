@@ -1,7 +1,6 @@
 import React from "react";
 import { json, LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
-import { useTheme, Theme } from "remix-themes";
 import Spline from "@splinetool/react-spline";
 import { cache } from "~/services/redis.server";
 import { SanityPost } from "~/interfaces/post";
@@ -11,6 +10,8 @@ import { LoadingBarContext } from "~/root";
 import { IconArrowRight } from "@tabler/icons";
 import PuffLoader from "react-spinners/PuffLoader";
 import { dtFormatter } from "~/utils/time";
+import { Theme } from "~/components/theme-provider";
+import { useTheme } from "~/hooks/use-theme";
 
 type LoaderData = {
   posts: SanityPost[];

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "@remix-run/react";
-import { Theme, useTheme } from "remix-themes";
+import { Theme } from "./theme-provider";
+import { useTheme } from "~/hooks/use-theme";
 import { Themed } from "./themed";
 import { LogoIcon } from "~/icons/logo";
 import { IconMoon, IconSun } from "@tabler/icons";

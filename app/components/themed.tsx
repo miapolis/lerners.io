@@ -1,6 +1,6 @@
 import React from "react";
-import { useTheme } from "remix-themes";
 import { ClientOnly } from "remix-utils";
+import { useTheme } from "~/hooks/use-theme";
 
 export interface ThemedProps {
   dark: React.ReactNode | string;

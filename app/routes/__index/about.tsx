@@ -1,5 +1,6 @@
 import React from "react";
-import { Theme, useTheme } from "remix-themes";
+import { Theme } from "~/components/theme-provider";
+import { useTheme } from "~/hooks/use-theme";
 
 import { Bitwarden } from "~/icons/simpleicons/bitwarden";
 import { DigitalOcean } from "~/icons/simpleicons/digitalocean";

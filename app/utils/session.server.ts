@@ -1,5 +1,4 @@
 import { createCookieSessionStorage } from "@remix-run/node";
-import { createThemeSessionResolver } from "remix-themes";
 import { assertEnv } from "./env.server";
 
 export const sessionStorage = createCookieSessionStorage({
@@ -16,5 +15,3 @@ export const sessionStorage = createCookieSessionStorage({
     httpOnly: process.env.NODE_ENV == "production",
   },
 });
-
-export const themeSessionResolver = createThemeSessionResolver(sessionStorage);

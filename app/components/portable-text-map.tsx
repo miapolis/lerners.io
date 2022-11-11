@@ -1,6 +1,5 @@
 import React from "react";
 import slugify from "slugify";
-import { Theme, useTheme } from "remix-themes";
 import imageUrlBuilder from "@sanity/image-url";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { PortableTextReactComponents, toPlainText } from "@portabletext/react";
@@ -11,6 +10,8 @@ import { Sidenote } from "./sidenote";
 
 import { coy, nightOwl } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { CodeWrapper } from "./code-wrapper";
+import { useTheme } from "~/hooks/use-theme";
+import { Theme } from "./theme-provider";
 
 const slugFn = (v: any) => slugify(toPlainText(v)).toLowerCase();
 

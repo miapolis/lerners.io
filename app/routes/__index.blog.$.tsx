@@ -7,8 +7,8 @@ import { LazyImage } from "~/components/lazy-image";
 import { portableTextMap } from "~/components/portable-text-map";
 import { sanityClient } from "~/config/sanity";
 import { getSanityClient } from "~/config/sanity.server";
+import { getThemeSession } from "~/utils/theme.server";
 import { PostPreview, SanityPost } from "~/interfaces/post";
-import { themeSessionResolver } from "~/utils/session.server";
 import { dtFormatter } from "~/utils/time";
 import { NotFoundPage } from "~/components/not-found-page";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons";
@@ -25,7 +25,7 @@ interface LoaderData {
 }
 
 export const loader: LoaderFunction = async ({ params, request }) => {
-  const { getTheme } = await themeSessionResolver(request);
+  const { getTheme } = await getThemeSession(request);
   const slug = params["*"];
   if (!slug) {
     throw new Response("Not found", { status: 404 });

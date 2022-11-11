@@ -1,15 +1,15 @@
 import { LoaderFunction } from "@remix-run/node";
 import { Outlet } from "@remix-run/react";
 import { LayoutWrapper } from "~/components/layout-wrapper";
-import { themeSessionResolver } from "~/utils/session.server";
+import { getThemeSession } from "~/utils/theme.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const { getTheme } = await themeSessionResolver(request);
+  const { getTheme } = await getThemeSession(request);
 
   return {
-    theme: getTheme()
-  }
-}
+    theme: getTheme(),
+  };
+};
 
 export default function Index() {
   return (
