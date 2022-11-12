@@ -454,7 +454,7 @@ p:not(.sidenote) {
 .sidenote > p {
   margin-bottom: 1.5rem;
   font-size: 1rem;
-  line-height: 1.5rem;
+  line-height: 1.75rem;
 }
 
 li > strong, 
@@ -692,12 +692,12 @@ code:not(.code-highlight code) {
   z-index: 200;
 }
 
-.z-\[50\] {
-  z-index: 50;
-}
-
 .z-\[100\] {
   z-index: 100;
+}
+
+.z-\[50\] {
+  z-index: 50;
 }
 
 .m-0 {
@@ -761,6 +761,14 @@ code:not(.code-highlight code) {
   margin-bottom: 3rem;
 }
 
+.mt-\[10px\] {
+  margin-top: 10px;
+}
+
+.mb-\[6px\] {
+  margin-bottom: 6px;
+}
+
 .mr-3 {
   margin-right: 0.75rem;
 }
@@ -815,22 +823,6 @@ code:not(.code-highlight code) {
 
 .mb-3 {
   margin-bottom: 0.75rem;
-}
-
-.mt-\[10px\] {
-  margin-top: 10px;
-}
-
-.mb-\[10px\] {
-  margin-bottom: 10px;
-}
-
-.mb-\[5px\] {
-  margin-bottom: 5px;
-}
-
-.mb-\[6px\] {
-  margin-bottom: 6px;
 }
 
 .block {
@@ -1031,6 +1023,10 @@ code:not(.code-highlight code) {
 
 .gap-3 {
   gap: 0.75rem;
+}
+
+.self-end {
+  align-self: flex-end;
 }
 
 .overflow-hidden {

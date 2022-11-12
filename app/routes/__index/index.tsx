@@ -42,7 +42,7 @@ export default function Index() {
   return (
     <div>
       <div className="fixed w-screen h-screen top-0 left-0 pointer-events-none flex items-center justify-center z-[50]">
-        <Suspense fallback={<></>}>
+        <Suspense fallback="">
           <Spline
             scene="https://prod.spline.design/taXw95jMHuEO12Wp/scene.splinecode"
             className="absolute"
@@ -67,15 +67,17 @@ export default function Index() {
             <PostCard key={i} {...post} />
           ))}
         </div>
-        <Link
-          to="/blog"
-          className="relative group flex gap-2 justify-end items-center mt-8 text-xl z-[100]"
-        >
-          <div className="transition-all duration-500 group-hover:text-indigo-700 dark:group-hover:text-yellow-400">
-            All Posts
-          </div>
-          <IconArrowRight className="transition-all duration-500 group-hover:translate-x-3 group-hover:stroke-indigo-700 dark:group-hover:stroke-yellow-400" />
-        </Link>
+        <div className="flex justify-end">
+          <Link
+            to="/blog"
+            className="relative group flex gap-2 items-center mt-8 text-xl z-[100]"
+          >
+            <div className="transition-all duration-500 group-hover:text-indigo-700 dark:group-hover:text-yellow-400">
+              All Posts
+            </div>
+            <IconArrowRight className="transition-all duration-500 group-hover:translate-x-3 group-hover:stroke-indigo-700 dark:group-hover:stroke-yellow-400" />
+          </Link>
+        </div>
       </div>
     </div>
   );

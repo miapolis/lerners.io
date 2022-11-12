@@ -23,7 +23,7 @@ html.light {
     @apply text-lg leading-8 mb-6;
   }
   .sidenote > p {
-    @apply text-base mb-6;
+    @apply text-base leading-7 mb-6;
   }
   li > strong,
   p > strong {
