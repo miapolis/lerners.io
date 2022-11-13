@@ -158,7 +158,7 @@ export default function Post() {
 
   return (
     <BlogLayoutWrapper aside={<PostMenu post={post} />}>
-      <main className="mt-16 relative overflow-visible mb-32">
+      <div className="mt-16 relative overflow-visible mb-32">
         <LazyImage
           className={`w-full rounded-lg mb-16 shadow-2xl`}
           width={post.fullImage.metadata.dimensions.width}
@@ -205,7 +205,7 @@ export default function Post() {
             <NextPostComp post={loaderData.nextPost} next />
           )}
         </section>
-      </main>
+      </div>
     </BlogLayoutWrapper>
   );
 }

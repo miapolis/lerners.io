@@ -825,6 +825,10 @@ code:not(.code-highlight code) {
   margin-bottom: 0.75rem;
 }
 
+.box-border {
+  box-sizing: border-box;
+}
+
 .block {
   display: block;
 }
@@ -915,6 +919,27 @@ code:not(.code-highlight code) {
   width: 0.5rem;
 }
 
+.w-1\/2 {
+  width: 50%;
+}
+
+.w-min {
+  width: -moz-min-content;
+  width: min-content;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.w-\[30px\] {
+  width: 30px;
+}
+
+.w-\[100px\] {
+  width: 100px;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -929,6 +954,35 @@ code:not(.code-highlight code) {
 
 .max-w-full {
   max-width: 100%;
+}
+
+.max-w-sm {
+  max-width: 24rem;
+}
+
+.max-w-lg {
+  max-width: 32rem;
+}
+
+.max-w-\[50\%\] {
+  max-width: 50%;
+}
+
+.max-w-fit {
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+}
+
+.max-w-0 {
+  max-width: 0rem;
+}
+
+.max-w-\[40\%\] {
+  max-width: 40%;
+}
+
+.max-w-\[50px\] {
+  max-width: 50px;
 }
 
 .flex-1 {
@@ -1023,10 +1077,6 @@ code:not(.code-highlight code) {
 
 .gap-3 {
   gap: 0.75rem;
-}
-
-.self-end {
-  align-self: flex-end;
 }
 
 .overflow-hidden {

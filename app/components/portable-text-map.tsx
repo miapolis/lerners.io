@@ -91,14 +91,14 @@ export const portableTextMap: Partial<PortableTextReactComponents> = {
 
       return (
         <CodeWrapper language={value.language} code={value.code}>
-          <div className="code-highlight">
+          <pre className="code-highlight">
             <SyntaxHighlighter
               language={value.language}
               style={theme == Theme.DARK ? nightOwl : coy}
             >
               {value.code}
             </SyntaxHighlighter>
-          </div>
+          </pre>
         </CodeWrapper>
       );
     },

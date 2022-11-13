@@ -11,7 +11,7 @@ export const CodeWrapper: React.FC<
   React.PropsWithChildren<CodeWrapperProps>
 > = ({ language, code, children }) => {
   return (
-    <div className="rounded-lg border-2 border-zinc-300 dark:border-zinc-700 mb-8">
+    <div className="relative rounded-lg border-2 border-zinc-300 dark:border-zinc-700 mb-8 w-full">
       <div className="w-full border-b-2 border-b-zinc-300 dark:border-b-zinc-700 text-zinc-700 dark:text-zinc-300 flex">
         <div className="flex-1 pl-5 py-3">{formatLanguage(language)}</div>
         <CopyCodeButton code={code} />
