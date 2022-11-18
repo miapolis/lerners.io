@@ -217,6 +217,7 @@ export const NextPostComp = ({
   post: PostPreview;
   next: boolean;
 }) => {
+  const bar = React.useContext(LoadingBarContext);
   const Arrow = next ? IconArrowRight : IconArrowLeft;
 
   return (
@@ -225,6 +226,9 @@ export const NextPostComp = ({
       className={`transition-all duration-500 group w-full border-2 border-zinc-200 dark:border-zinc-800 hover:border-indigo-700 dark:hover:border-yellow-400 rounded-lg p-4 flex hover:shadow-md ${
         next ? "flex-row" : "flex-row-reverse"
       } items-center gap-4`}
+      onClick={() => {
+        bar?.current!.continuousStart();
+      }}
     >
       <div
         className={`flex-1 ${
