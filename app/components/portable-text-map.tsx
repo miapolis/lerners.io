@@ -82,7 +82,7 @@ export const portableTextMap: Partial<PortableTextReactComponents> = {
       if (!landed) {
         return (
           <CodeWrapper language={value.language} code={value.code}>
-            <pre className="code-highlight mt-[10px] mb-[6px]">
+            <pre className="code-highlight mt-[10px] mb-[6px] overflow-x-auto">
               <code>{value.code}</code>
             </pre>
           </CodeWrapper>
@@ -118,7 +118,7 @@ export const portableTextMap: Partial<PortableTextReactComponents> = {
     bullet: ({ children }) => {
       return (
         <li className="flex items-start">
-          <span className="mr-3 mt-[2px]">
+          <span className="mr-3 mt-[4px]">
             <IconArrowRight className="stroke-indigo-500" />
           </span>
           <div className="flex-1">{children}</div>
