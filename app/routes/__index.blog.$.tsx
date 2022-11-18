@@ -1,6 +1,6 @@
 import React from "react";
 import { json, LoaderFunction } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, useTransition } from "@remix-run/react";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import { LazyImage } from "~/components/lazy-image";
@@ -145,6 +145,7 @@ const getSinglePost = (posts: SanityPost[], isPreview = false) => {
 };
 
 export default function Post() {
+  const transition = useTransition();
   const loaderData = useLoaderData<LoaderData>();
   if (!loaderData) return null;
 
@@ -153,8 +154,8 @@ export default function Post() {
 
   const bar = React.useContext(LoadingBarContext);
   React.useEffect(() => {
-    bar?.current?.complete();
-  }, []);
+    if (transition.state == "idle") bar?.current?.complete();
+  }, [transition.state]);
 
   return (
     <BlogLayoutWrapper aside={<PostMenu post={post} />}>
