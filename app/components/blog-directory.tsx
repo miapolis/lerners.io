@@ -39,7 +39,7 @@ export const PostCard = (post: SanityPost) => {
 
   return (
     <Link
-      className="group flex flex-col sm:flex-row gap-2 sm:gap-6 mb-6"
+      className={`umami--click--blog-post-${post.slug.current} group flex flex-col sm:flex-row gap-2 sm:gap-6 mb-6`}
       to={`/blog/${post.slug.current}`}
       onClick={() => {
         bar?.current?.continuousStart();
@@ -53,8 +53,8 @@ export const PostCard = (post: SanityPost) => {
           {post.title}
         </h2>
         <div className="inline-flex flex-wrap gap-2 mb-5 w-full">
-          {post.tags.map((x) => (
-            <Tag name={x.title} />
+          {post.tags.map((x, i) => (
+            <Tag name={x.title} key={i} />
           ))}
         </div>
         <div className="text-md text-zinc-700 dark:text-zinc-300">

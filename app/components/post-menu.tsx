@@ -52,14 +52,11 @@ export const PostMenu: React.FC<PostMenuProps> = ({ post }) => {
     const current = window.scrollY;
     const map = new Map<string, number>();
     for (const link of links) {
-      map.set(
-        link.slug,
-        (
-          document.getElementById(link.slug) as HTMLAnchorElement
-        ).getBoundingClientRect().top +
-          current -
-          100
-      );
+      const anchor = document.getElementById(link.slug) as HTMLAnchorElement;
+      if (!anchor) continue;
+      const value = anchor.getBoundingClientRect().top + current - 100;
+
+      map.set(link.slug, value);
     }
     anchorMap = map;
 
@@ -80,7 +77,7 @@ export const PostMenu: React.FC<PostMenuProps> = ({ post }) => {
   return (
     <div className="sticky top-32 w-64">
       <button
-        className="mb-6 font-bold flex gap-2"
+        className={`umami--click--post-share-${post.slug.current} mb-6 font-bold flex gap-2`}
         onClick={() => {
           navigator.clipboard.writeText(window.location.href);
           setCopied(true);

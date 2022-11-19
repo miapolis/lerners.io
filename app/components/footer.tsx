@@ -24,13 +24,21 @@ export const Footer: React.FC = () => {
           <div className="flex w-max gap-8">
             <div className="flex flex-col gap-2">
               <div className="text-zinc-500">Links</div>
-              <FooterLink href="/about" name="About" />
-              <FooterLink href="/blog" name="Blog" />
+              <FooterLink href="/about" name="About" umamiId="about" />
+              <FooterLink href="/blog" name="Blog" umamiId="blog" />
             </div>
             <div className="flex flex-col gap-2">
               <div className="text-zinc-500">Contact</div>
-              <FooterLink href="mailto:ethan@lerners.io" name="Email" />
-              <FooterLink href="https://github.com/miapolis" name="GitHub" />
+              <FooterLink
+                href="mailto:ethan@lerners.io"
+                name="Email"
+                umamiId="email"
+              />
+              <FooterLink
+                href="https://github.com/miapolis"
+                name="GitHub"
+                umamiId="github"
+              />
             </div>
           </div>
         </div>
@@ -39,9 +47,10 @@ export const Footer: React.FC = () => {
   );
 };
 
-const FooterLink: React.FC<{ href: string; name: string }> = ({
+const FooterLink: React.FC<{ href: string; name: string; umamiId: string }> = ({
   href,
   name,
+  umamiId,
 }) => {
   const Comp = href.startsWith("/") ? Link : "a";
 
@@ -49,7 +58,7 @@ const FooterLink: React.FC<{ href: string; name: string }> = ({
     <Comp
       to={href}
       href={href}
-      className="transition-all text-base hover:text-indigo-700 dark:hover:text-yellow-400"
+      className={`umami--click--footer-${umamiId} transition-all text-base hover:text-indigo-700 dark:hover:text-yellow-400`}
     >
       {name}
     </Comp>

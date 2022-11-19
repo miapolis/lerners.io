@@ -257,7 +257,9 @@ export const NextPostComp = ({
   return (
     <Link
       to={`/blog/${post.slug.current}`}
-      className={`transition-all duration-500 group w-full border-2 border-zinc-200 dark:border-zinc-800 hover:border-indigo-700 dark:hover:border-yellow-400 rounded-lg p-4 flex hover:shadow-md ${
+      className={`umami--click--post-${
+        next ? "next" : "previous"
+      } transition-all duration-500 group w-full border-2 border-zinc-200 dark:border-zinc-800 hover:border-indigo-700 dark:hover:border-yellow-400 rounded-lg p-4 flex hover:shadow-md ${
         next ? "flex-row" : "flex-row-reverse"
       } items-center gap-4`}
       onClick={() => {

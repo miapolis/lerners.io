@@ -25,9 +25,9 @@ export const Navbar: React.FC = () => {
         />
       </Link>
       <div className="flex gap-6">
-        <MainLink href="/about" name="About" />
-        <MainLink href="/blog" name="Blog" />
-        <MainLink href="mailto:ethan@lerners.io" name="Email" />
+        <MainLink href="/about" name="About" umamiId="about" />
+        <MainLink href="/blog" name="Blog" umamiId="blog" />
+        <MainLink href="mailto:ethan@lerners.io" name="Email" umamiId="email" />
       </div>
       <button
         className="w-6 h-6"
@@ -41,14 +41,18 @@ export const Navbar: React.FC = () => {
   );
 };
 
-const MainLink: React.FC<{ href: string; name: string }> = ({ href, name }) => {
+const MainLink: React.FC<{ href: string; name: string; umamiId: string }> = ({
+  href,
+  name,
+  umamiId,
+}) => {
   const Comp = href.startsWith("/") ? Link : "a";
 
   return (
     <Comp
       to={href}
       href={href}
-      className="transition-all text-base font-semibold hover:text-indigo-700 dark:hover:text-yellow-400"
+      className={`umami--click--navbar-${umamiId} transition-all text-base font-semibold hover:text-indigo-700 dark:hover:text-yellow-400`}
     >
       {name}
     </Comp>

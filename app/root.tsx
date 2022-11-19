@@ -38,6 +38,10 @@ export const loader: LoaderFunction = async ({ request }) => {
   const { getTheme } = await getThemeSession(request);
   return {
     theme: getTheme(),
+    umami: !!process.env.UMAMI_URL && {
+      websiteId: process.env.UMAMI_WEBSITE_ID,
+      url: process.env.UMAMI_URL,
+    },
   };
 };
 
@@ -80,6 +84,14 @@ export const App = () => {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        {data.umami && (
+          <script
+            async
+            defer
+            data-website-id={data.umami.websiteId}
+            src={data.umami.url}
+          />
+        )}
       </body>
     </html>
   );

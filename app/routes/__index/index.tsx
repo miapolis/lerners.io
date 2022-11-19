@@ -64,13 +64,13 @@ export default function Index() {
       <div className="mt-16 mb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full h-full">
           {data.posts.map((post, i) => (
-            <PostCard key={i} {...post} />
+            <PostCard key={i} index={i} post={post} />
           ))}
         </div>
         <div className="flex justify-end">
           <Link
             to="/blog"
-            className="relative group flex gap-2 items-center mt-8 text-xl z-[100]"
+            className="umami--click--home-all-posts relative group flex gap-2 items-center mt-8 text-xl z-[100]"
           >
             <div className="transition-all duration-500 group-hover:text-indigo-700 dark:group-hover:text-yellow-400">
               All Posts
@@ -83,12 +83,17 @@ export default function Index() {
   );
 }
 
-export const PostCard = (post: SanityPost) => {
+export const PostCard: React.FC<{ post: SanityPost; index: number }> = ({
+  post,
+  index,
+}) => {
   const bar = React.useContext(LoadingBarContext);
 
   return (
     <Link
-      className="z-[100] flex gap-3 flex-col py-6 px-7 group bg-zinc-400 dark:bg-zinc-600 bg-opacity-10 dark:bg-opacity-10 backdrop-blur-xl rounded-xl border-2 border-black dark:border-white border-opacity-30 dark:border-opacity-30 shadow-xl"
+      className={`umami--click--home-post-${post.slug.current}-${
+        index + 1
+      } z-[100] flex gap-3 flex-col py-6 px-7 group bg-zinc-400 dark:bg-zinc-600 bg-opacity-10 dark:bg-opacity-10 backdrop-blur-xl rounded-xl border-2 border-black dark:border-white border-opacity-30 dark:border-opacity-30 shadow-xl`}
       to={`/blog/${post.slug.current}`}
       onClick={() => {
         bar?.current!.continuousStart();
