@@ -79,19 +79,23 @@ export const PostMenu: React.FC<PostMenuProps> = ({ post }) => {
 
   return (
     <div className="sticky top-32 w-64">
-      <button className="mb-6 font-bold flex gap-2" onClick={() => {
-        navigator.clipboard.writeText(window.location.href)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      }}>
+      <button
+        className="mb-6 font-bold flex gap-2"
+        onClick={() => {
+          navigator.clipboard.writeText(window.location.href);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        }}
+      >
         {copied ? <IconCircleCheck /> : <IconShare />}
         {copied ? "Link Copied" : "Share"}
       </button>
       <div className="text-zinc-400 dark:text-zinc-600 uppercase font-semibold mb-4">
         In this post
       </div>
-      {links.map((x) => (
+      {links.map((x, i) => (
         <div
+          key={i}
           className="cursor-pointer group flex -translate-x-[18px] mb-2"
           onClick={() => {
             const el = document.getElementById(x.slug);

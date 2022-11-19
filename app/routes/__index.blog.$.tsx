@@ -1,5 +1,5 @@
 import React from "react";
-import { json, LoaderFunction } from "@remix-run/node";
+import { json, LoaderFunction, MetaFunction } from "@remix-run/node";
 import { Link, useLoaderData, useTransition } from "@remix-run/react";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
@@ -18,12 +18,14 @@ import { cache } from "~/services/redis.server";
 import { LoadingBarContext } from "~/root";
 import { commitSession, getSession } from "~/utils/session.server";
 import { db } from "~/services/db.server";
+import { baseUrl } from "~/utils/site-url";
 
 interface LoaderData {
   posts: SanityPost[];
   isPreview: boolean;
   nextPost: PostPreview | null;
   prevPost: PostPreview | null;
+  url: string;
   hits: number;
 }
 
@@ -118,12 +120,14 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     headers["Set-Cookie"] = await commitSession(session);
   }
 
+  const url = `${baseUrl()}/blog/${posts[0].slug.current}`;
   return json(
     {
       posts,
       isPreview,
       nextPost: adjData.nextPost,
       prevPost: adjData.prevPost,
+      url,
       hits,
       theme: getTheme(),
     },
@@ -142,6 +146,35 @@ const getSinglePost = (posts: SanityPost[], isPreview = false) => {
     return posts.find((x) => x._id.startsWith(`drafts.`)) || posts[0];
   }
   return posts[0];
+};
+
+export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
+  const builder = imageUrlBuilder(sanityClient);
+
+  return {
+    title: data.posts[0].title,
+    description: data.posts[0].description,
+    keywords: data.posts[0].tags.map((x) => x.title).join(","),
+    "theme-color": "#6366f1",
+
+    "og:site_name": "Ethan Lerner",
+    "og:url": data.url,
+    "og:title": data.posts[0].title,
+    "og:description": data.posts[0].description,
+    "og:image": builder.image(data.posts[0].fullImage).auto("format").url(),
+
+    "og:type": "article",
+    "article:published_time": new Date(data.posts[0].publishedAt).toISOString(),
+
+    "twitter:card": "summary_large_image",
+    "twitter:url": data.url,
+    "twitter:title": data.posts[0].title,
+    "twitter:description": data.posts[0].description,
+    "twitter:image": builder
+      .image(data.posts[0].fullImage)
+      .auto("format")
+      .url(),
+  };
 };
 
 export default function Post() {
