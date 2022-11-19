@@ -150,6 +150,7 @@ const getSinglePost = (posts: SanityPost[], isPreview = false) => {
 
 export const meta: MetaFunction = ({ data }: { data: LoaderData }) => {
   const builder = imageUrlBuilder(sanityClient);
+  if (!data || !data.posts) return {};
 
   return {
     title: data.posts[0].title,
