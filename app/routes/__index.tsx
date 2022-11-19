@@ -9,7 +9,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
   return {
     theme: getTheme(),
-    url: baseUrl(),
+    url: baseUrl(request),
   };
 };
 

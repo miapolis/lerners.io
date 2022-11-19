@@ -120,7 +120,7 @@ export const loader: LoaderFunction = async ({ params, request }) => {
     headers["Set-Cookie"] = await commitSession(session);
   }
 
-  const url = `${baseUrl()}/blog/${posts[0].slug.current}`;
+  const url = `${baseUrl(request)}/blog/${posts[0].slug.current}`;
   return json(
     {
       posts,
