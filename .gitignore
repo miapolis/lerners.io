@@ -2,11 +2,14 @@ node_modules
 
 .cache
 .env
+.env.production
 .vercel
 .output
 
 /build/
 /public/build
+/public/studio
+/sanity/dist
 /api/
 /api/index.js
 /api/index.js.map

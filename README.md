@@ -2,7 +2,7 @@
 
 ![Stylized landing page](./public/og-default.png)
 
-The third iteration of my personal website and blog, hosted on Vercel.
+The third iteration of my personal website and blog, hosted on fly.io.
 See [my blog post](https://lerners.io/blog/writing-a-blog).
 
 Built with:

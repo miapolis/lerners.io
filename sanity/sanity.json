@@ -1,7 +1,8 @@
 {
   "root": true,
   "project": {
-    "name": "lerners.io"
+    "name": "lerners.io",
+    "basePath": "/studio"
   },
   "api": {
     "projectId": "u896dyie",
@@ -24,10 +25,6 @@
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema"
-    },
-    {
-      "implements": "part:@sanity/base/root",
-      "path": "plugins/sanity-plugin-tutorial/CustomDefaultLayout"
     },
     {
       "implements": "part:@sanity/production-preview/resolve-production-url",
