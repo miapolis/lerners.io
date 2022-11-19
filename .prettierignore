@@ -1,0 +1,6 @@
+node_modules/
+api/
+public/build/
+.cache/
+app/styles/tailwind.css
+package-lock.json

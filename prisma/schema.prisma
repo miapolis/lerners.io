@@ -1,0 +1,18 @@
+datasource db {
+  url          = env("DATABASE_URL")
+  provider     = "mysql"
+  relationMode = "prisma"
+}
+
+generator js {
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
+}
+
+model SlottedPostCounter {
+  slug  String
+  slot  Int    @default(0)
+  count Int?
+
+  @@unique([slug, slot])
+}
