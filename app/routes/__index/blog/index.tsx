@@ -10,7 +10,7 @@ type LoaderData = {
 
 export const loader: LoaderFunction = async () => {
   return json<LoaderData>({
-    posts: await getPosts(60),
+    posts: await getPosts(0),
   });
 };
 
