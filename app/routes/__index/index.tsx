@@ -93,7 +93,7 @@ export const PostCard: React.FC<{ post: SanityPost; index: number }> = ({
     <Link
       className={`umami--click--home-post-${post.slug.current}-${
         index + 1
-      } z-[100] flex gap-3 flex-col py-6 px-7 group bg-zinc-400 dark:bg-zinc-600 bg-opacity-10 dark:bg-opacity-10 backdrop-blur-xl rounded-xl border-2 border-black dark:border-white border-opacity-30 dark:border-opacity-30 shadow-xl`}
+      } z-[100] flex gap-3 flex-col py-6 px-7 group bg-zinc-400 dark:bg-zinc-600 bg-opacity-10 dark:bg-opacity-10 backdrop-blur-xl rounded-xl border-2 border-black dark:border-white border-opacity-30 dark:border-opacity-30 shadow-xl transition-[border-color] duration-500 focus:border-indigo-700 dark:focus:border-yellow-400`}
       to={`/blog/${post.slug.current}`}
       onClick={() => {
         bar?.current!.continuousStart();
