@@ -35,7 +35,14 @@ export const Navbar: React.FC = () => {
           setTheme((prev) => (prev === Theme.DARK ? Theme.LIGHT : Theme.DARK));
         }}
       >
-        <Themed dark={<IconMoon />} light={<IconSun />} />
+        <Themed
+          dark={
+            <IconMoon className="transition-all hover:stroke-yellow-400 hover:-rotate-[30deg]" />
+          }
+          light={
+            <IconSun className="transition-all hover:stroke-indigo-700 hover:-rotate-[30deg]" />
+          }
+        />
       </button>
     </header>
   );

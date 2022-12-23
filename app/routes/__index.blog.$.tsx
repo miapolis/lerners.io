@@ -195,7 +195,7 @@ export default function Post() {
     <BlogLayoutWrapper aside={<PostMenu post={post} />}>
       <div className="mt-16 relative overflow-visible mb-32">
         <LazyImage
-          className={`w-full rounded-lg mb-16 shadow-2xl`}
+          className="w-full rounded-lg mb-16 shadow-2xl"
           width={post.fullImage.metadata.dimensions.width}
           height={post.fullImage.metadata.dimensions.height}
           placeholderSrc={post.fullImage.metadata.lqip}

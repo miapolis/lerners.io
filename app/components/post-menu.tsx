@@ -22,17 +22,19 @@ export const PostMenu: React.FC<PostMenuProps> = ({ post }) => {
   const [copied, setCopied] = React.useState(false);
 
   React.useEffect(() => {
-    setLinks(
-      ((post.body as any[]) || [])
-        .filter(
-          (x) => x._type == "block" && (x.style == "h2" || x.style == "h3")
-        )
-        .map((x) => ({
-          name: x.children[0].text,
-          slug: slugify(x.children[0].text).toLowerCase(),
-          indent: x.style == "h3",
-        }))
-    );
+    setTimeout(() => {
+      setLinks(
+        ((post.body as any[]) || [])
+          .filter(
+            (x) => x._type == "block" && (x.style == "h2" || x.style == "h3")
+          )
+          .map((x) => ({
+            name: x.children[0].text,
+            slug: slugify(x.children[0].text).toLowerCase(),
+            indent: x.style == "h3",
+          }))
+      );
+    });
   }, [post]);
 
   React.useEffect(() => {
@@ -46,6 +48,8 @@ export const PostMenu: React.FC<PostMenuProps> = ({ post }) => {
       subtree: true,
     });
     window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [links]);
 
   const getAllAnchors = () => {
@@ -77,7 +81,11 @@ export const PostMenu: React.FC<PostMenuProps> = ({ post }) => {
   return (
     <div className="sticky top-32 w-64">
       <button
-        className={`umami--click--post-share-${post.slug.current} mb-6 font-bold flex gap-2`}
+        className={`group umami--click--post-share-${
+          post.slug.current
+        } mb-6 font-bold flex gap-2 ${
+          !copied && "hover:underline"
+        } underline-offset-4`}
         onClick={() => {
           navigator.clipboard.writeText(window.location.href);
           setCopied(true);

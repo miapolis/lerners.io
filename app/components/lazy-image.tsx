@@ -27,10 +27,12 @@ export const LazyImage: React.FC<LazyImageProps> = ({
   }, [transition.state]);
 
   React.useEffect(() => {
-    const img = new Image();
-    img.src = src;
-    img.addEventListener("load", () => {
-      setRendered(true);
+    setTimeout(() => {
+      const img = new Image();
+      img.src = src;
+      img.addEventListener("load", () => {
+        setRendered(true);
+      });
     });
   }, [src]);
 
