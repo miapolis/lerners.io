@@ -3,7 +3,6 @@ import { BaseIconProps } from ".";
 
 export const ElixirIcon: React.FC<BaseIconProps> = ({
   className,
-  color = "#4B275F",
   size = 24,
 }) => {
   return (
@@ -11,9 +10,6 @@ export const ElixirIcon: React.FC<BaseIconProps> = ({
       className={className}
       role="img"
       viewBox="0 0 24 24"
-      style={{
-        fill: color,
-      }}
       width={size}
       height={size}
     >

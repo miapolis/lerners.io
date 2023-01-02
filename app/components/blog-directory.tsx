@@ -4,6 +4,7 @@ import { SanityPost } from "~/interfaces/post";
 import { dtFormatter } from "~/utils/time";
 import { IconArrowRight } from "@tabler/icons";
 import { LoadingBarContext } from "~/root";
+import { NavLink } from "./nav-link";
 
 export interface BlogDirectoryProps {
   title: string;
@@ -17,12 +18,12 @@ export const BlogDirectory: React.FC<BlogDirectoryProps> = ({
   posts,
 }) => {
   return (
-    <div className="mt-16">
+    <div className="mt-16 mb-20">
       <h1 className="text-5xl font-extrabold">{title}</h1>
       <div className="text-indigo-700 dark:text-yellow-400 font-semibold">
         {subheading || <>&nbsp;</>}
       </div>
-      <div className="mt-10 mb-20">
+      <div className="mt-10">
         {posts.map((post, i) => (
           <PostCard key={i} {...post} />
         ))}
@@ -30,6 +31,7 @@ export const BlogDirectory: React.FC<BlogDirectoryProps> = ({
           <div className="text-lg text-zinc-500">No posts found</div>
         )}
       </div>
+      <NavLink to="/blog/tags" text="View all tags" />
     </div>
   );
 };
@@ -45,7 +47,7 @@ export const PostCard = (post: SanityPost) => {
         bar?.current?.continuousStart();
       }}
     >
-      <div className="w-32 sm:border-r-2 sm:border-r-black sm:dark:border-r-white text-zinc-800 dark:text-zinc-200">
+      <div className="transition-[border-right-color] w-32 sm:border-r-2 sm:border-r-black sm:dark:border-r-white group-focus:border-r-indigo-700 dark:group-focus:border-r-yellow-400 text-zinc-800 dark:text-zinc-200">
         <div>{dtFormatter.format(new Date(post.publishedAt))}</div>
       </div>
       <div className="flex-1">

@@ -1,19 +1,12 @@
 import React from "react";
 import { BaseIconProps } from ".";
 
-export const Trello: React.FC<BaseIconProps> = ({
-  className,
-  color = "#3178C6",
-  size = 24,
-}) => {
+export const Trello: React.FC<BaseIconProps> = ({ className, size = 24 }) => {
   return (
     <svg
       className={className}
       role="img"
       viewBox="0 0 24 24"
-      style={{
-        fill: color,
-      }}
       width={size}
       height={size}
     >

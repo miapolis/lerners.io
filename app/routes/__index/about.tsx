@@ -43,7 +43,7 @@ export default function About() {
             name="TypeScript"
             accentColor="#3b82f6"
             description="My go-to language for most new projects, you need static typing whether you believe it or not."
-            icon={<TypeScriptIcon color="" className="fill-blue-500" />}
+            icon={<TypeScriptIcon className="fill-blue-500" />}
           />
           <Technology
             name="Rust"
@@ -55,37 +55,37 @@ export default function About() {
             name="Elixir"
             accentColor="#6366f1"
             description="Great for distributed systems, but syntax is a bit convoluted and dynamic types get icky."
-            icon={<ElixirIcon className="fill-indigo-500" color="" />}
+            icon={<ElixirIcon className="fill-indigo-500" />}
           />
           <Technology
             name="React"
             accentColor="#06b6d4"
             description="Popular, well-supported, and a great ecosystem. That's what I need the most."
-            icon={<ReactIcon className="fill-cyan-500" color="" />}
+            icon={<ReactIcon className="fill-cyan-500" />}
           />
           <Technology
             name="Tailwind CSS"
             accentColor="#14b8a6"
             description="Makes CSS actually enjoyable and leads me iteratively to better results, faster."
-            icon={<TailwindIcon className="fill-teal-500" color="" />}
+            icon={<TailwindIcon className="fill-teal-500" />}
           />
           <Technology
             name="MongoDB"
             accentColor="#22c55e"
             description="Great for rapidly prototyping, terrible for just about everything else."
-            icon={<MongoIcon className="fill-green-500" color="" />}
+            icon={<MongoIcon className="fill-green-500" />}
           />
           <Technology
             name="Docker"
             accentColor="#0ea5e9"
             description="Docker is great because it works excellently on my machine!"
-            icon={<DockerIcon className="fill-sky-500" color="" />}
+            icon={<DockerIcon className="fill-sky-500" />}
           />
           <Technology
             name="VSCode"
             accentColor="#0ea5e9"
             description="Out of all of the other memory hoggers I've used, this one is the least bad."
-            icon={<VSCodeIcon className="fill-blue-500" color="" />}
+            icon={<VSCodeIcon className="fill-blue-500" />}
           />
         </GroupContainer>
         <GroupContainer title="Cloud Providers">
@@ -93,9 +93,7 @@ export default function About() {
             name="Vercel"
             accentColor={theme == Theme.DARK ? "#ffffff" : "#000000"}
             description="My go-to for quick deployments and static sites, especially with Next.js."
-            icon={
-              <VercelIcon color="" className="fill-black dark:fill-white" />
-            }
+            icon={<VercelIcon className="fill-black dark:fill-white" />}
           />
           <Technology
             name="DigitalOcean"
@@ -107,33 +105,31 @@ export default function About() {
             name="Fly.io"
             accentColor="#a855f7"
             description="I have become increasingly fond of fly.io's performance and reliability."
-            icon={<FlyDotIo className="fill-purple-500" color="" />}
+            icon={<FlyDotIo className="fill-purple-500" />}
           />
           <Technology
             name="Google Cloud"
             accentColor="#3b82f6"
             description="Lots of great services here, Kubernetes is especially powerful, just a matter of cost."
-            icon={<GoogleCloud className="fill-blue-500" color="" />}
+            icon={<GoogleCloud className="fill-blue-500" />}
           />
           <Technology
             name="Sentry"
             accentColor="#6366f1"
             description="A bit clunky to set up, but provides pretty reasonable applicaton insights."
-            icon={<Sentry className="fill-indigo-500" color="" />}
+            icon={<Sentry className="fill-indigo-500" />}
           />
           <Technology
             name="GitHub"
             accentColor={theme == Theme.DARK ? "#ffffff" : "#000000"}
             description="A wonderful platform, the student developer pack came in especially handy!"
-            icon={<GitHub color="" className="fill-black dark:fill-white" />}
+            icon={<GitHub className="fill-black dark:fill-white" />}
           />
           <Technology
             name="PlanetScale"
             accentColor={theme == Theme.DARK ? "#ffffff" : "#000000"}
             description="Unparalleled performance and reliability for database scaling."
-            icon={
-              <PlanetScale color="" className="fill-black dark:fill-white" />
-            }
+            icon={<PlanetScale className="fill-black dark:fill-white" />}
           />
         </GroupContainer>
         <GroupContainer title="Other">
@@ -141,37 +137,37 @@ export default function About() {
             name="Vivaldi"
             accentColor="#ef4444"
             description="An extremely powerful and customizable browser. They're all Chrome anyway."
-            icon={<Vivaldi className="fill-red-500" color="" />}
+            icon={<Vivaldi className="fill-red-500" />}
           />
           <Technology
             name="Bitwarden"
             accentColor="#3b82f6"
             description="An open-source password manager with a mediocre interface."
-            icon={<Bitwarden className="fill-blue-500" color="" />}
+            icon={<Bitwarden className="fill-blue-500" />}
           />
           <Technology
             name="Spotify"
             accentColor="#22c55e"
             description="Yes, Spotify is better, mainly for their discovery and recommendation services."
-            icon={<Spotify className="fill-green-500" color="" />}
+            icon={<Spotify className="fill-green-500" />}
           />
           <Technology
             name="Obsidian"
             accentColor="#6366f1"
             description="A wonderful markdown editor that works almost like a second brain!"
-            icon={<Obsidian className="fill-indigo-500" color="" />}
+            icon={<Obsidian className="fill-indigo-500" />}
           />
           <Technology
             name="Manjaro KDE"
             accentColor="#0ea5e9"
             description="I've found KDE to be much more customizable, and I need fractional scaling."
-            icon={<Kde className="fill-sky-500" color="" />}
+            icon={<Kde className="fill-sky-500" />}
           />
           <Technology
             name="Trello"
             accentColor="#06b6d4"
             description="Useful for keeping track of tasks and projects, and pretending like I know how to be organized."
-            icon={<Trello className="fill-cyan-500" color="" />}
+            icon={<Trello className="fill-cyan-500" />}
           />
         </GroupContainer>
       </section>

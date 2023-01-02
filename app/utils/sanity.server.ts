@@ -1,5 +1,6 @@
 import { getSanityClient } from "~/config/sanity.server";
 import { SanityPost } from "~/interfaces/post";
+import { SanityTag } from "~/interfaces/tag";
 
 export const getPosts = async (limit?: number): Promise<SanityPost[]> => {
   return await getSanityClient().fetch(
@@ -18,6 +19,10 @@ export const getPosts = async (limit?: number): Promise<SanityPost[]> => {
         }
       : {}
   );
+};
+
+export const getTags = async (): Promise<SanityTag[]> => {
+  return await getSanityClient().fetch(`*[_type == 'tag']`);
 };
 
 export const postsByTag = async (tag: string): Promise<SanityPost[]> => {
