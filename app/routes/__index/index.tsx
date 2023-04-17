@@ -61,7 +61,7 @@ export default function Index() {
           Ethan Lerner
         </h1>
       </div>
-      <div className="mt-16 mb-20">
+      <div className="-mt-7 mb-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full h-full">
           {data.posts.map((post, i) => (
             <PostCard key={i} index={i} post={post} />
